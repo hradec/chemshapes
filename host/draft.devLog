@@ -1,0 +1,5 @@
+may 24 3:54
+===========
+
+Added save/load of configuration file. Now all parameters set on the UI are saved when quiting the application, and loaded back when you start it up. 
+

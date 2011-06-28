@@ -1,0 +1,684 @@
+Fri May 20 13:14:09 2011| new log started...Fri May 20 13:14:23 2011| new log started...Fri May 20 13:16:56 2011| new log started...Fri May 20 13:16:59 2011| Opening serial port: Fri May 20 13:16:59 2011| 
+Fri May 20 13:16:59 2011| arduinoException!!Fri May 20 13:16:59 2011| 
+Fri May 20 13:17:02 2011| Opening serial port: Fri May 20 13:17:02 2011| 
+Fri May 20 13:17:02 2011| arduinoException!!Fri May 20 13:17:02 2011| 
+Fri May 20 13:17:05 2011| Opening serial port: Fri May 20 13:17:05 2011| 
+Fri May 20 13:17:05 2011| arduinoException!!Fri May 20 13:17:05 2011| 
+Fri May 20 13:17:17 2011| Opening serial port: Fri May 20 13:17:17 2011| 
+Fri May 20 13:17:17 2011| arduinoException!!Fri May 20 13:17:17 2011| 
+Fri May 20 13:17:25 2011| Opening serial port: Fri May 20 13:17:25 2011| 
+Fri May 20 13:17:25 2011| arduinoException!!Fri May 20 13:17:25 2011| 
+Fri May 20 13:17:49 2011| arduinoException!!Fri May 20 13:17:49 2011| 
+Fri May 20 13:17:51 2011| Opening serial port: Fri May 20 13:17:51 2011| 
+Fri May 20 13:17:51 2011| arduinoException!!Fri May 20 13:17:51 2011| 
+Fri May 20 13:23:18 2011| new log started...Fri May 20 13:23:21 2011| Opening serial port: Fri May 20 13:23:21 2011| 
+Fri May 20 13:23:21 2011| arduinoException!!Fri May 20 13:23:21 2011| 
+Fri May 20 13:23:22 2011| Opening serial port: Fri May 20 13:23:22 2011| 
+Fri May 20 13:23:22 2011| arduinoException!!Fri May 20 13:23:22 2011| 
+Fri May 20 13:23:23 2011| Opening serial port: Fri May 20 13:23:23 2011| 
+Fri May 20 13:23:23 2011| arduinoException!!Fri May 20 13:23:23 2011| 
+Fri May 20 13:23:23 2011| Opening serial port: Fri May 20 13:23:23 2011| 
+Fri May 20 13:23:23 2011| arduinoException!!Fri May 20 13:23:23 2011| 
+Fri May 20 13:23:23 2011| Opening serial port: Fri May 20 13:23:23 2011| 
+Fri May 20 13:23:23 2011| arduinoException!!Fri May 20 13:23:23 2011| 
+Fri May 20 13:23:24 2011| Opening serial port: Fri May 20 13:23:24 2011| 
+Fri May 20 13:23:24 2011| arduinoException!!Fri May 20 13:23:24 2011| 
+Fri May 20 13:23:24 2011| Opening serial port: Fri May 20 13:23:24 2011| 
+Fri May 20 13:23:24 2011| arduinoException!!Fri May 20 13:23:24 2011| 
+Fri May 20 13:23:24 2011| Opening serial port: Fri May 20 13:23:24 2011| 
+Fri May 20 13:23:24 2011| arduinoException!!Fri May 20 13:23:24 2011| 
+Fri May 20 13:23:24 2011| Opening serial port: Fri May 20 13:23:24 2011| 
+Fri May 20 13:23:24 2011| arduinoException!!Fri May 20 13:23:24 2011| 
+Fri May 20 13:23:24 2011| Opening serial port: Fri May 20 13:23:24 2011| 
+Fri May 20 13:23:24 2011| arduinoException!!Fri May 20 13:23:24 2011| 
+Fri May 20 13:23:25 2011| Opening serial port: Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:25 2011| arduinoException!!Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:25 2011| Opening serial port: Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:25 2011| arduinoException!!Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:25 2011| Opening serial port: Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:25 2011| arduinoException!!Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:25 2011| Opening serial port: Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:25 2011| arduinoException!!Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:25 2011| Opening serial port: Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:25 2011| arduinoException!!Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:25 2011| Opening serial port: Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:25 2011| arduinoException!!Fri May 20 13:23:25 2011| 
+Fri May 20 13:23:26 2011| Opening serial port: Fri May 20 13:23:26 2011| 
+Fri May 20 13:23:26 2011| arduinoException!!Fri May 20 13:23:26 2011| 
+Fri May 20 13:23:26 2011| Opening serial port: Fri May 20 13:23:26 2011| 
+Fri May 20 13:23:26 2011| arduinoException!!Fri May 20 13:23:26 2011| 
+Fri May 20 13:23:43 2011| new log started...Fri May 20 13:23:51 2011| new log started...Fri May 20 13:26:26 2011| new log started...Fri May 20 13:26:28 2011| Opening serial port: Fri May 20 13:26:28 2011| 
+Fri May 20 13:26:28 2011| arduinoException!!Fri May 20 13:26:28 2011| 
+Fri May 20 13:26:29 2011| Opening serial port: Fri May 20 13:26:29 2011| 
+Fri May 20 13:26:29 2011| arduinoException!!Fri May 20 13:26:29 2011| 
+Fri May 20 13:26:30 2011| Opening serial port: Fri May 20 13:26:30 2011| 
+Fri May 20 13:26:30 2011| arduinoException!!Fri May 20 13:26:30 2011| 
+Fri May 20 13:26:30 2011| Opening serial port: Fri May 20 13:26:30 2011| 
+Fri May 20 13:26:30 2011| arduinoException!!Fri May 20 13:26:30 2011| 
+Fri May 20 13:26:30 2011| Opening serial port: Fri May 20 13:26:30 2011| 
+Fri May 20 13:26:30 2011| arduinoException!!Fri May 20 13:26:30 2011| 
+Fri May 20 13:26:30 2011| Opening serial port: Fri May 20 13:26:30 2011| 
+Fri May 20 13:26:30 2011| arduinoException!!Fri May 20 13:26:30 2011| 
+Fri May 20 13:26:33 2011| Opening serial port: Fri May 20 13:26:33 2011| 
+Fri May 20 13:26:33 2011| arduinoException!!Fri May 20 13:26:33 2011| 
+Fri May 20 13:26:34 2011| Opening serial port: Fri May 20 13:26:34 2011| 
+Fri May 20 13:26:34 2011| arduinoException!!Fri May 20 13:26:34 2011| 
+Fri May 20 13:26:35 2011| Opening serial port: Fri May 20 13:26:35 2011| 
+Fri May 20 13:26:35 2011| arduinoException!!Fri May 20 13:26:35 2011| 
+Fri May 20 13:26:35 2011| Opening serial port: Fri May 20 13:26:35 2011| 
+Fri May 20 13:26:35 2011| arduinoException!!Fri May 20 13:26:35 2011| 
+Fri May 20 13:26:35 2011| Opening serial port: Fri May 20 13:26:35 2011| 
+Fri May 20 13:26:35 2011| arduinoException!!Fri May 20 13:26:35 2011| 
+Fri May 20 13:26:35 2011| Opening serial port: Fri May 20 13:26:35 2011| 
+Fri May 20 13:26:35 2011| arduinoException!!Fri May 20 13:26:35 2011| 
+Fri May 20 13:26:39 2011| Opening serial port: Fri May 20 13:26:39 2011| 
+Fri May 20 13:26:39 2011| arduinoException!!Fri May 20 13:26:39 2011| 
+Fri May 20 13:26:40 2011| Opening serial port: Fri May 20 13:26:40 2011| 
+Fri May 20 13:26:40 2011| arduinoException!!Fri May 20 13:26:40 2011| 
+Fri May 20 13:26:40 2011| Opening serial port: Fri May 20 13:26:40 2011| 
+Fri May 20 13:26:40 2011| arduinoException!!Fri May 20 13:26:40 2011| 
+Fri May 20 13:26:40 2011| Opening serial port: Fri May 20 13:26:40 2011| 
+Fri May 20 13:26:40 2011| arduinoException!!Fri May 20 13:26:40 2011| 
+Fri May 20 13:26:41 2011| Opening serial port: Fri May 20 13:26:41 2011| 
+Fri May 20 13:26:41 2011| arduinoException!!Fri May 20 13:26:41 2011| 
+Fri May 20 13:26:41 2011| Opening serial port: Fri May 20 13:26:41 2011| 
+Fri May 20 13:26:41 2011| arduinoException!!Fri May 20 13:26:41 2011| 
+Fri May 20 13:26:41 2011| Opening serial port: Fri May 20 13:26:41 2011| 
+Fri May 20 13:26:41 2011| arduinoException!!Fri May 20 13:26:41 2011| 
+Fri May 20 13:26:41 2011| Opening serial port: Fri May 20 13:26:41 2011| 
+Fri May 20 13:26:41 2011| arduinoException!!Fri May 20 13:26:41 2011| 
+Fri May 20 13:26:42 2011| Opening serial port: Fri May 20 13:26:42 2011| 
+Fri May 20 13:26:42 2011| arduinoException!!Fri May 20 13:26:42 2011| 
+Fri May 20 13:26:42 2011| Opening serial port: Fri May 20 13:26:42 2011| 
+Fri May 20 13:26:42 2011| arduinoException!!Fri May 20 13:26:42 2011| 
+Fri May 20 13:26:42 2011| Opening serial port: Fri May 20 13:26:42 2011| 
+Fri May 20 13:26:42 2011| arduinoException!!Fri May 20 13:26:42 2011| 
+Fri May 20 13:28:16 2011| new log started...
+Fri May 20 13:28:18 2011| Opening serial port:
+Fri May 20 13:28:18 2011| 
+Fri May 20 13:28:18 2011| arduinoException!!
+Fri May 20 13:28:18 2011| 
+Fri May 20 13:28:59 2011| new log started...
+Fri May 20 13:29:01 2011| Opening serial port:
+Fri May 20 13:29:01 2011| arduinoException!!
+Fri May 20 13:29:07 2011| Opening serial port:
+Fri May 20 13:29:07 2011| arduinoException!!
+Fri May 20 13:29:08 2011| Opening serial port:
+Fri May 20 13:29:08 2011| arduinoException!!
+Fri May 20 13:29:08 2011| Opening serial port:
+Fri May 20 13:29:08 2011| arduinoException!!
+Fri May 20 13:29:08 2011| Opening serial port:
+Fri May 20 13:29:08 2011| arduinoException!!
+Fri May 20 13:29:08 2011| Opening serial port:
+Fri May 20 13:29:08 2011| arduinoException!!
+Fri May 20 13:29:33 2011| new log started...
+Fri May 20 13:29:35 2011| Opening serial port:
+Fri May 20 13:29:35 2011| arduinoException!!
+Fri May 20 13:29:37 2011| Opening serial port:
+Fri May 20 13:29:37 2011| arduinoException!!
+Fri May 20 13:29:37 2011| Opening serial port:
+Fri May 20 13:29:37 2011| arduinoException!!
+Fri May 20 13:29:38 2011| Opening serial port:
+Fri May 20 13:29:38 2011| arduinoException!!
+Fri May 20 13:29:38 2011| Opening serial port:
+Fri May 20 13:29:38 2011| arduinoException!!
+Fri May 20 13:29:38 2011| Opening serial port:
+Fri May 20 13:29:38 2011| arduinoException!!
+Fri May 20 13:29:39 2011| Opening serial port:
+Fri May 20 13:29:39 2011| arduinoException!!
+Fri May 20 13:29:39 2011| Opening serial port:
+Fri May 20 13:29:39 2011| arduinoException!!
+Fri May 20 13:29:39 2011| Opening serial port:
+Fri May 20 13:29:39 2011| arduinoException!!
+Fri May 20 13:29:40 2011| Opening serial port:
+Fri May 20 13:29:40 2011| arduinoException!!
+Fri May 20 13:29:40 2011| Opening serial port:
+Fri May 20 13:29:40 2011| arduinoException!!
+Fri May 20 13:29:40 2011| Opening serial port:
+Fri May 20 13:29:40 2011| arduinoException!!
+Fri May 20 13:29:40 2011| Opening serial port:
+Fri May 20 13:29:40 2011| arduinoException!!
+Fri May 20 13:29:40 2011| Opening serial port:
+Fri May 20 13:29:40 2011| arduinoException!!
+Fri May 20 13:29:41 2011| Opening serial port:
+Fri May 20 13:29:41 2011| arduinoException!!
+Fri May 20 13:29:41 2011| Opening serial port:
+Fri May 20 13:29:41 2011| arduinoException!!
+Fri May 20 13:29:41 2011| Opening serial port:
+Fri May 20 13:29:41 2011| arduinoException!!
+Fri May 20 13:29:41 2011| Opening serial port:
+Fri May 20 13:29:41 2011| arduinoException!!
+Fri May 20 13:29:41 2011| Opening serial port:
+Fri May 20 13:29:41 2011| arduinoException!!
+Fri May 20 13:29:45 2011| Opening serial port:
+Fri May 20 13:29:45 2011| arduinoException!!
+Fri May 20 13:29:46 2011| Opening serial port:
+Fri May 20 13:29:46 2011| arduinoException!!
+Fri May 20 13:29:46 2011| Opening serial port:
+Fri May 20 13:29:46 2011| arduinoException!!
+Fri May 20 13:29:46 2011| Opening serial port:
+Fri May 20 13:29:46 2011| arduinoException!!
+Fri May 20 13:29:47 2011| Opening serial port:
+Fri May 20 13:29:47 2011| arduinoException!!
+Fri May 20 13:30:01 2011 | new log started...
+Fri May 20 13:30:03 2011 | Opening serial port:
+Fri May 20 13:30:03 2011 | arduinoException!!
+Fri May 20 13:30:04 2011 | Opening serial port:
+Fri May 20 13:30:04 2011 | arduinoException!!
+Fri May 20 13:30:05 2011 | Opening serial port:
+Fri May 20 13:30:05 2011 | arduinoException!!
+Fri May 20 13:30:05 2011 | Opening serial port:
+Fri May 20 13:30:05 2011 | arduinoException!!
+Fri May 20 13:30:12 2011 >>  new log started...
+Fri May 20 13:30:14 2011 >>  Opening serial port:
+Fri May 20 13:30:14 2011 >>  arduinoException!!
+Fri May 20 13:30:16 2011 >>  Opening serial port:
+Fri May 20 13:30:16 2011 >>  arduinoException!!
+Fri May 20 13:30:16 2011 >>  Opening serial port:
+Fri May 20 13:30:16 2011 >>  arduinoException!!
+Fri May 20 13:30:16 2011 >>  Opening serial port:
+Fri May 20 13:30:16 2011 >>  arduinoException!!
+Fri May 20 13:30:16 2011 >>  Opening serial port:
+Fri May 20 13:30:16 2011 >>  arduinoException!!
+Fri May 20 13:30:17 2011 >>  Opening serial port:
+Fri May 20 13:30:17 2011 >>  arduinoException!!
+Fri May 20 13:30:17 2011 >>  Opening serial port:
+Fri May 20 13:30:17 2011 >>  arduinoException!!
+Fri May 20 13:30:17 2011 >>  Opening serial port:
+Fri May 20 13:30:17 2011 >>  arduinoException!!
+Fri May 20 13:30:17 2011 >>  Opening serial port:
+Fri May 20 13:30:17 2011 >>  arduinoException!!
+Fri May 20 13:30:17 2011 >>  Opening serial port:
+Fri May 20 13:30:17 2011 >>  arduinoException!!
+Fri May 20 13:30:17 2011 >>  Opening serial port:
+Fri May 20 13:30:17 2011 >>  arduinoException!!
+Fri May 20 13:31:26 2011 >>  new log started...
+Fri May 20 13:31:28 2011 >>  Opening serial port:
+Fri May 20 13:31:28 2011 >>  arduinoException!!
+Fri May 20 13:31:29 2011 >>  Opening serial port:
+Fri May 20 13:31:29 2011 >>  arduinoException!!
+Fri May 20 13:31:30 2011 >>  Opening serial port:
+Fri May 20 13:31:30 2011 >>  arduinoException!!
+Fri May 20 13:31:30 2011 >>  Opening serial port:
+Fri May 20 13:31:30 2011 >>  arduinoException!!
+Fri May 20 13:31:30 2011 >>  Opening serial port:
+Fri May 20 13:31:30 2011 >>  arduinoException!!
+Fri May 20 13:31:31 2011 >>  Opening serial port:
+Fri May 20 13:31:31 2011 >>  arduinoException!!
+Fri May 20 13:31:31 2011 >>  Opening serial port:
+Fri May 20 13:31:31 2011 >>  arduinoException!!
+Fri May 20 13:31:31 2011 >>  Opening serial port:
+Fri May 20 13:31:31 2011 >>  arduinoException!!
+Fri May 20 13:31:31 2011 >>  Opening serial port:
+Fri May 20 13:31:31 2011 >>  arduinoException!!
+Fri May 20 13:31:32 2011 >>  Opening serial port:
+Fri May 20 13:31:32 2011 >>  arduinoException!!
+Fri May 20 13:31:32 2011 >>  Opening serial port:
+Fri May 20 13:31:32 2011 >>  arduinoException!!
+Fri May 20 13:31:32 2011 >>  Opening serial port:
+Fri May 20 13:31:32 2011 >>  arduinoException!!
+Fri May 20 13:31:32 2011 >>  Opening serial port:
+Fri May 20 13:31:32 2011 >>  arduinoException!!
+Fri May 20 13:31:32 2011 >>  Opening serial port:
+Fri May 20 13:31:32 2011 >>  arduinoException!!
+Fri May 20 13:31:40 2011 >>  new log started...
+Fri May 20 13:31:42 2011 >>  Opening serial port:
+Fri May 20 13:31:42 2011 >>  arduinoException!!
+Fri May 20 13:31:42 2011 >>  Opening serial port:
+Fri May 20 13:31:42 2011 >>  arduinoException!!
+Fri May 20 13:31:43 2011 >>  Opening serial port:
+Fri May 20 13:31:43 2011 >>  arduinoException!!
+Fri May 20 13:31:43 2011 >>  Opening serial port:
+Fri May 20 13:31:43 2011 >>  arduinoException!!
+Fri May 20 13:31:43 2011 >>  Opening serial port:
+Fri May 20 13:31:43 2011 >>  arduinoException!!
+Fri May 20 13:31:44 2011 >>  Opening serial port:
+Fri May 20 13:31:44 2011 >>  arduinoException!!
+Fri May 20 13:31:44 2011 >>  Opening serial port:
+Fri May 20 13:31:44 2011 >>  arduinoException!!
+Fri May 20 13:31:44 2011 >>  Opening serial port:
+Fri May 20 13:31:44 2011 >>  arduinoException!!
+Fri May 20 13:31:44 2011 >>  Opening serial port:
+Fri May 20 13:31:44 2011 >>  arduinoException!!
+Fri May 20 13:31:45 2011 >>  Opening serial port:
+Fri May 20 13:31:45 2011 >>  arduinoException!!
+Fri May 20 13:31:45 2011 >>  Opening serial port:
+Fri May 20 13:31:45 2011 >>  arduinoException!!
+Fri May 20 13:31:45 2011 >>  Opening serial port:
+Fri May 20 13:31:45 2011 >>  arduinoException!!
+Fri May 20 13:31:45 2011 >>  Opening serial port:
+Fri May 20 13:31:45 2011 >>  arduinoException!!
+Fri May 20 13:31:45 2011 >>  Opening serial port:
+Fri May 20 13:31:45 2011 >>  arduinoException!!
+Fri May 20 13:31:46 2011 >>  Opening serial port:
+Fri May 20 13:31:46 2011 >>  arduinoException!!
+Fri May 20 13:31:46 2011 >>  Opening serial port:
+Fri May 20 13:31:46 2011 >>  arduinoException!!
+Fri May 20 13:31:46 2011 >>  Opening serial port:
+Fri May 20 13:31:46 2011 >>  arduinoException!!
+Fri May 20 13:31:46 2011 >>  Opening serial port:
+Fri May 20 13:31:46 2011 >>  arduinoException!!
+Fri May 20 13:32:01 2011 >>  new log started...
+Fri May 20 13:32:04 2011 >>  Opening serial port:
+Fri May 20 13:32:04 2011 >>  arduinoException!!
+Fri May 20 13:32:04 2011 >>  Opening serial port:
+Fri May 20 13:32:04 2011 >>  arduinoException!!
+Fri May 20 13:32:05 2011 >>  Opening serial port:
+Fri May 20 13:32:05 2011 >>  arduinoException!!
+Fri May 20 13:32:05 2011 >>  Opening serial port:
+Fri May 20 13:32:05 2011 >>  arduinoException!!
+Fri May 20 13:32:05 2011 >>  Opening serial port:
+Fri May 20 13:32:05 2011 >>  arduinoException!!
+Fri May 20 13:32:05 2011 >>  Opening serial port:
+Fri May 20 13:32:05 2011 >>  arduinoException!!
+Fri May 20 13:32:06 2011 >>  Opening serial port:
+Fri May 20 13:32:06 2011 >>  arduinoException!!
+Fri May 20 13:32:06 2011 >>  Opening serial port:
+Fri May 20 13:32:06 2011 >>  arduinoException!!
+Fri May 20 13:32:06 2011 >>  Opening serial port:
+Fri May 20 13:32:06 2011 >>  arduinoException!!
+Fri May 20 13:32:06 2011 >>  Opening serial port:
+Fri May 20 13:32:06 2011 >>  arduinoException!!
+Fri May 20 13:32:07 2011 >>  Opening serial port:
+Fri May 20 13:32:07 2011 >>  arduinoException!!
+Fri May 20 13:32:07 2011 >>  Opening serial port:
+Fri May 20 13:32:07 2011 >>  arduinoException!!
+Fri May 20 13:32:08 2011 >>  Opening serial port:
+Fri May 20 13:32:08 2011 >>  arduinoException!!
+Fri May 20 13:32:29 2011 >>  new log started...
+Fri May 20 13:32:31 2011 >>  Opening serial port:
+Fri May 20 13:32:31 2011 >>  arduinoException!!
+Fri May 20 13:32:32 2011 >>  Opening serial port:
+Fri May 20 13:32:32 2011 >>  arduinoException!!
+Fri May 20 13:32:32 2011 >>  Opening serial port:
+Fri May 20 13:32:32 2011 >>  arduinoException!!
+Fri May 20 13:32:32 2011 >>  Opening serial port:
+Fri May 20 13:32:32 2011 >>  arduinoException!!
+Fri May 20 13:32:34 2011 >>  Traceback (most recent call last):
+Fri May 20 13:32:34 2011 >>  File "./draft.py", line 43, in <lambda>
+Fri May 20 13:32:34 2011 >>  self.ui.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )
+Fri May 20 13:32:34 2011 >>  File "./draft.py", line 158, in loadGeo
+Fri May 20 13:32:34 2011 >>  self.glFrame.addMesh( mesh(fileNames[0]) )
+Fri May 20 13:32:34 2011 >>  TypeError
+Fri May 20 13:32:34 2011 >>  :
+Fri May 20 13:32:34 2011 >>  'NoneType' object is not subscriptable
+Fri May 20 13:32:49 2011 >>  Opening serial port:
+Fri May 20 13:32:49 2011 >>  arduinoException!!
+Fri May 20 13:35:13 2011 >>  EXCEPTION: new log started...
+Fri May 20 13:35:13 2011 >>  EXCEPTION: new log started...
+Fri May 20 13:35:16 2011 >>  Opening serial port:
+Fri May 20 13:35:16 2011 >>  arduinoException!!
+Fri May 20 13:35:17 2011 >>  Opening serial port:
+Fri May 20 13:35:17 2011 >>  arduinoException!!
+Fri May 20 13:35:19 2011 >>  EXCEPTION: Traceback (most recent call last):
+Fri May 20 13:35:19 2011 >>  EXCEPTION: File "./draft.py", line 43, in <lambda>
+Fri May 20 13:35:19 2011 >>  EXCEPTION: self.ui.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )
+Fri May 20 13:35:19 2011 >>  EXCEPTION: File "./draft.py", line 158, in loadGeo
+Fri May 20 13:35:19 2011 >>  EXCEPTION: self.glFrame.addMesh( mesh(fileNames[0]) )
+Fri May 20 13:35:19 2011 >>  EXCEPTION: TypeError
+Fri May 20 13:35:19 2011 >>  EXCEPTION: :
+Fri May 20 13:35:19 2011 >>  EXCEPTION: 'NoneType' object is not subscriptable
+Fri May 20 13:35:34 2011 >>  EXCEPTION: Traceback (most recent call last):
+Fri May 20 13:35:34 2011 >>  EXCEPTION: File "./draft.py", line 43, in <lambda>
+Fri May 20 13:35:34 2011 >>  EXCEPTION: self.ui.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )
+Fri May 20 13:35:34 2011 >>  EXCEPTION: File "./draft.py", line 158, in loadGeo
+Fri May 20 13:35:34 2011 >>  EXCEPTION: self.glFrame.addMesh( mesh(fileNames[0]) )
+Fri May 20 13:35:34 2011 >>  EXCEPTION: TypeError
+Fri May 20 13:35:34 2011 >>  EXCEPTION: :
+Fri May 20 13:35:34 2011 >>  EXCEPTION: 'NoneType' object is not subscriptable
+Fri May 20 13:36:08 2011 >>  PYTHON EXCEPTION: new log started...
+Fri May 20 13:36:08 2011 >>  PYTHON EXCEPTION: new log started...
+Fri May 20 13:36:15 2011 >>  Opening serial port: 
+Fri May 20 13:36:15 2011 >>  arduinoException!!
+Fri May 20 13:36:15 2011 >>  Opening serial port: 
+Fri May 20 13:36:15 2011 >>  arduinoException!!
+Fri May 20 13:36:18 2011 >>  PYTHON EXCEPTION: Traceback (most recent call last):
+
+Fri May 20 13:36:18 2011 >>  PYTHON EXCEPTION: File "./draft.py", line 43, in <lambda>
+
+Fri May 20 13:36:18 2011 >>  PYTHON EXCEPTION: self.ui.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )
+
+Fri May 20 13:36:18 2011 >>  PYTHON EXCEPTION: File "./draft.py", line 158, in loadGeo
+
+Fri May 20 13:36:18 2011 >>  PYTHON EXCEPTION: self.glFrame.addMesh( mesh(fileNames[0]) )
+
+Fri May 20 13:36:18 2011 >>  PYTHON EXCEPTION: TypeError
+Fri May 20 13:36:18 2011 >>  PYTHON EXCEPTION: : 
+Fri May 20 13:36:18 2011 >>  PYTHON EXCEPTION: 'NoneType' object is not subscriptable
+Fri May 20 13:36:41 2011 >>  PYTHON EXCEPTION: new log started...
+Fri May 20 13:36:41 2011 >>  PYTHON EXCEPTION: new log started...
+Fri May 20 13:36:44 2011 >>  PYTHON EXCEPTION: Traceback (most recent call last):
+Fri May 20 13:36:44 2011 >>  PYTHON EXCEPTION:   File "./draft.py", line 43, in <lambda>
+Fri May 20 13:36:44 2011 >>  PYTHON EXCEPTION: self.ui.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )
+Fri May 20 13:36:44 2011 >>  PYTHON EXCEPTION:   File "./draft.py", line 158, in loadGeo
+Fri May 20 13:36:44 2011 >>  PYTHON EXCEPTION: self.glFrame.addMesh( mesh(fileNames[0]) )
+Fri May 20 13:36:44 2011 >>  PYTHON EXCEPTION: TypeError
+Fri May 20 13:36:44 2011 >>  PYTHON EXCEPTION: :
+Fri May 20 13:36:44 2011 >>  PYTHON EXCEPTION: 'NoneType' object is not subscriptable
+Fri May 20 13:37:19 2011 >>  PYTHON EXCEPTION: 	new log started...
+Fri May 20 13:37:19 2011 >>  PYTHON EXCEPTION: 	new log started...
+Fri May 20 13:37:22 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:37:22 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 43, in <lambda>
+Fri May 20 13:37:22 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )
+Fri May 20 13:37:22 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 158, in loadGeo
+Fri May 20 13:37:22 2011 >>  PYTHON EXCEPTION: 	self.glFrame.addMesh( mesh(fileNames[0]) )
+Fri May 20 13:37:22 2011 >>  PYTHON EXCEPTION: 	TypeError
+Fri May 20 13:37:22 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:37:22 2011 >>  PYTHON EXCEPTION: 	'NoneType' object is not subscriptable
+Fri May 20 13:38:04 2011 >>  Opening serial port:
+Fri May 20 13:38:04 2011 >>  arduinoException!!
+Fri May 20 13:38:04 2011 >>  Opening serial port:
+Fri May 20 13:38:04 2011 >>  arduinoException!!
+Fri May 20 13:38:05 2011 >>  Opening serial port:
+Fri May 20 13:38:05 2011 >>  arduinoException!!
+Fri May 20 13:38:08 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:08 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 43, in <lambda>
+Fri May 20 13:38:08 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )
+Fri May 20 13:38:08 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 158, in loadGeo
+Fri May 20 13:38:08 2011 >>  PYTHON EXCEPTION: 	self.glFrame.addMesh( mesh(fileNames[0]) )
+Fri May 20 13:38:08 2011 >>  PYTHON EXCEPTION: 	TypeError
+Fri May 20 13:38:08 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:08 2011 >>  PYTHON EXCEPTION: 	'NoneType' object is not subscriptable
+Fri May 20 13:38:11 2011 >>  Opening serial port:
+Fri May 20 13:38:11 2011 >>  arduinoException!!
+Fri May 20 13:38:12 2011 >>  Opening serial port:
+Fri May 20 13:38:12 2011 >>  arduinoException!!
+Fri May 20 13:38:13 2011 >>  Opening serial port:
+Fri May 20 13:38:13 2011 >>  arduinoException!!
+Fri May 20 13:38:13 2011 >>  Opening serial port:
+Fri May 20 13:38:13 2011 >>  arduinoException!!
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 56, in <lambda>
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm01') , SIGNAL('clicked()'), lambda: self.moveZ(-0.1, True) )
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 60, in <lambda>
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'p01') , SIGNAL('clicked()'), lambda: self.moveZ(0.1, True) )
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:15 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 56, in <lambda>
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm01') , SIGNAL('clicked()'), lambda: self.moveZ(-0.1, True) )
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:16 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 56, in <lambda>
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm01') , SIGNAL('clicked()'), lambda: self.moveZ(-0.1, True) )
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:18 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 55, in <lambda>
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm1')  , SIGNAL('clicked()'), lambda: self.moveZ(-1, True) )
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 55, in <lambda>
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm1')  , SIGNAL('clicked()'), lambda: self.moveZ(-1, True) )
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:19 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 54, in <lambda>
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm10') , SIGNAL('clicked()'), lambda: self.moveZ(-10, True) )
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:20 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 56, in <lambda>
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm01') , SIGNAL('clicked()'), lambda: self.moveZ(-0.1, True) )
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:29 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 56, in <lambda>
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm01') , SIGNAL('clicked()'), lambda: self.moveZ(-0.1, True) )
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:30 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 56, in <lambda>
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm01') , SIGNAL('clicked()'), lambda: self.moveZ(-0.1, True) )
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:31 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 54, in <lambda>
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm10') , SIGNAL('clicked()'), lambda: self.moveZ(-10, True) )
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 54, in <lambda>
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm10') , SIGNAL('clicked()'), lambda: self.moveZ(-10, True) )
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:32 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:53 2011 >>  Opening serial port:
+Fri May 20 13:38:53 2011 >>  arduinoException!!
+Fri May 20 13:38:53 2011 >>  Opening serial port:
+Fri May 20 13:38:53 2011 >>  arduinoException!!
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	Traceback (most recent call last):
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 54, in <lambda>
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm10') , SIGNAL('clicked()'), lambda: self.moveZ(-10, True) )
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	self.device.write('G91')
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	self.close()
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	self.sender.ser.close()
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	AttributeError
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	:
+Fri May 20 13:38:55 2011 >>  PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'
+Fri May 20 13:38:57 2011 >>  Opening serial port:
+Fri May 20 13:38:57 2011 >>  arduinoException!!
+Fri May 20 13:38:58 2011 >>  Opening serial port:
+Fri May 20 13:38:58 2011 >>  arduinoException!!
+Fri May 20 13:38:58 2011 >>  Opening serial port:
+Fri May 20 13:38:58 2011 >>  arduinoException!!
+Fri May 20 13:38:58 2011 >>  Opening serial port:
+Fri May 20 13:38:58 2011 >>  arduinoException!!
+Fri May 20 13:38:58 2011 >>  Opening serial port:
+Fri May 20 13:38:58 2011 >>  arduinoException!!
+Fri May 20 13:39:02 2011 >>  arduinoException!!
+Fri May 20 13:39:08 2011 >>  Opening serial port:
+Fri May 20 13:39:08 2011 >>  arduinoException!!
+Fri May 20 13:40:25 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	new log started...</FONT>
+Fri May 20 13:40:25 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	new log started...</FONT>
+Fri May 20 13:40:27 2011 >>  Opening serial port:
+Fri May 20 13:40:27 2011 >>  arduinoException!!
+Fri May 20 13:40:30 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	Traceback (most recent call last):</FONT>
+Fri May 20 13:40:30 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 43, in <lambda></FONT>
+Fri May 20 13:40:30 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )</FONT>
+Fri May 20 13:40:30 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 158, in loadGeo</FONT>
+Fri May 20 13:40:30 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.glFrame.addMesh( mesh(fileNames[0]) )</FONT>
+Fri May 20 13:40:30 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	TypeError</FONT>
+Fri May 20 13:40:30 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	:</FONT>
+Fri May 20 13:40:30 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	'NoneType' object is not subscriptable</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	Traceback (most recent call last):</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 54, in <lambda></FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm10') , SIGNAL('clicked()'), lambda: self.moveZ(-10, True) )</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.device.write('G91')</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.close()</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.sender.ser.close()</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	AttributeError</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	:</FONT>
+Fri May 20 13:40:34 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	Traceback (most recent call last):</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 55, in <lambda></FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm1')  , SIGNAL('clicked()'), lambda: self.moveZ(-1, True) )</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.device.write('G91')</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.close()</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.sender.ser.close()</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	AttributeError</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	:</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	Traceback (most recent call last):</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 56, in <lambda></FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'm01') , SIGNAL('clicked()'), lambda: self.moveZ(-0.1, True) )</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.device.write('G91')</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.close()</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.sender.ser.close()</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	AttributeError</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	:</FONT>
+Fri May 20 13:40:35 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	Traceback (most recent call last):</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 58, in <lambda></FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'p10') , SIGNAL('clicked()'), lambda: self.moveZ(10, True) )</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.device.write('G91')</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.close()</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.sender.ser.close()</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	AttributeError</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	:</FONT>
+Fri May 20 13:40:36 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	Traceback (most recent call last):</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 59, in <lambda></FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.ui.connect(self.ui.findChild(QToolButton, 'p1')  , SIGNAL('clicked()'), lambda: self.moveZ(1, True) )</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "./draft.py", line 96, in moveZ</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.reprap.z.move( mm, relative )</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 17, in move</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.device.write('G91')</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 62, in write</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.close()</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	  File "D:\Dropbox\gabiguga_hradec.com\snygro\software\reprap\__init__.py", line 55, in close</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	self.sender.ser.close()</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	AttributeError</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	:</FONT>
+Fri May 20 13:40:37 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	'NoneType' object has no attribute 'ser'</FONT>
+Fri May 20 13:40:39 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	new log started...</FONT>
+Fri May 20 13:40:39 2011 >>  <FONT COLOR="#cc6600">PYTHON EXCEPTION: 	new log started...</FONT>
+Fri May 20 13:41:59 2011 >>  <FONT COLOR="#cc0000">PYTHON EXCEPTION:</FONT> 	<FONT COLOR="#cc6600">new log started...</FONT>
+Fri May 20 13:41:59 2011 >>  <FONT COLOR="#cc0000">PYTHON EXCEPTION:</FONT> 	<FONT COLOR="#cc6600">new log started...</FONT>
+Fri May 20 13:42:01 2011 >>  <FONT COLOR="#00aa00">Opening serial port:</FONT>
+Fri May 20 13:42:01 2011 >>  <FONT COLOR="#00aa00">arduinoException!!</FONT>
+Fri May 20 13:42:09 2011 >>  <FONT COLOR="#cc0000">PYTHON EXCEPTION:</FONT> 	<FONT COLOR="#cc6600">Traceback (most recent call last):</FONT>
+Fri May 20 13:42:09 2011 >>  <FONT COLOR="#cc0000">PYTHON EXCEPTION:</FONT> 	<FONT COLOR="#cc6600">  File "./draft.py", line 43, in <lambda></FONT>
+Fri May 20 13:42:09 2011 >>  <FONT COLOR="#cc0000">PYTHON EXCEPTION:</FONT> 	<FONT COLOR="#cc6600">self.ui.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )</FONT>
+Fri May 20 13:42:09 2011 >>  <FONT COLOR="#cc0000">PYTHON EXCEPTION:</FONT> 	<FONT COLOR="#cc6600">  File "./draft.py", line 158, in loadGeo</FONT>
+Fri May 20 13:42:09 2011 >>  <FONT COLOR="#cc0000">PYTHON EXCEPTION:</FONT> 	<FONT COLOR="#cc6600">self.glFrame.addMesh( mesh(fileNames[0]) )</FONT>
+Fri May 20 13:42:09 2011 >>  <FONT COLOR="#cc0000">PYTHON EXCEPTION:</FONT> 	<FONT COLOR="#cc6600">TypeError</FONT>
+Fri May 20 13:42:09 2011 >>  <FONT COLOR="#cc0000">PYTHON EXCEPTION:</FONT> 	<FONT COLOR="#cc6600">:</FONT>
+Fri May 20 13:42:09 2011 >>  <FONT COLOR="#cc0000">PYTHON EXCEPTION:</FONT> 	<FONT COLOR="#cc6600">'NoneType' object is not subscriptable</FONT>

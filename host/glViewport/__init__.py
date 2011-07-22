@@ -16,6 +16,8 @@ except ImportError:
 
 from stl import stl
 
+import pyglet_shaders 
+import pyglet.gl.glu  as glu
 
 def calculateNormal( face ):
     vec
@@ -177,25 +179,53 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.zoom = mesh.bboxMin[2] * (mesh.bboxMax[2] - mesh.bboxMin[2]) * 2
         self.yPos = (mesh.bboxMin[1] - mesh.bboxMax[1])/2.0
         self.updateGL()
+        
+    def install_shaders(self):
+        fragment = '%s/slicer.frag' % os.path.dirname( __file__ )
+        vertex = '%s/slicer.vert' % os.path.dirname( __file__ )
+        def read_source(fname):
+            f = open(fname)
+            try:
+                src = f.read()
+            finally:
+                f.close()
+            return src
+
+        fsrc = read_source(fragment)
+        self.fshader = pyglet_shaders.FragmentShader([fsrc])
+
+        vsrc = read_source(vertex)
+        self.vshader = pyglet_shaders.VertexShader([vsrc])
+
+        self.shader = pyglet_shaders.ShaderProgram(self.fshader, self.vshader)
+        self.shader.use()
+
 
     def initializeGL(self):
         self.qglClearColor(self.trolltechPurple.darker())
         #self.object = self.makeObject()
 
         GL.glShadeModel(GL.GL_FLAT)
-        GL.glEnable(GL.GL_DEPTH_TEST)
-        GL.glEnable(GL.GL_CULL_FACE)
+        GL.glDisable(GL.GL_DEPTH_TEST)
+        GL.glEnable(GL.GL_BLEND)
+        
+        GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_DST_ALPHA )
+        
+        GL.glDisable(GL.GL_CULL_FACE)
 
         GL.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, (5.0, 15.0, 10.0, 1.0))
         GL.glEnable(GL.GL_LIGHTING)
         GL.glEnable(GL.GL_LIGHT0)
         
         GL.glEnable(GL.GL_NORMALIZE)
+        
+        self.install_shaders()
 
     def paintGL(self):
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
         for mesh in self.meshs:
             GL.glLoadIdentity()
+            glu.gluLookAt (0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
             
             GL.glTranslated(self.xPos, self.yPos, self.zoom )
             GL.glRotated(self.xRot / 16.0, 1.0, 0.0, 0.0)

@@ -1,19 +1,20 @@
+#!/usr/bin/env python
 
-
-from ctypes import util
 import sys, os, time
 sys.path += [ '.' ]
 #os.environ[ 'PATH' ] = '.%s%s' % ( os.path.pathsep, os.environ[ 'PATH' ] )
 
 
 from PySide.QtCore import QIODevice, QFile, SIGNAL, SLOT, QObject, Qt
-from PySide.QtGui import QApplication, QPushButton, QFileDialog, QWidget, QMessageBox, QTextOption, QWidget,QHBoxLayout, QCheckBox, QComboBox, QTextCursor, QGroupBox, QToolButton, QDoubleSpinBox, 	QStatusBar, QPlainTextEdit 
+from PySide.QtGui import QApplication, QSlider, QPushButton, QFileDialog, QWidget, QMessageBox, QTextOption, QWidget,QHBoxLayout, QCheckBox, QComboBox, QTextCursor, QGroupBox, QToolButton, QDoubleSpinBox, 	QStatusBar, QPlainTextEdit 
 import PySide.QtUiTools as QtUiTools
 
 from glViewport import GLWidget, mesh
 
 import reprap
 from log import log
+import glSVG
+
 
 defaultIcon = '\nborder: 0	px solid ;\nborder-radius: 7px;\nborder-color: rgb(150, 220,140);\nmargin-top: 0.0ex;background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.45, fx:0.386783, fy:0.358, '
 comIcon = [
@@ -22,13 +23,15 @@ comIcon = [
 ]
 
 console = sys.stdout
-stdoutLog = log()
-stderrLog = log(error=True)
+stdoutLog = None
+stderrLog = None 
 
 
 class win(QWidget):
     def __init__(self, app=None):
         QWidget.__init__(self, None)
+        
+        self.svgGLViewer = None 
         
         # load the draft.ui, a UI defination created on QT Creator.
         QUiLoader = QtUiTools.QUiLoader()
@@ -48,6 +51,10 @@ class win(QWidget):
         self.ui.connect(self.ui.findChild(QPushButton, 'sliceButton') , SIGNAL('clicked()'), lambda: self.sliceButton() )
         self.ui.connect(self.ui.findChild(QPushButton, 'printButton') , SIGNAL('clicked()'), lambda: self.printButton() )
         self.ui.connect(self.ui.findChild(QPushButton, 'connect') , SIGNAL('clicked()'), lambda: self.connectButton() )
+        self.ui.connect(self.ui.findChild(QToolButton, 'refil') , SIGNAL('clicked()'), lambda: self.refilButton() )
+        self.ui.connect(self.ui.findChild(QSlider, 'layer') , SIGNAL('sliderMoved(int)'), self.layerSlider )
+        self.ui.connect(self.ui.findChild(QSlider, 'layer') , SIGNAL('valueChanged(int)'), self.layerSlider )
+        
 
         # store those as direct children for easy access and save in config file.
         self.startPrintAfterSlice   = self.ui.findChild(QCheckBox, 'startPrintAfterSlice') 
@@ -102,6 +109,11 @@ class win(QWidget):
         
         self.loadConfig()
         
+        stdoutLog = log()
+        stderrLog = log(error=True)
+        
+        self.layerSliderValue = 0.5
+        
     def saveConfig(self):
         checkBoxStates = {
             Qt.Unchecked        : 'Qt.Unchecked', 
@@ -136,7 +148,17 @@ class win(QWidget):
         self.logWin.ensureCursorVisible()# ( QTextCursor.End )
         self.logWin.repaint()
         
+    def layerSlider(self, value):
+        value = float(value)/100.0
+        print value
+        self.glFrame.shader.uniformf( 'layer', value)
+        self.glFrame.updateGL()
         
+        
+    def refilButton(self):
+        self.glFrame.install_shaders( )
+        self.glFrame.shader.uniformf( 'layer', self.layerSliderValue )
+
     def axisSpeed( self ):
         print 'ssss' ; sys.stdout.flush()
         self.reprap.z.speed( float(self.axisSpeedSpinBox.value()) )
@@ -185,7 +207,11 @@ class win(QWidget):
             self.arduinoException()
         
     def sliceButton(self):
-        pass
+        if not self.svgGLViewer: 
+            self.svgGLViewer = glSVG.PygletApp( )
+        
+        self.svgGLViewer.load( self.fileName )
+        self.svgGLViewer.run()
         
     def printButton(self):
         try:

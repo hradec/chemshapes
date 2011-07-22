@@ -693,7 +693,7 @@ background-color: rgb(65, 8, 9);
                   </widget>
                  </item>
                  <item>
-                  <widget class="QToolButton" name="refill">
+                  <widget class="QToolButton" name="refil">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -709,6 +709,13 @@ background-color: rgb(65, 8, 9);
                </widget>
               </item>
              </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSlider" name="layer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
             </widget>
            </item>
            <item>

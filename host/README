@@ -17,8 +17,32 @@
 #    along with this software.  If not, see <http://www.gnu.org/licenses/>.
 # ---------------------------------------------------------------------------
 
-depot map:
+Welcome to ChemShapes Host Software. 
 
-    - host -> Chemshapes host software
+If you find any issues, bugs or suggestions, please report it on this page: 
 
+        https://github.com/hradec/chemshapes/issues
+        
+        
+If you're in Windows, just double click on:
 
+    Click here to run Chemshapes Host Software.cmd
+    
+
+for OSX and Linux, there are dependencies that you need to install before hand:
+
+    1. PyOpenGL
+    2. PySide
+    3. Qt 4.7
+    
+    
+I'm looking on an standalone way to run it on OSX, for examplem, using py2app to generate
+a self-contained Mac App. 
+
+If you have experience with py2app and py2exe, please feel free to help me out!!!! =)
+
+Just make sure to put your code/setup into appropriate folders: 
+    
+        build/win - makefiles to generate windows .exe
+        build/osx - makefiles to generate mac standalone app
+        build/linux - makefiles to generate linux packages

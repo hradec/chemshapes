@@ -1,5 +1,6 @@
 varying vec4 P;
 varying vec3 normal;
+uniform vec4 bboxSize;
 
 void main()
 {   
@@ -12,7 +13,7 @@ void main()
 //        gl_Vertex.z,
 //        gl_Vertex.w / 30.0);
     gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
-    P =  gl_ProjectionMatrixInverse * gl_Vertex;
+    P =  gl_Vertex/bboxSize;
     normal = gl_ProjectionMatrixInverse *  gl_Vertex;
 }
 

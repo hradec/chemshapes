@@ -309,7 +309,7 @@ background-color: rgb(64, 24, 24);
                    <enum>Qt::LeftToRight</enum>
                   </property>
                   <property name="text">
-                   <string>thickness in mm</string>
+                   <string>thickness in micron</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -340,11 +340,41 @@ border-top-color: rgb(26, 26, 26);
 
 border-color: rgb(14, 12, 47);</string>
                   </property>
+                  <property name="decimals">
+                   <number>0</number>
+                  </property>
+                  <property name="maximum">
+                   <double>1000.000000000000000</double>
+                  </property>
                   <property name="singleStep">
-                   <double>0.010000000000000</double>
+                   <double>1.000000000000000</double>
                   </property>
                   <property name="value">
-                   <double>0.040000000000000</double>
+                   <double>40.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_5">
+                <item>
+                 <widget class="QLabel" name="label_8">
+                  <property name="toolTip">
+                   <string>Change the visible slice in the viewport</string>
+                  </property>
+                  <property name="text">
+                   <string>Slice:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="layer">
+                  <property name="toolTip">
+                   <string>Change the visible slice in the viewport</string>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
                   </property>
                  </widget>
                 </item>
@@ -359,6 +389,9 @@ border-color: rgb(14, 12, 47);</string>
               </item>
               <item>
                <widget class="QCheckBox" name="startPrintAfterSlice">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
                 <property name="text">
                  <string>start printing right after slice</string>
                 </property>
@@ -709,13 +742,6 @@ background-color: rgb(65, 8, 9);
                </widget>
               </item>
              </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QSlider" name="layer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
             </widget>
            </item>
            <item>

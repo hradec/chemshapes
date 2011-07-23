@@ -20,7 +20,7 @@ import pyglet_shaders
 import pyglet.gl.glu  as glu
 
 def calculateNormal( face ):
-    vec
+    pass
 
 class obj:
     def __init__(self, file=None):
@@ -62,7 +62,7 @@ class obj:
                     self.normals.append( line.split()[1:] )
                 if id == 'f':
                     self.faces.append( face(line) )
-
+                    
     def render(self):
         if not self.genList:
             self.genList = GL.glGenLists(1)
@@ -112,6 +112,8 @@ class mesh:
             self.bboxMin = self.mesh.bboxMin 
             self.bboxMax = self.mesh.bboxMax
             
+    
+            
         
 
 class GLWidget(QtOpenGL.QGLWidget):
@@ -122,17 +124,20 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.parent = parent
 
         self.object = 0
+        
+        self.lastPos = QtCore.QPoint()
+
+        self.trolltechGreen = QtGui.QColor.fromCmykF(0.40, 0.0, 1.0, 0.0)
+        self.trolltechPurple = QtGui.QColor.fromCmykF(0.39, 0.39, 0.0, 0.0)
+        self.resetCamera()
+        
+    def resetCamera(self):
         self.xRot = 0
         self.yRot = 0
         self.zRot = 0
         self.zoom = -10.0
         self.xPos = 0
         self.yPos = 0
-
-        self.lastPos = QtCore.QPoint()
-
-        self.trolltechGreen = QtGui.QColor.fromCmykF(0.40, 0.0, 1.0, 0.0)
-        self.trolltechPurple = QtGui.QColor.fromCmykF(0.39, 0.39, 0.0, 0.0)
 
     def xRotation(self):
         return self.xRot
@@ -175,9 +180,23 @@ class GLWidget(QtOpenGL.QGLWidget):
             for each in range(len(self.meshs)):
                 del self.meshs[each]
             
+        self.meshs = []
         self.meshs.append(mesh)
-        self.zoom = mesh.bboxMin[2] * (mesh.bboxMax[2] - mesh.bboxMin[2]) * 2
-        self.yPos = (mesh.bboxMin[1] - mesh.bboxMax[1])/2.0
+        #self.zoom = mesh.bboxMin[2] * (mesh.bboxMax[2] - mesh.bboxMin[2]) * 2
+        self.center = [0,0,0] 
+        self.vec = [0,0,0]
+        self.lenght = 0
+        for i in range(3):
+            x = float(mesh.bboxMax[i] - mesh.bboxMin[i])
+            self.center[i] = mesh.bboxMin[i] + (x/2.0)
+            self.vec[i] = x
+            self.lenght += self.vec[i]*self.vec[i]
+        self.lenght = math.sqrt(self.lenght)
+        self.resize = 10/self.lenght
+            
+        #self.yPos = (mesh.bboxMin[1] - mesh.bboxMax[1])/2.0
+        self.zCamera = ((self.vec[1]*self.resize)/2.0)+((self.lenght*self.resize)*2)
+        self.resetCamera()
         self.updateGL()
         
     def install_shaders(self):
@@ -207,6 +226,8 @@ class GLWidget(QtOpenGL.QGLWidget):
 
         GL.glShadeModel(GL.GL_FLAT)
         GL.glDisable(GL.GL_DEPTH_TEST)
+        GL.glDisable(GL.GL_CLIP_PLANE0)
+        GL.glDisable(GL.GL_CLIP_PLANE1)
         GL.glEnable(GL.GL_BLEND)
         
         GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_DST_ALPHA )
@@ -225,15 +246,16 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
         for mesh in self.meshs:
             GL.glLoadIdentity()
-            glu.gluLookAt (0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+            glu.gluLookAt (0,0, self.zCamera/2 , self.center[0]*self.resize, self.center[1]*self.resize, self.center[2]*self.resize, 0.0, 1.0, 0.0);
             
-            GL.glTranslated(self.xPos, self.yPos, self.zoom )
+            GL.glTranslated(self.xPos, self.yPos, 0 )
             GL.glRotated(self.xRot / 16.0, 1.0, 0.0, 0.0)
             GL.glRotated(self.yRot / 16.0, 0.0, 1.0, 0.0)
             GL.glRotated(self.zRot / 16.0, 0.0, 0.0, 1.0)
             
 
             self.qglColor(self.trolltechGreen)
+            GL.glScale( self.resize, self.resize, self.resize )
             mesh.render()
         #GL.glCallList(self.object)
 
@@ -251,7 +273,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         #aspect1 = float(height)/float(width)
         #aspect2 = float(width)/float(height)
         #GL.glOrtho(-0.5, +0.5, +0.5, -0.5, -1500.0, 1500.0)
-        GL.glFrustum(-1 , 1 , -1 , 1 , 4.0, 6000.0)
+        GL.glFrustum(-1 , 1 , -1 , 1 , 2, 6000.0)
         GL.glMatrixMode(GL.GL_MODELVIEW)
 
     def mousePressEvent(self, event):
@@ -265,7 +287,7 @@ class GLWidget(QtOpenGL.QGLWidget):
             self.setXRotation(self.xRot + 8 * dy)
             self.setYRotation(self.yRot + 8 * dx)
         elif event.buttons() & QtCore.Qt.RightButton:
-            self.zoom += dx/10.0
+            self.zCamera += dx/10.0
             self.updateGL()
         elif event.buttons() & QtCore.Qt.MiddleButton:
             self.xPos += dx/100.0

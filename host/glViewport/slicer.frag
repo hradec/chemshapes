@@ -1,12 +1,13 @@
 varying vec3 normal;
 varying vec4 P;
 uniform float layer;
+uniform vec4 bboxSize;
 
 void main()
 {
-    float sliceSize = 0.01;
+    float sliceSize = bboxSize[3];
     float sliceLevel = layer;
-    float slice = smoothstep(sliceLevel-sliceSize,sliceLevel,P.g) * (1-smoothstep(sliceLevel,sliceLevel+sliceSize,P.g));
+    float slice = smoothstep(sliceLevel-sliceSize,sliceLevel,P[1]) * (1-smoothstep(sliceLevel,sliceLevel+sliceSize,P[1]));
 
     
     

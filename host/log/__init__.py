@@ -5,10 +5,10 @@ from PySide.QtCore import QIODevice, QFile, SIGNAL, SLOT, QObject
 from PySide.QtGui import QPlainTextEdit 
 import PySide.QtUiTools as QtUiTools
 
-import time, traceback
+import time, traceback, socket
 
 class log:
-    def __init__(self, logfile='log.html', QPlainTextEdit_widget=None, error=False):
+    def __init__(self, logfile='log_%s.html' % socket.gethostname(), QPlainTextEdit_widget=None, error=False):
         self.attachLog( QPlainTextEdit_widget )
         self.logfile = logfile
 #        self._write('='*80, cleanText=True)
@@ -37,7 +37,7 @@ class log:
             if self.QPlainTextEdit_widget:
                 self.QPlainTextEdit_widget.appendHtml ( msg )
             self.logFile = open(self.logfile,'a')
-            self.logFile.write( '%s\n' % msg )
+            self.logFile.write( '%s<br>' % msg )
             self.logFile.flush()
             self.logFile.close()
 

@@ -16,7 +16,7 @@ from log import log
 import glSVG
 
 
-defaultIcon = '\nborder: 0	px solid ;\nborder-radius: 7px;\nborder-color: rgb(150, 220,140);\nmargin-top: 0.0ex;background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.45, fx:0.386783, fy:0.358, '
+defaultIcon = '\nborder: 0 solid ;\nborder-radius: 7;\nborder-color: rgb(150, 220,140);\nmargin-top: 0.0ex;background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.45, fx:0.386783, fy:0.358, '
 comIcon = [
     defaultIcon +'stop:0 rgba(255, 169, 169, 255), stop:0.118227 rgba(214, 0, 0, 255), stop:0.82266 rgba(69, 0, 0, 255), stop:0.901478 rgba(0, 0, 0, 0), stop:1 rgba(0, 0, 0, 0));', 
     defaultIcon +'stop:0 rgba( 169, 255,169, 255), stop:0.118227 rgba(0, 214, 0, 255), stop:0.82266 rgba(0, 69, 0, 255), stop:0.901478 rgba(0, 0, 0, 0), stop:1 rgba(0, 0, 0, 0));', 
@@ -62,6 +62,7 @@ class win(QWidget):
         self.sliceThickness         = self.ui.findChild(QDoubleSpinBox, 'sliceThickness') 
         self.axisSpeedSpinBox       = self.ui.findChild(QDoubleSpinBox, 'axisSpeed') 
         
+        self.ui.connect(self.sliceThickness, SIGNAL('valueChanged(double)'), self.refreshGPU )
         
         #self.ui.connect(self.axisSpeedSpinBox , SIGNAL('valueChanged()'), lambda: self.axisSpeed() )
         self.axisSpeedSpinBox.valueChanged[float].connect(lambda: self.axisSpeed())
@@ -150,9 +151,8 @@ class win(QWidget):
         
     def layerSlider(self, value):
         value = float(value)/100.0
-        print value
         self.glFrame.shader.uniformf( 'layer', value)
-        self.glFrame.updateGL()
+        self.refreshGPU()
         
         
     def refilButton(self):
@@ -160,7 +160,6 @@ class win(QWidget):
         self.glFrame.shader.uniformf( 'layer', self.layerSliderValue )
 
     def axisSpeed( self ):
-        print 'ssss' ; sys.stdout.flush()
         self.reprap.z.speed( float(self.axisSpeedSpinBox.value()) )
         
     def moveZ(self, mm, relative=False):
@@ -207,11 +206,12 @@ class win(QWidget):
             self.arduinoException()
         
     def sliceButton(self):
-        if not self.svgGLViewer: 
-            self.svgGLViewer = glSVG.PygletApp( )
+        pass
+#        if not self.svgGLViewer: 
+#            self.svgGLViewer = glSVG.PygletApp( )
         
-        self.svgGLViewer.load( self.fileName )
-        self.svgGLViewer.run()
+#        self.svgGLViewer.load( self.fileName )
+#        self.svgGLViewer.run()
         
     def printButton(self):
         try:
@@ -232,12 +232,21 @@ class win(QWidget):
         
         self.refreshMesh()
     
+    
+    def refreshGPU(self):
+        thickness = float(self.sliceThickness.value())/10000.0 
+        self.glFrame.shader.uniformf( 'bboxSize', self.glFrame.vec[0], self.glFrame.vec[1]+thickness*4, self.glFrame.vec[2], thickness)
+        self.glFrame.updateGL()
+
+        
     def refreshMesh( self ):
         if not os.path.exists(self.fileName):
             self.fileName = os.path.abspath( './%s' % self.fileName)
             if not os.path.exists( self.fileName ):
                 return
         self.glFrame.addMesh( mesh(self.fileName) )
+        self.refreshGPU()
+        
         
 
 stdoutLog = log()

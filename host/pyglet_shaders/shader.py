@@ -2,7 +2,8 @@ from ctypes import (
     byref, c_char, c_char_p, c_int, cast, create_string_buffer, pointer,
     POINTER
 )
-from pyglet import gl
+import sys
+from OpenGL import GL as gl
 
 
 class ShaderError(Exception): pass
@@ -32,8 +33,8 @@ class _Shader(object):
         
     def _get(self, paramId):
         outvalue = c_int(0)
-        gl.glGetShaderiv(self.id, paramId, byref(outvalue))
-        value = outvalue.value
+        value = gl.glGetShaderiv(self.id, paramId) #, byref(outvalue))
+        #value = outvalue.value
         if value in shaderErrors.keys():
             msg = '%s from glGetShader(%s, %s, &value)'
             raise ValueError(msg % (shaderErrors[value], self.id, paramId))
@@ -49,13 +50,17 @@ class _Shader(object):
 
 
     def getInfoLog(self):
-        length = self.getInfoLogLength()
-        if length == 0:
-            return ''
-        buffer = create_string_buffer(length)
-        gl.glGetShaderInfoLog(self.id, length, None, buffer)
-        return buffer.value
-
+        ret = ''
+        if sys.platform == 'darwin':
+            ret = gl.glGetShaderInfoLog(self.id)
+        else:
+            length = self.getInfoLogLength()
+            if length == 0:
+                return ''
+            buffer = create_string_buffer(length)
+            gl.glGetShaderInfoLog(self.id, length, None, buffer)
+            ret = buffer.value
+        return ret
 
     def _srcToArray(self):
         num = len(self.sources)
@@ -67,7 +72,10 @@ class _Shader(object):
         self.id = gl.glCreateShader(self.type)
 
         num, src = self._srcToArray()
-        gl.glShaderSource(self.id, num, src, None)
+        if sys.platform == 'darwin':
+            gl.glShaderSource(self.id, self.sources)
+        else:
+            gl.glShaderSource(self.id, num, src, None)
         
         gl.glCompileShader(self.id)
 
@@ -111,12 +119,17 @@ class ShaderProgram(object):
 
 
     def getInfoLog(self):
-        length = self.getInfoLogLength()
-        if length == 0:
-            return ''
-        buffer = create_string_buffer(length)
-        gl.glGetProgramInfoLog(self.id, length, None, buffer)
-        return buffer.value
+        ret = ""
+        if sys.platform == 'darwin':
+            ret = gl.glGetProgramInfoLog(self.id)
+        else:
+            length = self.getInfoLogLength()
+            if length == 0:
+                return ''
+            buffer = create_string_buffer(length)
+            gl.glGetProgramInfoLog(self.id, length, None, buffer)
+            ret = buffer.value
+        return ret
         
 
     def _getMessage(self):

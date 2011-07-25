@@ -280,7 +280,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         #self.object = self.makeObject()
 
         GL.glShadeModel(GL.GL_FLAT)
-        GL.glDisable(GL.GL_CULL_FACE)
+#        GL.glEnable(GL.GL_CULL_FACE)
 #        GL.glEnable(GL.GL_DEPTH_TEST)
         
         GL.glEnable(GL.GL_BLEND)        

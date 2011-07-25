@@ -57,11 +57,12 @@ class createtriangle:
 
 
 class stl:
-    model=[]
-    
+#    model = []
     def __init__(self, file):
         self.bboxMin = [999999999,999999999,999999999]
         self.bboxMax = [-999999999,-999999999,-999999999]        
+        self.model=[]
+        self.glList = None
         self.load_stl(file)
         self.bbox()
         
@@ -81,6 +82,13 @@ class stl:
                     self.bboxMax[1] = tri.points[n].y
                 if tri.points[n].z > self.bboxMax[2]:
                     self.bboxMax[2] = tri.points[n].z
+
+        self.center = [0,0,0]
+        for n in range(3):
+            self.bboxMax[n] = self.bboxMax[n] / 10
+            self.bboxMin[n] = self.bboxMin[n] / 10
+            self.center[n] = self.bboxMin[n]+float(self.bboxMax[n]-self.bboxMin[n])/2.0
+            
       
     #return the faces of the triangles
     def get_triangles(self):
@@ -90,13 +98,20 @@ class stl:
 
     #draw the models faces
     def render(self):
-        GL.glBegin(GL.GL_TRIANGLES)
-        for tri in self.get_triangles():
-            GL.glNormal3f(tri.normal.x,tri.normal.y,tri.normal.z)
-            GL.glVertex3f(tri.points[0].x,tri.points[0].y,tri.points[0].z)
-            GL.glVertex3f(tri.points[1].x,tri.points[1].y,tri.points[1].z)
-            GL.glVertex3f(tri.points[2].x,tri.points[2].y,tri.points[2].z)
-        GL.glEnd()
+        if not self.glList:
+#            GL.glDeleteLists(1,0)
+            self.glList = GL.glGenLists(1)
+            GL.glNewList(self.glList, GL.GL_COMPILE)
+            GL.glBegin(GL.GL_TRIANGLES)
+
+            for tri in self.model: #self.get_triangles():
+                GL.glNormal3f(tri.normal.x,tri.normal.y,tri.normal.z)
+                GL.glVertex3f(tri.points[0].x/10-self.center[0],tri.points[0].z/10-self.bboxMin[2],tri.points[0].y/10-self.center[1])
+                GL.glVertex3f(tri.points[1].x/10-self.center[0],tri.points[1].z/10-self.bboxMin[2],tri.points[1].y/10-self.center[1])
+                GL.glVertex3f(tri.points[2].x/10-self.center[0],tri.points[2].z/10-self.bboxMin[2],tri.points[2].y/10-self.center[1])
+            GL.glEnd()
+            GL.glEndList()
+        GL.glCallList(self.glList)
   
     #load stl file detects if the file is a text file or binary file
     def load_stl(self,filename):
@@ -117,6 +132,9 @@ class stl:
     def load_text_stl(self,filename):
         fp=open(filename,'r')
 
+        self.model = []
+        self.glList = None
+        
         for line in fp.readlines():
             words=line.split()
             if len(words)>0:
@@ -126,7 +144,10 @@ class stl:
                 if words[0]=='facet':
                     center=[0.0,0.0,0.0]
                     triangle=[]
-                    normal=(eval(words[2]),eval(words[3]),eval(words[4]))
+                    try:
+                        normal=(eval(words[2]),eval(words[3]),eval(words[4]))
+                    except:
+                        normal=(0,0,0) 
                   
                 if words[0]=='vertex':
                     triangle.append((eval(words[1]),eval(words[2]),eval(words[3])))
@@ -146,6 +167,8 @@ class stl:
 
         l=struct.unpack('I',fp.read(4))[0]
         count=0
+        self.model = []
+        self.glList = None
         while True:
             try:
                 p=fp.read(12)

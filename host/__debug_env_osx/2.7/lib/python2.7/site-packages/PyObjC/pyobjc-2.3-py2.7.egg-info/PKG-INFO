@@ -1,0 +1,30 @@
+Metadata-Version: 1.0
+Name: pyobjc
+Version: 2.3
+Summary: Python<->ObjC Interoperability Module
+Home-page: http://pyobjc.sourceforge.net/
+Author: Ronald Oussoren
+Author-email: pyobjc-dev@lists.sourceforge.net
+License: MIT License
+Description: 
+        PyObjC is a bridge between Python and Objective-C.  It allows full
+        featured Cocoa applications to be written in pure Python.  It is also
+        easy to use other frameworks containing Objective-C class libraries
+        from Python and to mix in Objective-C, C and C++ source.
+        
+        This package is a pseudo-package that will install all pyobjc related
+        packages (that is, pyobjc-core as well as wrapppers for frameworks on
+        OSX)
+        
+Platform: MacOS X
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Environment :: MacOS X :: Cocoa
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Objective C
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: User Interfaces

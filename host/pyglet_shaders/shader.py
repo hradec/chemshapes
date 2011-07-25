@@ -50,17 +50,7 @@ class _Shader(object):
 
 
     def getInfoLog(self):
-        ret = ''
-        if sys.platform == 'darwin':
-            ret = gl.glGetShaderInfoLog(self.id)
-        else:
-            length = self.getInfoLogLength()
-            if length == 0:
-                return ''
-            buffer = create_string_buffer(length)
-            gl.glGetShaderInfoLog(self.id, length, None, buffer)
-            ret = buffer.value
-        return ret
+        return gl.glGetShaderInfoLog(self.id)
 
     def _srcToArray(self):
         num = len(self.sources)
@@ -72,11 +62,7 @@ class _Shader(object):
         self.id = gl.glCreateShader(self.type)
 
         num, src = self._srcToArray()
-        if sys.platform == 'darwin':
-            gl.glShaderSource(self.id, self.sources)
-        else:
-            gl.glShaderSource(self.id, num, src, None)
-        
+        gl.glShaderSource(self.id, self.sources)
         gl.glCompileShader(self.id)
 
         if not self.getCompileStatus():
@@ -119,17 +105,7 @@ class ShaderProgram(object):
 
 
     def getInfoLog(self):
-        ret = ""
-        if sys.platform == 'darwin':
-            ret = gl.glGetProgramInfoLog(self.id)
-        else:
-            length = self.getInfoLogLength()
-            if length == 0:
-                return ''
-            buffer = create_string_buffer(length)
-            gl.glGetProgramInfoLog(self.id, length, None, buffer)
-            ret = buffer.value
-        return ret
+        return gl.glGetProgramInfoLog(self.id)
         
 
     def _getMessage(self):

@@ -367,13 +367,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.lastPos = QtCore.QPoint(event.pos())
         
     def wheelEvent(self, event):
-        numDegrees = event.delta() / 8
-        numSteps = numDegrees / 15
-
-        if event.orientation() == QtCore.Qt.Horizontal:
-           self.zCamera += numSteps/2
-        else:
-           self.zCamera -= numSteps/2
+        self.zCamera += event.delta()*0.01
         event.accept()
         self.updateGL()
 

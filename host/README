@@ -29,7 +29,12 @@ If you're in Windows, just double click on:
     Click here to run Chemshapes Host Software.cmd
     
 
-for OSX and Linux, there are dependencies that you need to install before hand:
+on OSX, open the terminal app, navigate to the chemshapes/host folder and type:
+    
+    ./runOSX.SH
+    
+    
+and on Linux, there are dependencies that you need to install before hand:
 
     1. PyOpenGL
     2. PySide

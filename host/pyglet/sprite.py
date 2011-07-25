@@ -2,14 +2,14 @@
 # pyglet
 # Copyright (c) 2006-2008 Alex Holkner
 # All rights reserved.
-#
+# 
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
+# modification, are permitted provided that the following conditions 
 # are met:
 #
 #  * Redistributions of source code must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright
+#  * Redistributions in binary form must reproduce the above copyright 
 #    notice, this list of conditions and the following disclaimer in
 #    the documentation and/or other materials provided with the
 #    distribution.
@@ -76,7 +76,7 @@ entire batch of sprites is then drawn in one call::
     ball_sprites = []
     for i in range(100):
         x, y = i * 10, 50
-        ball_sprites.append(pyglet.sprite.Sprite(ball_image, x, y, batch=batch)
+        ball_sprites.append(pyglet.sprite.Sprite(ball_image, x, y, batch=batch))
 
     @window.event
     def on_draw():
@@ -91,7 +91,7 @@ sprites within batches.
 '''
 
 __docformat__ = 'restructuredtext'
-__version__ = '$Id: sprite.py 2541 2009-12-31 04:31:11Z benjamin.coder.smith@gmail.com $'
+__version__ = '$Id$'
 
 import math
 import sys
@@ -335,7 +335,8 @@ class Sprite(event.EventDispatcher):
             self._frame_index = 0
             self._set_texture(img.frames[0].image.get_texture())
             self._next_dt = img.frames[0].duration
-            clock.schedule_once(self._animate, self._next_dt)
+            if self._next_dt:
+                clock.schedule_once(self._animate, self._next_dt)
         else:
             self._set_texture(img.get_texture())
         self._update_position()
@@ -365,11 +366,11 @@ class Sprite(event.EventDispatcher):
     def _create_vertex_list(self):
         if self._batch is None:
             self._vertex_list = graphics.vertex_list(4,
-                'v2i/%s' % self._usage,
+                'v2i/%s' % self._usage, 
                 'c4B', ('t3f', self._texture.tex_coords))
         else:
             self._vertex_list = self._batch.add(4, GL_QUADS, self._group,
-                'v2i/%s' % self._usage,
+                'v2i/%s' % self._usage, 
                 'c4B', ('t3f', self._texture.tex_coords))
         self._update_position()
         self._update_color()
@@ -526,10 +527,10 @@ class Sprite(event.EventDispatcher):
 
     This property sets the color of the sprite's vertices. This allows the
     sprite to be drawn with a color tint.
-
+    
     The color is specified as an RGB tuple of integers ``(red, green, blue)``.
     Each color component must be in the range 0 (dark) to 255 (saturated).
-
+    
     :type: (int, int, int)
     ''')
 

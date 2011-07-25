@@ -1,0 +1,5 @@
+if (NOT PYTHON_BASENAME)
+    message(STATUS "Using default python: python2.7")
+    SET(PYTHON_BASENAME python2.7)
+endif()
+include(/Volumes/ramdisk/install/usr/lib/cmake/PySide-1.0.4/PySideConfig-${PYTHON_BASENAME}.cmake)

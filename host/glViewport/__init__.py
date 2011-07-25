@@ -5,6 +5,7 @@ from PySide import QtCore, QtGui, QtOpenGL
 
 try:
     from OpenGL import GL
+    from OpenGL import GLU as glu
 except ImportError:
     app = QtGui.QApplication(sys.argv)
     QtGui.QMessageBox.critical(None, "OpenGL hellogl",
@@ -17,10 +18,13 @@ except ImportError:
 from stl import stl
 
 import pyglet_shaders 
-import pyglet.gl.glu  as glu
 
-def calculateNormal( face ):
-    pass
+def cross(a, b):
+    c = [a[1]*b[2] - a[2]*b[1],
+         a[2]*b[0] - a[0]*b[2],
+         a[0]*b[1] - a[1]*b[0]]
+
+    return c
 
 class obj:
     def __init__(self, file=None):
@@ -62,23 +66,59 @@ class obj:
                     self.normals.append( line.split()[1:] )
                 if id == 'f':
                     self.faces.append( face(line) )
+        
+        self.calculateNormal( )
+
+    def calculateNormal(self ):
+        edges = {}
+        for each in self.faces:
+            oldVert = self.vertex[ int(each[-1][0])-1 ]
+            oldId = int(each[-1][0])-1
+            for index in each:
+                id = int(index[0])-1
+                vertex = self.vertex[ id ]
+                if not edges.has_key(oldId):
+                    edges[oldId] = []
+                if not edges.has_key(id):
+                    edges[id] = []
+                e = []
+                for v in range(3):
+                    e.append( oldVert[v] - vertex[v] )
+                edges[oldId].append( e )
+                edges[id].append( e )
+                oldVert = vertex
+                oldId = id
+                    
+#            print edges
+        if not self.normals:
+            self.normals = {}
+        for each in self.faces:
+            for index in each:
+                id = int(index[0])-1
+                self.normals[id] = cross(edges[id][0], edges[id][1] )
+                
+            
+            
                     
     def render(self):
         if not self.genList:
             self.genList = GL.glGenLists(1)
             GL.glNewList(self.genList, GL.GL_COMPILE)
 
-            GL.glBegin(GL.GL_TRIANGLES)
-            
-            for each in self.faces:
-                for index in each:
-                    if len(index)>1:
+            def draw():
+                for each in self.faces:
+                    l = None
+                    for index in each:
+#                        if len(index)>1:
                         normal = self.normals[ int(index[0])-1 ]
                         GL.glNormal3f( float(normal[0]), float(normal[1]), float(normal[2]))
-                    vertex = self.vertex[ int(index[0])-1 ]
-                    GL.glVertex3f( float(vertex[0]), float(vertex[1]), float(vertex[2]))
+                        vertex = self.vertex[ int(index[0])-1 ]
+                        GL.glVertex3f( float(vertex[0]), float(vertex[1]), float(vertex[2]))
 
+            GL.glBegin(GL.GL_TRIANGLES)
+            draw()
             GL.glEnd()
+            
             GL.glEndList()
         GL.glCallList( self.genList )
         return self.genList
@@ -112,6 +152,8 @@ class mesh:
             self.bboxMin = self.mesh.bboxMin 
             self.bboxMax = self.mesh.bboxMax
             
+
+            
     
             
         
@@ -123,6 +165,11 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.meshs = []
         self.parent = parent
 
+        self.xRot = 0
+        self.yRot = 0
+        self.zRot = 0
+        self.zoom = -10.0
+
         self.object = 0
         
         self.lastPos = QtCore.QPoint()
@@ -130,12 +177,13 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.trolltechGreen = QtGui.QColor.fromCmykF(0.40, 0.0, 1.0, 0.0)
         self.trolltechPurple = QtGui.QColor.fromCmykF(0.39, 0.39, 0.0, 0.0)
         self.resetCamera()
+        self.zCamera = 0
         
     def resetCamera(self):
-        self.xRot = 0
-        self.yRot = 0
-        self.zRot = 0
-        self.zoom = -10.0
+#        self.xRot = 0
+#        self.yRot = 0
+#        self.zRot = 0
+#        self.zoom = -10.0
         self.xPos = 0
         self.yPos = 0
 
@@ -195,13 +243,11 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.resize = 10/self.lenght
             
         #self.yPos = (mesh.bboxMin[1] - mesh.bboxMax[1])/2.0
-        self.zCamera = ((self.vec[1]*self.resize)/2.0)+((self.lenght*self.resize)*2)
+#        self.zCamera = ((self.vec[1]*self.resize)/2.0)+((self.lenght*self.resize)*2)
         self.resetCamera()
         self.updateGL()
         
     def install_shaders(self):
-        fragment = '%s/slicer.frag' % os.path.dirname( __file__ )
-        vertex = '%s/slicer.vert' % os.path.dirname( __file__ )
         def read_source(fname):
             f = open(fname)
             try:
@@ -210,14 +256,23 @@ class GLWidget(QtOpenGL.QGLWidget):
                 f.close()
             return src
 
-        fsrc = read_source(fragment)
-        self.fshader = pyglet_shaders.FragmentShader([fsrc])
+        self.s = {}
+        self.fshader = {}
+        self.vshader = {}
+        for each in ['slicer', 'normal']:
+            fragment = '%s/%s.frag' % (os.path.dirname( __file__ ), each)
+            vertex = '%s/%s.vert' % (os.path.dirname( __file__ ), each)
 
-        vsrc = read_source(vertex)
-        self.vshader = pyglet_shaders.VertexShader([vsrc])
+            fsrc = read_source(fragment)
+            self.fshader[each] = pyglet_shaders.FragmentShader([fsrc])
 
-        self.shader = pyglet_shaders.ShaderProgram(self.fshader, self.vshader)
-        self.shader.use()
+            vsrc = read_source(vertex)
+            self.vshader[each] = pyglet_shaders.VertexShader([vsrc])
+
+            self.s[each] = pyglet_shaders.ShaderProgram(self.fshader[each], self.vshader[each])
+
+            self.s[each].use()
+        self.shader = self.s['slicer']
 
 
     def initializeGL(self):
@@ -225,14 +280,12 @@ class GLWidget(QtOpenGL.QGLWidget):
         #self.object = self.makeObject()
 
         GL.glShadeModel(GL.GL_FLAT)
-        GL.glDisable(GL.GL_DEPTH_TEST)
-        GL.glDisable(GL.GL_CLIP_PLANE0)
-        GL.glDisable(GL.GL_CLIP_PLANE1)
-        GL.glEnable(GL.GL_BLEND)
-        
-        GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_DST_ALPHA )
-        
         GL.glDisable(GL.GL_CULL_FACE)
+#        GL.glEnable(GL.GL_DEPTH_TEST)
+        
+        GL.glEnable(GL.GL_BLEND)        
+        GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA )
+        
 
         GL.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, (5.0, 15.0, 10.0, 1.0))
         GL.glEnable(GL.GL_LIGHTING)
@@ -241,32 +294,49 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glEnable(GL.GL_NORMALIZE)
         
         self.install_shaders()
+        self.makeObject()
+        self.resizeGL()
+
 
     def paintGL(self):
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+
+        if self.zCamera <= -25:
+            self.zCamera = -25.0
+
+        GL.glLoadIdentity()
+#        glu.gluLookAt (0,5, self.zCamera , self.center[0]*self.resize, self.center[1]*self.resize, self.center[2]*self.resize, 0.0, 1.0, 0.0);
+        glu.gluLookAt ( 0, 5, 30+self.zCamera, 0, 3.0+self.zCamera/20.0, 0, 0.0, 1.0, 0.0 );
+        
+        GL.glTranslated(self.xPos, self.yPos, 0 )
+        GL.glRotated(self.xRot / 16.0, 1.0, 0.0, 0.0)
+        GL.glRotated(self.yRot / 16.0, 0.0, 1.0, 0.0)
+        GL.glRotated(self.zRot / 16.0, 0.0, 0.0, 1.0)
+
+        self.s['normal'].bind()
+        GL.glCallList(1)
+        self.s['normal'].unbind()
+        
+
+#        self.qglColor(self.trolltechGreen)
+#        GL.glScale( self.resize, self.resize, self.resize )
+            
+        self.s['slicer'].bind()
         for mesh in self.meshs:
-            GL.glLoadIdentity()
-            glu.gluLookAt (0,0, self.zCamera/2 , self.center[0]*self.resize, self.center[1]*self.resize, self.center[2]*self.resize, 0.0, 1.0, 0.0);
-            
-            GL.glTranslated(self.xPos, self.yPos, 0 )
-            GL.glRotated(self.xRot / 16.0, 1.0, 0.0, 0.0)
-            GL.glRotated(self.yRot / 16.0, 0.0, 1.0, 0.0)
-            GL.glRotated(self.zRot / 16.0, 0.0, 0.0, 1.0)
-            
-
-            self.qglColor(self.trolltechGreen)
-            GL.glScale( self.resize, self.resize, self.resize )
             mesh.render()
-        #GL.glCallList(self.object)
+            
 
-    def resizeGL(self, width, height):
+    def resizeGL(self, width=0, height=0):
+        width = float(self.parent.width())
+        height = float(self.parent.height())
         side = min(width, height)
         if side == width:
             side2 = height
         else:
             side2 = width
-        GL.glViewport((width - side) / 2, (height - side) / 2, side, side)
-        #GL.glViewport(0, 0, width, height)
+#        GL.glViewport((width - side) / 2, (height - side) / 2, side, side)
+        w = width*(height/width)
+        GL.glViewport(int((width-w)/2), 0, int(w), int(height))
 
         GL.glMatrixMode(GL.GL_PROJECTION)
         GL.glLoadIdentity()
@@ -287,7 +357,7 @@ class GLWidget(QtOpenGL.QGLWidget):
             self.setXRotation(self.xRot + 8 * dy)
             self.setYRotation(self.yRot + 8 * dx)
         elif event.buttons() & QtCore.Qt.RightButton:
-            self.zCamera += dx/10.0
+            self.zCamera += dx*(0.5)
             self.updateGL()
         elif event.buttons() & QtCore.Qt.MiddleButton:
             self.xPos += dx/100.0
@@ -295,6 +365,17 @@ class GLWidget(QtOpenGL.QGLWidget):
             self.updateGL()
 
         self.lastPos = QtCore.QPoint(event.pos())
+        
+    def wheelEvent(self, event):
+        numDegrees = event.delta() / 8
+        numSteps = numDegrees / 15
+
+        if event.orientation() == QtCore.Qt.Horizontal:
+           self.zCamera += numSteps/2
+        else:
+           self.zCamera -= numSteps/2
+        event.accept()
+        self.updateGL()
 
     def makeObject(self):
         genList = GL.glGenLists(1)
@@ -302,64 +383,69 @@ class GLWidget(QtOpenGL.QGLWidget):
 
         GL.glBegin(GL.GL_QUADS)
 
-        x1 = +0.06
-        y1 = -0.14
-        x2 = +0.14
-        y2 = -0.06
-        x3 = +0.08
-        y3 = +0.00
-        x4 = +0.30
-        y4 = +0.22
+        self.quad(
+            -10, 0, -10, 
+            -10, 0,  10, 
+             10, 0,  10, 
+             10, 0, -10)
+        self.quad(
+            -10, 20, -10, 
+            -10, 20,  10, 
+             10, 20,  10, 
+             10, 20, -10)
 
-        self.quad(x1, y1, x2, y2, y2, x2, y1, x1)
-        self.quad(x3, y3, x4, y4, y4, x4, y3, x3)
+#        self.extrude(x1, y1, x2, y2)
+#        self.extrude(x2, y2, y2, x2)
+#        self.extrude(y2, x2, y1, x1)
+#        self.extrude(y1, x1, x1, y1)
+#        self.extrude(x3, y3, x4, y4)
+#        self.extrude(x4, y4, y4, x4)
+#        self.extrude(y4, x4, y3, x3)
 
-        self.extrude(x1, y1, x2, y2)
-        self.extrude(x2, y2, y2, x2)
-        self.extrude(y2, x2, y1, x1)
-        self.extrude(y1, x1, x1, y1)
-        self.extrude(x3, y3, x4, y4)
-        self.extrude(x4, y4, y4, x4)
-        self.extrude(y4, x4, y3, x3)
+#        Pi = 3.14159265358979323846
+#        NumSectors = 200
 
-        Pi = 3.14159265358979323846
-        NumSectors = 200
+#        for i in range(NumSectors):
+#            angle1 = (i * 2 * Pi) / NumSectors
+#            x5 = 0.30 * math.sin(angle1)
+#            y5 = 0.30 * math.cos(angle1)
+#            x6 = 0.20 * math.sin(angle1)
+#            y6 = 0.20 * math.cos(angle1)
 
-        for i in range(NumSectors):
-            angle1 = (i * 2 * Pi) / NumSectors
-            x5 = 0.30 * math.sin(angle1)
-            y5 = 0.30 * math.cos(angle1)
-            x6 = 0.20 * math.sin(angle1)
-            y6 = 0.20 * math.cos(angle1)
+#            angle2 = ((i + 1) * 2 * Pi) / NumSectors
+#            x7 = 0.20 * math.sin(angle2)
+#            y7 = 0.20 * math.cos(angle2)
+#            x8 = 0.30 * math.sin(angle2)
+#            y8 = 0.30 * math.cos(angle2)
 
-            angle2 = ((i + 1) * 2 * Pi) / NumSectors
-            x7 = 0.20 * math.sin(angle2)
-            y7 = 0.20 * math.cos(angle2)
-            x8 = 0.30 * math.sin(angle2)
-            y8 = 0.30 * math.cos(angle2)
+#            self.quad(x5, y5, x6, y6, x7, y7, x8, y8)
 
-            self.quad(x5, y5, x6, y6, x7, y7, x8, y8)
-
-            self.extrude(x6, y6, x7, y7)
-            self.extrude(x8, y8, x5, y5)
+#            self.extrude(x6, y6, x7, y7)
+#            self.extrude(x8, y8, x5, y5)
 
         GL.glEnd()
         GL.glEndList()
 
         return genList
 
-    def quad(self, x1, y1, x2, y2, x3, y3, x4, y4):
-        self.qglColor(self.trolltechGreen)
+    def quad(self, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4):
 
-        GL.glVertex3d(x1, y1, -0.05)
-        GL.glVertex3d(x2, y2, -0.05)
-        GL.glVertex3d(x3, y3, -0.05)
-        GL.glVertex3d(x4, y4, -0.05)
+        GL.glTexCoord2i(1, 0);
+        GL.glVertex3d(x1, y1, z1)
+        GL.glTexCoord2i(1, 1);
+        GL.glVertex3d(x2, y2, z2)
+        GL.glTexCoord2i(0, 1);
+        GL.glVertex3d(x3, y3, z3)
+        GL.glTexCoord2i(0, 0);
+        GL.glVertex3d(x4, y4, z4)
 
-        GL.glVertex3d(x4, y4, +0.05)
-        GL.glVertex3d(x3, y3, +0.05)
-        GL.glVertex3d(x2, y2, +0.05)
-        GL.glVertex3d(x1, y1, +0.05)
+        GL.glVertex3d(x4, y4, z4)
+        GL.glTexCoord2i(0, 1);
+        GL.glVertex3d(x3, y3, z3)
+        GL.glTexCoord2i(1, 1);
+        GL.glVertex3d(x2, y2, z2)
+        GL.glTexCoord2i(1, 0);
+        GL.glVertex3d(x1, y1, z1)
 
     def extrude(self, x1, y1, x2, y2):
         self.qglColor(self.trolltechGreen.darker(250 + int(100 * x1)))

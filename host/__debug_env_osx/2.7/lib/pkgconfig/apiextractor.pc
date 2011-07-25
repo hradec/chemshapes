@@ -1,0 +1,11 @@
+prefix=/Volumes/ramdisk/install/usr
+exec_prefix=/Volumes/ramdisk/install/usr/bin
+libdir=/Volumes/ramdisk/install/usr/lib
+includedir=/Volumes/ramdisk/install/usr/include
+
+Name: apiextractor
+Description: Qt4 Binding Generator library
+Requires: QtCore
+Version: 0.10.4
+Libs: -L${libdir} -lapiextractor
+Cflags: -I${includedir}/apiextractor

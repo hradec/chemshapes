@@ -1,0 +1,14 @@
+prefix=/Volumes/ramdisk/install/usr
+exec_prefix=/Volumes/ramdisk/install/usr
+libdir=/Volumes/ramdisk/install/usr/lib
+includedir=/Volumes/ramdisk/install/usr/include/PySide
+typesystemdir=/Volumes/ramdisk/install/usr/share/PySide/typesystems
+pythonpath=/Volumes/ramdisk/install/site-packages
+
+Name: PySide
+Description: Support library for Python bindings of Qt-based libraries.
+Version: 1.0.4
+Libs: -L${libdir} -lpyside
+Cflags: -I${includedir}
+Requires: shiboken
+

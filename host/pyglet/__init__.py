@@ -2,14 +2,14 @@
 # pyglet
 # Copyright (c) 2006-2008 Alex Holkner
 # All rights reserved.
-#
+# 
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
+# modification, are permitted provided that the following conditions 
 # are met:
 #
 #  * Redistributions of source code must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright
+#  * Redistributions in binary form must reproduce the above copyright 
 #    notice, this list of conditions and the following disclaimer in
 #    the documentation and/or other materials provided with the
 #    distribution.
@@ -38,18 +38,18 @@ Detailed documentation is available at http://www.pyglet.org
 '''
 
 __docformat__ = 'restructuredtext'
-__version__ = '$Id: __init__.py 2530 2009-10-18 01:39:18Z benjamin.coder.smith $'
+__version__ = '$Id$'
 
 import os
 import sys
 
 _is_epydoc = hasattr(sys, 'is_epydoc') and sys.is_epydoc
 
-#: The release version of this pyglet installation.
+#: The release version of this pyglet installation.  
 #:
 #: Valid only if pyglet was installed from a source or binary distribution
 #: (i.e. not in a checked-out copy from SVN).
-#:
+#: 
 #: Use setuptools if you need to check for a specific release version, e.g.::
 #:
 #:    >>> import pyglet
@@ -57,7 +57,7 @@ _is_epydoc = hasattr(sys, 'is_epydoc') and sys.is_epydoc
 #:    >>> parse_version(pyglet.version) >= parse_version('1.1')
 #:    True
 #:
-version = '1.1.4'
+version = '1.2dev'
 
 def _require_ctypes_version(version):
     # Check ctypes version
@@ -83,7 +83,7 @@ if getattr(sys, 'frozen', None):
 #: ``PYGLET_``.  For example, in Bash you can set the ``debug_gl`` option with::
 #:
 #:      PYGLET_DEBUG_GL=True; export PYGLET_DEBUG_GL
-#:
+#: 
 #: For options requiring a tuple of values, separate each value with a comma.
 #:
 #: The non-development options are:
@@ -93,7 +93,7 @@ if getattr(sys, 'frozen', None):
 #:     order of preference.  Valid driver names are:
 #:
 #:     * directsound, the Windows DirectSound audio module (Windows only)
-#:     * alsa, the ALSA audio module (Linux only)
+#:     * pulse, the PulseAudio module (Linux only)
 #:     * openal, the OpenAL audio module
 #:     * silent, no audio
 #: debug_lib
@@ -128,9 +128,16 @@ if getattr(sys, 'frozen', None):
 #:     that implements the _NET_WM_SYNC_REQUEST protocol.
 #:
 #:     **Since:** pyglet 1.1
-#:
+#: darwin_cocoa
+#:     If True, the Cocoa-based pyglet implementation is used as opposed to
+#:     the 32-bit Carbon implementation.  When python is running in 64-bit mode
+#:     on Mac OS X 10.6 or later, this option is set to True by default.  
+#:     Otherwise the Carbon implementation is preferred.
+#:   
+#:     **Since:** pyglet 1.2
+#:   
 options = {
-    'audio': ('directsound', 'openal', 'alsa', 'silent'),
+    'audio': ('directsound', 'pulse', 'openal', 'silent'),
     'font': ('gdiplus', 'win32'), # ignored outside win32; win32 is deprecated
     'debug_font': False,
     'debug_gl': not _enable_optimisations,
@@ -150,6 +157,8 @@ options = {
     'shadow_window': True,
     'vsync': None,
     'xsync': True,
+    'xlib_fullscreen_override_redirect': False,
+    'darwin_cocoa': False,
 }
 
 _option_types = {
@@ -173,7 +182,27 @@ _option_types = {
     'shadow_window': bool,
     'vsync': bool,
     'xsync': bool,
+    'xlib_fullscreen_override_redirect': bool,
+    'darwin_cocoa': bool,
 }
+
+def _choose_darwin_platform():
+    """Choose between Darwin's Carbon and Cocoa implementations."""
+    if sys.platform != 'darwin':
+        return
+    is_64bits = sys.maxint > 2**32
+    import platform
+    osx_version = platform.mac_ver()[0]
+    from objc import __version__ as pyobjc_version
+    if is_64bits:
+        if osx_version < '10.6':
+            raise Exception('pyglet is not compatible with 64-bit Python for versions of Mac OS X prior to 10.6.')
+        if pyobjc_version < '2.2':
+            raise Exception('pyglet is not compatible with 64-bit Python for versions of PyObjC prior to 2.2')            
+        options['darwin_cocoa'] = True
+    else:
+        options['darwin_cocoa'] = False        
+_choose_darwin_platform()  # can be overridden by an environment variable below
 
 def _read_environment():
     '''Read defaults for options from environment'''
@@ -212,7 +241,7 @@ def _trace_repr(value, size=40):
         value = value[:size//2-2] + '...' + value[-size//2-1:]
     return value
 
-def _trace_frame(frame, indent):
+def _trace_frame(thread, frame, indent):
     from pyglet import lib
     if frame.f_code is lib._TraceFunction.__call__.func_code:
         is_ctypes = True
@@ -225,10 +254,10 @@ def _trace_frame(frame, indent):
         name = code.co_name
         path = code.co_filename
         line = code.co_firstlineno
-
+    
         try:
             filename = _trace_filename_abbreviations[path]
-        except KeyError:
+        except KeyError: 
             # Trim path down
             dir = ''
             path, filename = os.path.split(path)
@@ -246,7 +275,7 @@ def _trace_frame(frame, indent):
 
     if indent:
         name = 'Called from %s' % name
-    print '%s%s %s' % (indent, name, location)
+    print '[%d] %s%s %s' % (thread, indent, name, location)
 
     if _trace_args:
         if is_ctypes:
@@ -263,23 +292,28 @@ def _trace_frame(frame, indent):
     if _trace_flush:
         sys.stdout.flush()
 
-def _trace_func(frame, event, arg):
-    if event == 'call':
-        indent = ''
-        for i in range(_trace_depth):
-            _trace_frame(frame, indent)
-            indent += '  '
-            frame = frame.f_back
-            if not frame:
-                break
-
-    elif event == 'exception':
-        (exception, value, traceback) = arg
-        print 'First chance exception raised:', repr(exception)
+def _thread_trace_func(thread):
+    def _trace_func(frame, event, arg):
+        if event == 'call':
+            indent = ''
+            for i in range(_trace_depth):
+                _trace_frame(thread, frame, indent)
+                indent += '  '
+                frame = frame.f_back
+                if not frame:
+                    break
+                
+        elif event == 'exception':
+            (exception, value, traceback) = arg
+            print 'First chance exception raised:', repr(exception)
+    return _trace_func
 
 def _install_trace():
-    sys.setprofile(_trace_func)
+    global _trace_thread_count
+    sys.setprofile(_thread_trace_func(_trace_thread_count))
+    _trace_thread_count += 1
 
+_trace_thread_count = 0
 _trace_args = options['debug_trace_args']
 _trace_depth = options['debug_trace_depth']
 _trace_flush = options['debug_trace_flush']
@@ -310,9 +344,9 @@ class _ModuleProxy(object):
             return getattr(module, name)
 
     def __setattr__(self, name, value):
-       try:
+        try:
             setattr(self._module, name, value)
-       except AttributeError:
+        except AttributeError:
             if self._module is not None:
                 raise
 
@@ -321,10 +355,11 @@ class _ModuleProxy(object):
             module = sys.modules[import_name]
             object.__setattr__(self, '_module', module)
             globals()[self._module_name] = module
-            setattr(module, name, value)
+            setattr(module, name, value) 
 
 if not _is_epydoc:
     app = _ModuleProxy('app')
+    canvas = _ModuleProxy('canvas')
     clock = _ModuleProxy('clock')
     com = _ModuleProxy('com')
     event = _ModuleProxy('event')
@@ -332,6 +367,7 @@ if not _is_epydoc:
     gl = _ModuleProxy('gl')
     graphics = _ModuleProxy('graphics')
     image = _ModuleProxy('image')
+    input = _ModuleProxy('input')
     lib = _ModuleProxy('lib')
     media = _ModuleProxy('media')
     resource = _ModuleProxy('resource')
@@ -343,12 +379,14 @@ if not _is_epydoc:
 # lazy loading)
 if False:
     import app
+    import canvas
     import clock
     import com
     import event
     import font
     import gl
     import graphics
+    import input
     import image
     import lib
     import media

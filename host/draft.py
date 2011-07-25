@@ -13,7 +13,7 @@ from glViewport import GLWidget, mesh
 
 import reprap
 from log import log
-import glSVG
+#import glSVG
 
 
 defaultIcon = '\nborder: 0 solid ;\nborder-radius: 7;\nborder-color: rgb(150, 220,140);\nmargin-top: 0.0ex;background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.45, fx:0.386783, fy:0.358, '
@@ -105,7 +105,7 @@ class win(QWidget):
         self.ui.connect(self.logWin , SIGNAL('textChanged()'), lambda: self.logAppended() )
         self.logWin.setWordWrapMode( QTextOption.NoWrap )
         
-        self.fileName = "teapot.obj"
+        self.fileName = None
         self.configFile = 'draft.config'
         
         self.loadConfig()
@@ -133,10 +133,11 @@ class win(QWidget):
         f.close()
         
     def loadConfig(self):
-        for l in open( self.configFile ):
-            exec( l )
+        if os.path.exists( self.configFile ):
+            for l in open( self.configFile ):
+                exec( l )
                 
-        self.refreshMesh()
+            self.refreshMesh()
 
     
     def logAppended(self):
@@ -223,19 +224,23 @@ class win(QWidget):
     def loadGeo(self, *args):
         dialog = QFileDialog(self)
         #dialog.setFileMode(QFileDialog.AnyFile)
-        dialog.setDirectory('meshes')
+        if not self.fileName:
+            dialog.setDirectory('meshes')
+        else:
+            dialog.setDirectory(os.path.dirname(self.fileName))
+            
         dialog.setNameFilter("Images (*.obj *.stl)")
         
-        self.fileName = ""
         if dialog.exec_():
             self.fileName = dialog.selectedFiles()[0]
         
-        self.refreshMesh()
+            self.refreshMesh()
     
     
     def refreshGPU(self):
-        thickness = float(self.sliceThickness.value())/10000.0 
-        self.glFrame.shader.uniformf( 'bboxSize', self.glFrame.vec[0], self.glFrame.vec[1]+thickness*4, self.glFrame.vec[2], thickness)
+        if hasattr( self.glFrame, "shader" ):
+            thickness = float(self.sliceThickness.value())/10000.0 
+            self.glFrame.shader.uniformf( 'bboxSize', self.glFrame.vec[0], self.glFrame.vec[1]+thickness*4, self.glFrame.vec[2], thickness)
         self.glFrame.updateGL()
 
         

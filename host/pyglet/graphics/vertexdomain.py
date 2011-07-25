@@ -2,14 +2,14 @@
 # pyglet
 # Copyright (c) 2006-2008 Alex Holkner
 # All rights reserved.
-#
+# 
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
+# modification, are permitted provided that the following conditions 
 # are met:
 #
 #  * Redistributions of source code must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright
+#  * Redistributions in binary form must reproduce the above copyright 
 #    notice, this list of conditions and the following disclaimer in
 #    the documentation and/or other materials provided with the
 #    distribution.
@@ -99,7 +99,7 @@ def create_attribute_usage(format):
     to the OpenGL VBO usage hint, and for ``static`` also indicates a
     preference for interleaved arrays.  If ``none`` is specified a buffer
     object is not created, and vertex data is stored in system memory.
-
+    
     Some examples:
 
     ``v3f/stream``
@@ -107,7 +107,7 @@ def create_attribute_usage(format):
     ``c4b/static``
         4-byte color attribute, for static usage
 
-    :return: attribute, usage
+    :return: attribute, usage  
     '''
     match = _usage_format_re.match(format)
     attribute_format = match.group('attribute')
@@ -124,7 +124,7 @@ def create_attribute_usage(format):
 
 def create_domain(*attribute_usage_formats):
     '''Create a vertex domain covering the given attribute usage formats.
-    See documentation for `create_attribute_usage` and
+    See documentation for `create_attribute_usage` and 
     `pyglet.graphics.vertexattribute.create_attribute` for the grammar of
     these format strings.
 
@@ -158,10 +158,22 @@ class VertexDomain(object):
     def __init__(self, attribute_usages):
         self.allocator = allocation.Allocator(self._initial_count)
 
+        # If there are any MultiTexCoord attributes, then a TexCoord attribute
+        # must be converted.
+        have_multi_texcoord = False
+        for attribute, _, _ in attribute_usages:
+            if isinstance(attribute, vertexattribute.MultiTexCoordAttribute):
+                have_multi_texcoord = True
+                break
+
         static_attributes = []
         attributes = []
         self.buffer_attributes = []   # list of (buffer, attributes)
         for attribute, usage, vbo in attribute_usages:
+            if (have_multi_texcoord and 
+                isinstance(attribute, vertexattribute.TexCoordAttribute)):
+                attribute.convert_to_multi_tex_coord_attribute()
+
             if usage == GL_STATIC_DRAW:
                 # Group attributes for interleaved buffer
                 static_attributes.append(attribute)
@@ -170,7 +182,7 @@ class VertexDomain(object):
                 # Create non-interleaved buffer
                 attributes.append(attribute)
                 attribute.buffer = vertexbuffer.create_mappable_buffer(
-                    attribute.stride * self.allocator.capacity,
+                    attribute.stride * self.allocator.capacity, 
                     usage=usage, vbo=vbo)
                 attribute.buffer.element_size = attribute.stride
                 attribute.buffer.attributes = (attribute,)
@@ -187,6 +199,7 @@ class VertexDomain(object):
             self.buffer_attributes.append(
                 (buffer, static_attributes))
 
+            attributes.extend(static_attributes)
             for attribute in static_attributes:
                 attribute.buffer = buffer
 
@@ -196,11 +209,22 @@ class VertexDomain(object):
         for attribute in attributes:
             if isinstance(attribute, vertexattribute.GenericAttribute):
                 index = attribute.index
-                if 'generic' not in self.attributes:
+                # TODO create a name and use it (e.g. 'generic3')   
+                # XXX this won't migrate; not documented.
+                if 'generic' not in self.attribute_names:
                     self.attribute_names['generic'] = {}
                 assert index not in self.attribute_names['generic'], \
                     'More than one generic attribute with index %d' % index
                 self.attribute_names['generic'][index] = attribute
+            elif isinstance(attribute, vertexattribute.MultiTexCoordAttribute):
+                # XXX this won't migrate; not documented.
+                texture = attribute.texture
+                if 'multi_tex_coords' not in self.attribute_names:
+                    self.attribute_names['multi_tex_coords'] = {}
+                assert texture not in self.attribute_names['multi_tex_coords'],\
+                    'More than one multi_tex_coord attribute for texture %d' % \
+                        texture
+                self.attribute_names['multi_tex_coords'][texture] = attribute
             else:
                 name = attribute.plural
                 assert name not in self.attributes, \
@@ -211,7 +235,10 @@ class VertexDomain(object):
         # Break circular refs that Python GC seems to miss even when forced
         # collection.
         for attribute in self.attributes:
-            del attribute.buffer
+            try:
+                del attribute.buffer
+            except AttributeError:
+                pass
 
     def _safe_alloc(self, count):
         '''Allocate vertices, resizing the buffers if necessary.'''
@@ -235,7 +262,7 @@ class VertexDomain(object):
             for buffer, _ in self.buffer_attributes:
                 buffer.resize(capacity * buffer.element_size)
             self.allocator.set_capacity(capacity)
-            return self.allocator.realloc(start, count, new_count)
+            return self.allocator.realloc(start, count, new_count) 
 
     def create(self, count):
         '''Create a `VertexList` in this domain.
@@ -251,7 +278,7 @@ class VertexDomain(object):
 
     def draw(self, mode, vertex_list=None):
         '''Draw vertices in the domain.
-
+        
         If `vertex_list` is not specified, all vertices in the domain are
         drawn.  This is the most efficient way to render primitives.
 
@@ -291,7 +318,7 @@ class VertexDomain(object):
             else:
                 for start, size in zip(starts, sizes):
                     glDrawArrays(mode, start, size)
-
+        
         for buffer, _ in self.buffer_attributes:
             buffer.unbind()
         glPopClientAttrib()
@@ -300,20 +327,20 @@ class VertexDomain(object):
         return not self.allocator.starts
 
     def __repr__(self):
-        return '<%s@%x %s>' % (self.__class__.__name__, id(self),
+        return '<%s@%x %s>' % (self.__class__.__name__, id(self), 
                                self.allocator)
 
 class VertexList(object):
     '''A list of vertices within a `VertexDomain`.  Use
     `VertexDomain.create` to construct this list.
     '''
-
+    
     def __init__(self, domain, start, count):
         # TODO make private
         self.domain = domain
         self.start = start
         self.count = count
-
+    
     def get_size(self):
         '''Get the number of vertices in the list.
 
@@ -337,22 +364,22 @@ class VertexList(object):
 
         '''
         self.domain.draw(mode, self)
-
+    
     def resize(self, count):
         '''Resize this group.
-
+        
         :Parameters:
             `count` : int
-                New number of vertices in the list.
+                New number of vertices in the list. 
 
         '''
         new_start = self.domain._safe_realloc(self.start, self.count, count)
         if new_start != self.start:
             # Copy contents to new location
             for attribute in self.domain.attributes:
-                old = attribute.get_region(attribute.buffer,
+                old = attribute.get_region(attribute.buffer, 
                                            self.start, self.count)
-                new = attribute.get_region(attribute.buffer,
+                new = attribute.get_region(attribute.buffer, 
                                            new_start, self.count)
                 new.array[:] = old.array[:]
                 new.invalidate()
@@ -375,7 +402,7 @@ class VertexList(object):
         '''Move this group from its current domain and add to the specified
         one.  Attributes on domains must match.  (In practice, used to change
         parent state of some vertices).
-
+        
         :Parameters:
             `domain` : `VertexDomain`
                 Domain to migrate this vertex list to.
@@ -397,7 +424,7 @@ class VertexList(object):
         self.domain.allocator.dealloc(self.start, self.count)
         self.domain = domain
         self.start = new_start
-
+        
         self._colors_cache_version = None
         self._fog_coords_cache_version = None
         self._edge_flags_cache_version = None
@@ -432,7 +459,7 @@ class VertexList(object):
 
     _colors_cache = None
     _colors_cache_version = None
-    colors = property(_get_colors, _set_colors,
+    colors = property(_get_colors, _set_colors, 
                       doc='''Array of color data.''')
 
     # ---
@@ -547,7 +574,7 @@ class VertexList(object):
                           doc='''Array of texture coordinate data.''')
 
     # ---
-
+    
     _vertices_cache = None
     _vertices_cache_version = None
 
@@ -565,7 +592,7 @@ class VertexList(object):
 
     def _set_vertices(self, data):
         self._get_vertices()[:] = data
-
+    
     vertices = property(_get_vertices, _set_vertices,
                         doc='''Array of vertex coordinate data.''')
 
@@ -581,12 +608,12 @@ class IndexedVertexDomain(VertexDomain):
         super(IndexedVertexDomain, self).__init__(attribute_usages)
 
         self.index_allocator = allocation.Allocator(self._initial_index_count)
-
+        
         self.index_gl_type = index_gl_type
         self.index_c_type = vertexattribute._c_types[index_gl_type]
         self.index_element_size = ctypes.sizeof(self.index_c_type)
         self.index_buffer = vertexbuffer.create_mappable_buffer(
-            self.index_allocator.capacity * self.index_element_size,
+            self.index_allocator.capacity * self.index_element_size, 
             target=GL_ELEMENT_ARRAY_BUFFER)
 
     def _safe_index_alloc(self, count):
@@ -623,7 +650,7 @@ class IndexedVertexDomain(VertexDomain):
         '''
         start = self._safe_alloc(count)
         index_start = self._safe_index_alloc(index_count)
-        return IndexedVertexList(self, start, count, index_start, index_count)
+        return IndexedVertexList(self, start, count, index_start, index_count) 
 
     def get_index_region(self, start, count):
         '''Get a region of the index buffer.
@@ -643,7 +670,7 @@ class IndexedVertexDomain(VertexDomain):
 
     def draw(self, mode, vertex_list=None):
         '''Draw vertices in the domain.
-
+        
         If `vertex_list` is not specified, all vertices in the domain are
         drawn.  This is the most efficient way to render primitives.
 
@@ -669,7 +696,7 @@ class IndexedVertexDomain(VertexDomain):
 
         if vertex_list is not None:
             glDrawElements(mode, vertex_list.index_count, self.index_gl_type,
-                self.index_buffer.ptr +
+                self.index_buffer.ptr + 
                     vertex_list.index_start * self.index_element_size)
         else:
             starts, sizes = self.index_allocator.get_allocated_regions()
@@ -682,16 +709,16 @@ class IndexedVertexDomain(VertexDomain):
                     self.index_buffer.ptr + starts[0])
             elif gl_info.have_version(1, 4):
                 starts = [s * self.index_element_size + self.index_buffer.ptr for s in starts]
-                starts = cast((GLuint * primcount)(*starts), POINTER(c_void_p))
+                starts = ctypes.cast((GLuint * primcount)(*starts), ctypes.POINTER(ctypes.c_void_p))
                 sizes = (GLsizei * primcount)(*sizes)
                 glMultiDrawElements(mode, sizes, GL_UNSIGNED_INT, starts,
                                     primcount)
             else:
                 for start, size in zip(starts, sizes):
                     glDrawElements(mode, size, self.index_gl_type,
-                        self.index_buffer.ptr +
+                        self.index_buffer.ptr + 
                             start * self.index_element_size)
-
+        
         self.index_buffer.unbind()
         for buffer, _ in self.buffer_attributes:
             buffer.unbind()
@@ -715,9 +742,9 @@ class IndexedVertexList(VertexList):
 
         :Parameters:
             `count` : int
-                New number of vertices in the list.
+                New number of vertices in the list. 
             `index_count` : int
-                New number of indices in the list.
+                New number of indices in the list. 
 
         '''
         old_start = self.start
@@ -727,7 +754,7 @@ class IndexedVertexList(VertexList):
         if old_start != self.start:
             diff = self.start - old_start
             self.indices[:] = map(lambda i: i + diff, self.indices)
-
+        
         # Resize indices
         new_start = self.domain._safe_index_realloc(
             self.index_start, self.index_count, index_count)
@@ -772,5 +799,5 @@ class IndexedVertexList(VertexList):
 
     _indices_cache = None
     _indices_cache_version = None
-    indices = property(_get_indices, _set_indices,
+    indices = property(_get_indices, _set_indices, 
                        doc='''Array of index data.''')

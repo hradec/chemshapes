@@ -2,14 +2,14 @@
 # pyglet
 # Copyright (c) 2006-2008 Alex Holkner
 # All rights reserved.
-#
+# 
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
+# modification, are permitted provided that the following conditions 
 # are met:
 #
 #  * Redistributions of source code must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright
+#  * Redistributions in binary form must reproduce the above copyright 
 #    notice, this list of conditions and the following disclaimer in
 #    the documentation and/or other materials provided with the
 #    distribution.
@@ -43,8 +43,8 @@ from ctypes import *
 from pyglet.gl import *
 from pyglet.image import *
 from pyglet.image.codecs import *
-from pyglet.window.win32.constants import *
-from pyglet.window.win32.types import *
+from pyglet.libs.win32.constants import *
+from pyglet.libs.win32.types import *
 
 ole32 = windll.ole32
 kernel32 = windll.kernel32
@@ -120,7 +120,7 @@ class PropertyItem(Structure):
 
 class GDIPlusDecoder(ImageDecoder):
     def get_file_extensions(self):
-        return ['.bmp', '.gif', '.jpg', '.jpeg', '.exif', '.png', '.tif',
+        return ['.bmp', '.gif', '.jpg', '.jpeg', '.exif', '.png', '.tif', 
                 '.tiff']
 
     def get_animation_file_extensions(self):
@@ -186,13 +186,13 @@ class GDIPlusDecoder(ImageDecoder):
         rect.Width = width
         rect.Height = height
         bitmap_data = BitmapData()
-        gdiplus.GdipBitmapLockBits(bitmap,
+        gdiplus.GdipBitmapLockBits(bitmap, 
             byref(rect), ImageLockModeRead, pf, byref(bitmap_data))
-
+        
         # Create buffer for RawImage
         buffer = create_string_buffer(bitmap_data.Stride * height)
         memmove(buffer, bitmap_data.Scan0, len(buffer))
-
+        
         # Unlock data
         gdiplus.GdipBitmapUnlockBits(bitmap, byref(bitmap_data))
 
@@ -211,13 +211,13 @@ class GDIPlusDecoder(ImageDecoder):
 
     def decode_animation(self, file, filename):
         bitmap = self._load_bitmap(file, filename)
-
+        
         dimension_count = c_uint()
         gdiplus.GdipImageGetFrameDimensionsCount(bitmap, byref(dimension_count))
         if dimension_count.value < 1:
             self._delete_bitmap(bitmap)
             raise ImageDecodeException('Image has no frame dimensions')
-
+        
         # XXX Make sure this dimension is time?
         dimensions = (c_void_p * dimension_count.value)()
         gdiplus.GdipImageGetFrameDimensionsList(bitmap, dimensions,
@@ -231,7 +231,7 @@ class GDIPlusDecoder(ImageDecoder):
         gdiplus.GdipGetPropertyItemSize(bitmap, prop_id, byref(prop_size))
 
         prop_buffer = c_buffer(prop_size.value)
-        prop_item = cast(prop_buffer, POINTER(PropertyItem)).contents
+        prop_item = cast(prop_buffer, POINTER(PropertyItem)).contents 
         gdiplus.GdipGetPropertyItem(bitmap, prop_id, prop_size.value,
             prop_buffer)
 
@@ -240,7 +240,7 @@ class GDIPlusDecoder(ImageDecoder):
         delays = cast(prop_item.value, POINTER(c_long * n_delays)).contents
 
         frames = []
-
+        
         for i in range(frame_count.value):
             gdiplus.GdipImageSelectActiveFrame(bitmap, dimensions, i)
             image = self._get_image(bitmap)

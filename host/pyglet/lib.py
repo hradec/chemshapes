@@ -2,14 +2,14 @@
 # pyglet
 # Copyright (c) 2006-2008 Alex Holkner
 # All rights reserved.
-#
+# 
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
+# modification, are permitted provided that the following conditions 
 # are met:
 #
 #  * Redistributions of source code must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright
+#  * Redistributions in binary form must reproduce the above copyright 
 #    notice, this list of conditions and the following disclaimer in
 #    the documentation and/or other materials provided with the
 #    distribution.
@@ -79,8 +79,8 @@ class _TraceLibrary(object):
 
 class LibraryLoader(object):
     def load_library(self, *names, **kwargs):
-        '''Find and load a library.
-
+        '''Find and load a library.  
+        
         More than one name can be specified, they will be tried in order.
         Platform-specific library names (given as kwargs) are tried first.
 
@@ -88,7 +88,7 @@ class LibraryLoader(object):
         '''
         if 'framework' in kwargs and self.platform == 'darwin':
             return self.load_framework(kwargs['framework'])
-
+        
         platform_names = kwargs.get(self.platform, [])
         if type(platform_names) in (str, unicode):
             platform_names = [platform_names]
@@ -96,7 +96,9 @@ class LibraryLoader(object):
             platform_names = list(platform_names)
 
         if self.platform == 'linux2':
-            platform_names.extend(['lib%s.so' % n for n in names])
+            for name in names:
+                libname = ctypes.util.find_library(name)
+                platform_names.append(libname or 'lib%s.so' % name)
 
         platform_names.extend(names)
         for name in platform_names:
@@ -150,11 +152,11 @@ class MachOLibraryLoader(LibraryLoader):
                 os.path.expanduser('~/lib'),
                 '/usr/local/lib',
                 '/usr/lib']
-
+ 
     def find_library(self, path):
         '''Implements the dylib search as specified in Apple documentation:
 
-        http://developer.apple.com/documentation/DeveloperTools/Conceptual/DynamicLibraries/Articles/DynamicLibraryUsageGuidelines.html
+        http://developer.apple.com/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/DynamicLibraryUsageGuidelines.html
 
         Before commencing the standard search, the method first checks
         the bundle's ``Frameworks`` directory if the application is running
@@ -208,7 +210,7 @@ class MachOLibraryLoader(LibraryLoader):
         # return '/System/Library/Frameworks/OpenGL.framework/OpenGL'
         name = os.path.splitext(os.path.split(path)[1])[0]
 
-        realpath = os.path.join(path, name)
+        realpath = os.path.join(path, name) 
         if os.path.exists(realpath):
             return realpath
 

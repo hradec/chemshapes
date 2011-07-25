@@ -2,14 +2,14 @@
 # pyglet
 # Copyright (c) 2006-2008 Alex Holkner
 # All rights reserved.
-#
+# 
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
+# modification, are permitted provided that the following conditions 
 # are met:
 #
 #  * Redistributions of source code must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright
+#  * Redistributions in binary form must reproduce the above copyright 
 #    notice, this list of conditions and the following disclaimer in
 #    the documentation and/or other materials provided with the
 #    distribution.
@@ -38,7 +38,7 @@ Reference: http://msdn2.microsoft.com/en-us/library/bb172993.aspx
 '''
 
 __docformat__ = 'restructuredtext'
-__version__ = '$Id: dds.py 2496 2009-08-19 01:17:30Z benjamin.coder.smith $'
+__version__ = '$Id$'
 
 from ctypes import *
 import struct
@@ -47,9 +47,10 @@ from pyglet.gl import *
 from pyglet.image import CompressedImageData
 from pyglet.image import codecs
 from pyglet.image.codecs import s3tc
+from pyglet.compat import izip_longest
 
 class DDSException(codecs.ImageDecodeException):
-    pass
+    exception_priority = 0
 
 # dwFlags of DDSURFACEDESC2
 DDSD_CAPS           = 0x00000001
@@ -86,7 +87,7 @@ class _filestruct(object):
         if len(data) < self.get_size():
             raise DDSException('Not a DDS file')
         items = struct.unpack(self.get_format(), data)
-        for field, value in map(None, self._fields, items):
+        for field, value in izip_longest(self._fields, items, fillvalue=None):
             setattr(self, field[0], value)
 
     def __repr__(self):
@@ -103,7 +104,7 @@ class _filestruct(object):
     @classmethod
     def get_size(cls):
         return struct.calcsize(cls.get_format())
-
+        
 class DDSURFACEDESC2(_filestruct):
     _fields = [
         ('dwMagic', '4s'),
@@ -166,7 +167,6 @@ class DDSImageDecoder(codecs.ImageDecoder):
         width = desc.dwWidth
         height = desc.dwHeight
         mipmaps = 1
-
 
         if desc.dwFlags & DDSD_DEPTH:
             raise DDSException('Volume DDS files unsupported')

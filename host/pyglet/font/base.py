@@ -2,14 +2,14 @@
 # pyglet
 # Copyright (c) 2006-2008 Alex Holkner
 # All rights reserved.
-#
+# 
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
+# modification, are permitted provided that the following conditions 
 # are met:
 #
 #  * Redistributions of source code must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright
+#  * Redistributions in binary form must reproduce the above copyright 
 #    notice, this list of conditions and the following disclaimer in
 #    the documentation and/or other materials provided with the
 #    distribution.
@@ -40,7 +40,7 @@ classes as a documented interface to the concrete classes.
 '''
 
 __docformat__ = 'restructuredtext'
-__version__ = '$Id: base.py 2541 2009-12-31 04:31:11Z benjamin.coder.smith@gmail.com $'
+__version__ = '$Id$'
 
 import unicodedata
 
@@ -76,7 +76,7 @@ def _grapheme_break(left, right):
     # GB3
     if left == _CR and right == _LF:
         return False
-
+    
     left_cc = unicodedata.category(left)
 
     # GB4
@@ -102,7 +102,7 @@ def _grapheme_break(left, right):
     # GB9b
     if _prepend(left, left_cc):
         return False
-
+    
     # GB10
     return True
 
@@ -110,7 +110,7 @@ def get_grapheme_clusters(text):
     '''Implements Table 2 of UAX #29: Grapheme Cluster Boundaries.
 
     Does not currently implement Hangul syllable rules.
-
+    
     :Parameters:
         `text` : unicode
             String to cluster.
@@ -178,7 +178,7 @@ class Glyph(image.TextureRegion):
 
     def draw(self):
         '''Debug method.
-
+        
         Use the higher level APIs for performance and kerning.
         '''
         glBindTexture(GL_TEXTURE_2D, self.owner.id)
@@ -187,7 +187,7 @@ class Glyph(image.TextureRegion):
         glEnd()
 
     def draw_quad_vertices(self):
-        '''Debug method.
+        '''Debug method. 
 
         Use the higher level APIs for performance and kerning.
         '''
@@ -232,7 +232,7 @@ class GlyphTextureAtlas(image.Texture):
         '''
         if self.x + image.width > self.width:
             self.x = 0
-            self.y += self.line_height
+            self.y += self.line_height + 1
             self.line_height = 0
         if self.y + image.height > self.height:
             return None
@@ -382,7 +382,7 @@ class Font(object):
 
     def get_glyphs_for_width(self, text, width):
         '''Return a list of glyphs for `text` that fit within the given width.
-
+        
         If the entire text is larger than 'width', as much as possible will be
         used while breaking after a space or zero-width space character.  If a
         newline is encountered in text, only text up to that newline will be
@@ -400,7 +400,7 @@ class Font(object):
                 Text to render.
             `width` : int
                 Maximum width of returned glyphs.
-
+        
         :rtype: list of `Glyph`
 
         :see: `GlyphString`
@@ -419,11 +419,11 @@ class Font(object):
                     glyph_renderer = self.glyph_renderer_class(self)
                 self.glyphs[c] = glyph_renderer.render(c)
             glyph = self.glyphs[c]
-
+            
             # Add to holding buffer and measure
             glyph_buffer.append(glyph)
             width -= glyph.advance
-
+            
             # If over width and have some committed glyphs, finish.
             if width <= 0 and len(glyphs) > 0:
                 break

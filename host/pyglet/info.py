@@ -2,14 +2,14 @@
 # pyglet
 # Copyright (c) 2006-2008 Alex Holkner
 # All rights reserved.
-#
+# 
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
+# modification, are permitted provided that the following conditions 
 # are met:
 #
 #  * Redistributions of source code must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright
+#  * Redistributions in binary form must reproduce the above copyright 
 #    notice, this list of conditions and the following disclaimer in
 #    the documentation and/or other materials provided with the
 #    distribution.
@@ -59,6 +59,13 @@ def dump_python():
     import sys
     print 'sys.version:', sys.version
     print 'sys.platform:', sys.platform
+    print 'sys.maxint:', sys.maxint
+    if sys.platform == 'darwin':
+        try: 
+            from objc import __version__ as pyobjc_version
+            print 'objc.__version__:', pyobjc_version
+        except:
+            print 'PyObjC not available'
     print 'os.getcwd():', os.getcwd()
     for key, value in os.environ.items():
         if key.startswith('PYGLET_'):
@@ -86,16 +93,22 @@ def dump_window():
     for key, value in window.config.get_gl_attributes():
         print "config['%s'] = %r" % (key, value)
     print 'context:', repr(window.context)
+
+    _heading('window.context._info')
+    dump_gl(window.context)
     window.close()
 
-def dump_gl():
+def dump_gl(context=None):
     '''Dump GL info.'''
-    from pyglet.gl import gl_info
-    print 'gl_info.get_version():',  gl_info.get_version()
-    print 'gl_info.get_vendor():',  gl_info.get_vendor()
-    print 'gl_info.get_renderer():',  gl_info.get_renderer()
+    if context is not None:
+        info = context.get_info()
+    else:
+        from pyglet.gl import gl_info as info
+    print 'gl_info.get_version():',  info.get_version()
+    print 'gl_info.get_vendor():',  info.get_vendor()
+    print 'gl_info.get_renderer():',  info.get_renderer()
     print 'gl_info.get_extensions():'
-    extensions = list(gl_info.get_extensions())
+    extensions = list(info.get_extensions())
     extensions.sort()
     for name in extensions:
         print '  ', name
@@ -142,7 +155,7 @@ def dump_glx():
 def dump_media():
     '''Dump pyglet.media info.'''
     import pyglet.media
-    print 'driver:', pyglet.media.driver.__name__
+    print 'audio driver:', pyglet.media.get_audio_driver()
 
 def dump_avbin():
     '''Dump AVbin info.'''
@@ -159,13 +172,32 @@ def dump_al():
     '''Dump OpenAL info.'''
     try:
         from pyglet.media.drivers import openal
-        print 'Library:', openal.al._lib
-        print 'Version:', openal.get_version()
-        print 'Extensions:'
-        for extension in openal.get_extensions():
-            print '  ', extension
     except:
         print 'OpenAL not available.'
+        return
+    print 'Library:', openal.al._lib
+
+    driver = openal.create_audio_driver()
+    print 'Version:', driver.get_version()
+    print 'Extensions:'
+    for extension in driver.get_extensions():
+        print '  ', extension
+
+def dump_wintab():
+    '''Dump WinTab info.'''
+    try:
+        from pyglet.input import wintab
+    except:
+        print 'WinTab not available.'
+        return
+
+    interface_name = wintab.get_interface_name()
+    impl_version = wintab.get_implementation_version()
+    spec_version = wintab.get_spec_version()
+
+    print 'WinTab: %s %d.%d (Spec %d.%d)' % (interface_name,
+        impl_version >> 8, impl_version & 0xff,
+        spec_version >> 8, spec_version & 0xff)
 
 def _try_dump(heading, func):
     _heading(heading)
@@ -180,12 +212,12 @@ def dump():
     _try_dump('Python', dump_python)
     _try_dump('pyglet', dump_pyglet)
     _try_dump('pyglet.window', dump_window)
-    _try_dump('pyglet.gl.gl_info', dump_gl)
     _try_dump('pyglet.gl.glu_info', dump_glu)
     _try_dump('pyglet.gl.glx_info', dump_glx)
     _try_dump('pyglet.media', dump_media)
     _try_dump('pyglet.media.avbin', dump_avbin)
     _try_dump('pyglet.media.drivers.openal', dump_al)
+    _try_dump('pyglet.input.wintab', dump_wintab)
 
 if __name__ == '__main__':
     dump()

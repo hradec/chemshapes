@@ -24,21 +24,18 @@ If you find any issues, bugs or suggestions, please report it on this page:
         https://github.com/hradec/chemshapes/issues
         
         
-If you're in Windows, just double click on:
+If you're in Windows or OSX, just double click on:
 
-    Click here to run Chemshapes Host Software.cmd
+    _<OS NAME> - Click here to run Chemshapes Host Software.cmd
     
 
-on OSX, open the terminal app, navigate to the chemshapes/host folder and type:
-    
-    ./runOSX.SH
-    
-    
-and on Linux, there are dependencies that you need to install before hand:
+On Linux, there are dependencies that you need to install before hand:
 
     1. PyOpenGL
     2. PySide
     3. Qt 4.7
+
+to run, use "python ./draft.py" from the application folder.
     
     
 I'm looking on an standalone way to run it on OSX, for examplem, using py2app to generate

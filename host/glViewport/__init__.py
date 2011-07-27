@@ -18,6 +18,7 @@ except ImportError:
 from stl import stl
 
 import pyglet_shaders 
+import gletools
 
 def cross(a, b):
     c = [a[1]*b[2] - a[2]*b[1],

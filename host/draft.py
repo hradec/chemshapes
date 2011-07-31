@@ -64,8 +64,8 @@ class win(QWidget):
         
         self.ui.connect(self.sliceThickness, SIGNAL('valueChanged(double)'), self.refreshGPU )
         
-        #self.ui.connect(self.axisSpeedSpinBox , SIGNAL('valueChanged()'), lambda: self.axisSpeed() )
-        self.axisSpeedSpinBox.valueChanged[float].connect(lambda: self.axisSpeed())
+        self.ui.connect(self.axisSpeedSpinBox , SIGNAL('valueChanged()'), lambda: self.axisSpeed() )
+        #self.axisSpeedSpinBox.valueChanged[float].connect(lambda: self.axisSpeed())
         self.axisSpeed()
 
         self.ui.connect(self.ui.findChild(QToolButton, 'm10') , SIGNAL('clicked()'), lambda: self.moveZ(-10, True) )

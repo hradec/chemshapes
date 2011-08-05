@@ -26,6 +26,7 @@
 ######################
 *.log
 *.txt
+*.config
 
 # OS generated files #
 ######################
@@ -33,4 +34,4 @@
 ehthumbs.db
 Icon?
 Thumbs.db
-*.html
+log_*.html

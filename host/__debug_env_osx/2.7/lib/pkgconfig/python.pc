@@ -1,1 +1,13 @@
-python-2.7.pc
+prefix=/Library/Frameworks/Python.framework/Versions/2.7
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Python
+Description: Python library
+Requires: 
+Version: 2.7
+Libs.private: -ldl  -framework CoreFoundation
+Libs: -L${libdir} -lpython2.7
+Cflags: -I${includedir}/python2.7 
+

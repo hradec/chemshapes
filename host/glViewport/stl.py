@@ -44,7 +44,7 @@ class createtriangle:
   
     #calculate vector / edge
     def calculate_vector(self,p1,p2):
-        return -p1.x+p2.x,-p1.y+p2.y,-p1.z+p2.z
+        return p2.x-p1.x,p2.y-p1.y,p2.z-p1.z
       
     def calculate_normal(self,p1,p2,p3):
         a=self.calculate_vector(p3,p2)
@@ -105,7 +105,7 @@ class stl:
             GL.glBegin(GL.GL_TRIANGLES)
 
             for tri in self.model: #self.get_triangles():
-                GL.glNormal3f(tri.normal.x,tri.normal.y,tri.normal.z)
+                GL.glNormal3f(tri.normal.x,tri.normal.z,tri.normal.y)
                 GL.glVertex3f(tri.points[0].x/10-self.center[0],tri.points[0].z/10-self.bboxMin[2],tri.points[0].y/10-self.center[1])
                 GL.glVertex3f(tri.points[1].x/10-self.center[0],tri.points[1].z/10-self.bboxMin[2],tri.points[1].y/10-self.center[1])
                 GL.glVertex3f(tri.points[2].x/10-self.center[0],tri.points[2].z/10-self.bboxMin[2],tri.points[2].y/10-self.center[1])

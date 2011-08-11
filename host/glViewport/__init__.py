@@ -3,6 +3,8 @@ import sys, os
 import math
 from PySide import QtCore, QtGui, QtOpenGL
 
+sys.path.append( '%s/gletools' % os.path.dirname( os.path.dirname( __file__ )) )
+
 try:
     from OpenGL import GL
     from OpenGL import GLU as glu
@@ -26,7 +28,16 @@ def cross(a, b):
          a[0]*b[1] - a[1]*b[0]]
 
     return c
-
+class createpoint:
+    def __init__(self,p,c=(1,0,0)):
+        self.point_size=0.5
+        self.color=c
+        self.x=p[0]
+        self.y=p[1]
+        self.z=p[2]
+      
+    def glvertex(self):
+        GL.glVertex3f(self.x,self.y,self.z)
 class obj:
     def __init__(self, file=None):
         self.clean()
@@ -93,11 +104,23 @@ class obj:
 #            print edges
         if not self.normals:
             self.normals = {}
-        for each in self.faces:
-            for index in each:
-                id = int(index[0])-1
-                self.normals[id] = cross(edges[id][0], edges[id][1] )
+            for each in self.faces:
+                for index in each:
+                    id = int(index[0])-1
+                    self.normals[id] = cross(edges[id][0], edges[id][1] )
                 
+    #calculate vector / edge
+    def calculate_vector(self,p1,p2):
+        return p2.x-p1.x,p2.y-p1.y,p2.z-p1.z
+      
+    def calculate_normal(self,p1,p2,p3):
+        a=self.calculate_vector(p3,p2)
+        b=self.calculate_vector(p3,p1)
+        #calculate the cross product returns a vector
+        return self.cross_product(a,b)    
+  
+    def cross_product(self,p1,p2):
+        return (p1[1]*p2[2]-p2[1]*p1[2]) , (p1[2]*p2[0])-(p2[2]*p1[0]) , (p1[0]*p2[1])-(p2[0]*p1[1])
             
             
                     
@@ -112,7 +135,7 @@ class obj:
                     for index in each:
 #                        if len(index)>1:
                         normal = self.normals[ int(index[0])-1 ]
-                        GL.glNormal3f( float(normal[0]), float(normal[1]), float(normal[2]))
+                        GL.glNormal3f( -float(normal[0]), -float(normal[1]), -float(normal[2]))
                         vertex = self.vertex[ int(index[0])-1 ]
                         GL.glVertex3f( float(vertex[0]), float(vertex[1]), float(vertex[2]))
 
@@ -282,10 +305,10 @@ class GLWidget(QtOpenGL.QGLWidget):
 
         GL.glShadeModel(GL.GL_FLAT)
 #        GL.glEnable(GL.GL_CULL_FACE)
-#        GL.glEnable(GL.GL_DEPTH_TEST)
+        GL.glEnable(GL.GL_DEPTH_TEST)
+        GL.glDepthFunc(GL.GL_LEQUAL)
         
         GL.glEnable(GL.GL_BLEND)        
-        GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA )
         
 
         GL.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, (5.0, 15.0, 10.0, 1.0))
@@ -314,18 +337,28 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glRotated(self.yRot / 16.0, 0.0, 1.0, 0.0)
         GL.glRotated(self.zRot / 16.0, 0.0, 0.0, 1.0)
 
-        self.s['normal'].bind()
-        GL.glCallList(1)
-        self.s['normal'].unbind()
-        
+
 
 #        self.qglColor(self.trolltechGreen)
 #        GL.glScale( self.resize, self.resize, self.resize )
+
+        GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA  )
+#        GL.glBlendFunc( GL.GL_ONE, GL.GL_ONE )
             
         self.s['slicer'].bind()
         for mesh in self.meshs:
+            self.shader.uniformf( 'front', 0.0 )
             mesh.render()
-            
+            self.shader.uniformf( 'front', 1.0 )
+            mesh.render()
+        self.s['slicer'].unbind()
+        
+        GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA )
+        self.s['normal'].bind()
+        GL.glCallList(1)
+        self.s['normal'].unbind()
+                    
+        self.s['slicer'].bind()
 
     def resizeGL(self, width=0, height=0):
         width = float(self.parent.width())
@@ -379,10 +412,10 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glBegin(GL.GL_QUADS)
 
         self.quad(
-            -10, 0, -10, 
-            -10, 0,  10, 
-             10, 0,  10, 
-             10, 0, -10)
+            -10, -0.001, -10, 
+            -10, -0.001,  10, 
+             10, -0.001,  10, 
+             10, -0.001, -10)
         self.quad(
             -10, 20, -10, 
             -10, 20,  10, 
@@ -434,13 +467,13 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glTexCoord2i(0, 0);
         GL.glVertex3d(x4, y4, z4)
 
-        GL.glVertex3d(x4, y4, z4)
-        GL.glTexCoord2i(0, 1);
-        GL.glVertex3d(x3, y3, z3)
-        GL.glTexCoord2i(1, 1);
-        GL.glVertex3d(x2, y2, z2)
-        GL.glTexCoord2i(1, 0);
-        GL.glVertex3d(x1, y1, z1)
+#        GL.glVertex3d(x4, y4, z4)
+#        GL.glTexCoord2i(0, 1);
+#        GL.glVertex3d(x3, y3, z3)
+#        GL.glTexCoord2i(1, 1);
+#        GL.glVertex3d(x2, y2, z2)
+#        GL.glTexCoord2i(1, 0);
+#        GL.glVertex3d(x1, y1, z1)
 
     def extrude(self, x1, y1, x2, y2):
         self.qglColor(self.trolltechGreen.darker(250 + int(100 * x1)))

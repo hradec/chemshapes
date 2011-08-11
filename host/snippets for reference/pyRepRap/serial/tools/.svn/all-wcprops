@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/pyserial/!svn/ver/397/trunk/pyserial/serial/tools
+END
+list_ports_windows.py
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pyserial/!svn/ver/397/trunk/pyserial/serial/tools/list_ports_windows.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/pyserial/!svn/ver/382/trunk/pyserial/serial/tools/__init__.py
+END
+list_ports_posix.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pyserial/!svn/ver/397/trunk/pyserial/serial/tools/list_ports_posix.py
+END
+miniterm.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/pyserial/!svn/ver/396/trunk/pyserial/serial/tools/miniterm.py
+END

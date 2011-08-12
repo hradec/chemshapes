@@ -121,29 +121,39 @@ class ShaderProgram(object):
 
         
     def use(self):
-        self.id = gl.glCreateProgram()
+        try:
+            self.id = gl.glCreateProgram()
+        except: 
+            self.id = -1
+            message = "Error - No Compatible video board found ( no GPU with GLSL support )"
+            sys.stderr.write( "%s\n" % message )
+#            message = self._getMessage()
         
-        for shader in self.shaders:
-            shader.compile()
-            gl.glAttachShader(self.id, shader.id)
+        if self.id>-1:
+            for shader in self.shaders:
+                shader.compile()
+                gl.glAttachShader(self.id, shader.id)
 
-        gl.glLinkProgram(self.id)
+            gl.glLinkProgram(self.id)
 
-        message = self._getMessage()
-        if not self.getLinkStatus():
-            raise LinkError(message)
+            message = self._getMessage()
+            if not self.getLinkStatus():
+                raise LinkError(message)
 
-        gl.glUseProgram(self.id)
+            gl.glUseProgram(self.id)
+
         return message
 
     def bind(self):
         # bind the program
-        gl.glUseProgram(self.id)
+        if  self.id > -1:
+            gl.glUseProgram(self.id)
 
     def unbind(self):
         # unbind whatever program is currently bound - not necessarily this program,
         # so this should probably be a class method instead
-        gl.glUseProgram(0)
+        if  self.id > -1:
+            gl.glUseProgram(0)
 
 
     # upload a floating point uniform
@@ -151,14 +161,15 @@ class ShaderProgram(object):
     def uniformf(self, name, *vals):
 #        self.bind()
         # check there are 1-4 values
-        if len(vals) in range(1, 5):
-            # select the correct function
-            { 1 : gl.glUniform1f,
-                2 : gl.glUniform2f,
-                3 : gl.glUniform3f,
-                4 : gl.glUniform4f
-                # retrieve the uniform location, and set
-            }[len(vals)](gl.glGetUniformLocation(self.id, name), *vals)
+        if  self.id > -1:
+            if len(vals) in range(1, 5):
+                # select the correct function
+                { 1 : gl.glUniform1f,
+                    2 : gl.glUniform2f,
+                    3 : gl.glUniform3f,
+                    4 : gl.glUniform4f
+                    # retrieve the uniform location, and set
+                }[len(vals)](gl.glGetUniformLocation(self.id, name), *vals)
 #        self.unbind()
 
     # upload an integer uniform

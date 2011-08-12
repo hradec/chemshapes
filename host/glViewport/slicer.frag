@@ -8,6 +8,7 @@ varying vec4 Peye;
 uniform float layer;
 uniform float front;
 uniform vec4 bboxSize;
+uniform float invertNormals;
 
 void main()
 {
@@ -15,8 +16,11 @@ void main()
     float sliceLevel = layer*bboxSize[2]*2.0;
     float slice = smoothstep(sliceLevel-sliceSize,sliceLevel,P[1]) * (1.0-smoothstep(sliceLevel,sliceLevel+sliceSize,P[1]));
 
+
     vec3 N = normalize(_N); 
 	vec3 V = -vec3(_V);
+    
+    if(invertNormals>0.0) N = -N;
 
 //    vec3 I = normalize(eye.xyz);
     

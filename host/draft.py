@@ -48,7 +48,7 @@ class win(QWidget):
         
         # connect buttons to methods on this class
         self.ui.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )
-        self.ui.connect(self.ui.findChild(QPushButton, 'sliceButton') , SIGNAL('clicked()'), lambda: self.sliceButton() )
+#        self.ui.connect(self.ui.findChild(QPushButton, 'sliceButton') , SIGNAL('clicked()'), lambda: self.sliceButton() )
         self.ui.connect(self.ui.findChild(QPushButton, 'printButton') , SIGNAL('clicked()'), lambda: self.printButton() )
         self.ui.connect(self.ui.findChild(QPushButton, 'connect') , SIGNAL('clicked()'), lambda: self.connectButton() )
         self.ui.connect(self.ui.findChild(QToolButton, 'refil') , SIGNAL('clicked()'), lambda: self.refilButton() )
@@ -57,12 +57,13 @@ class win(QWidget):
         
 
         # store those as direct children for easy access and save in config file.
-        self.startPrintAfterSlice   = self.ui.findChild(QCheckBox, 'startPrintAfterSlice') 
+        self.invertNormals          = self.ui.findChild(QCheckBox, 'invertNormals') 
         self.expTime                = self.ui.findChild(QDoubleSpinBox, 'expTime') 
         self.sliceThickness         = self.ui.findChild(QDoubleSpinBox, 'sliceThickness') 
         self.axisSpeedSpinBox       = self.ui.findChild(QDoubleSpinBox, 'axisSpeed') 
         
         self.ui.connect(self.sliceThickness, SIGNAL('valueChanged(double)'), self.refreshGPU )
+        self.ui.connect(self.invertNormals, SIGNAL('clicked()'), self.refreshGPU )
         
         self.ui.connect(self.axisSpeedSpinBox , SIGNAL('valueChanged()'), lambda: self.axisSpeed() )
         #self.axisSpeedSpinBox.valueChanged[float].connect(lambda: self.axisSpeed())
@@ -127,7 +128,7 @@ class win(QWidget):
         f.write( 'self.axisSpeedSpinBox.setValue(%s)\n' % str(self.axisSpeedSpinBox.value()) )
         f.write( 'self.sliceThickness.setValue(%s)\n' % str(self.sliceThickness.value()) )
         f.write( 'self.expTime.setValue(%s)\n' % str(self.expTime.value()) )
-        f.write( 'self.startPrintAfterSlice.setCheckState(%s)\n' % checkBoxStates[ self.startPrintAfterSlice.checkState() ] )
+#        f.write( 'self.startPrintAfterSlice.setCheckState(%s)\n' % checkBoxStates[ self.startPrintAfterSlice.checkState() ] )
         
         f.flush()
         f.close()
@@ -135,7 +136,10 @@ class win(QWidget):
     def loadConfig(self):
         if os.path.exists( self.configFile ):
             for l in open( self.configFile ):
-                exec( l )
+                try:
+                    exec( l )
+                except:
+                    pass
                 
             self.refreshMesh()
 
@@ -241,6 +245,8 @@ class win(QWidget):
         if hasattr( self.glFrame, "shader" ):
             thickness = float(self.sliceThickness.value())/10000.0 
             self.glFrame.shader.uniformf( 'bboxSize', self.glFrame.vec[0], self.glFrame.vec[1]+thickness*4, self.glFrame.vec[2], thickness)
+            self.glFrame.shader.uniformf( 'invertNormals', float(self.invertNormals.checkState()) )
+            
         self.glFrame.updateGL()
 
         

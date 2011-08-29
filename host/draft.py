@@ -1,18 +1,26 @@
 #!/usr/bin/env python
 
 import sys, os, time
-sys.path += [ '.' ]
+sys.path += [ os.path.abspath('.') ]
 #os.environ[ 'PATH' ] = '.%s%s' % ( os.path.pathsep, os.environ[ 'PATH' ] )
 
 
+if not hasattr(sys, "frozen"):
+    f = open('draft.ui.py','w')
+    for line in os.popen( 'pyside-uic draft.ui').readlines():
+        f.write(line)
+    f.close()
+
 from PySide.QtCore import QIODevice, QFile, SIGNAL, SLOT, QObject, Qt
-from PySide.QtGui import QApplication, QSlider, QPushButton, QFileDialog, QWidget, QMessageBox, QTextOption, QWidget,QHBoxLayout, QCheckBox, QComboBox, QTextCursor, QGroupBox, QToolButton, QDoubleSpinBox, 	QStatusBar, QPlainTextEdit 
-import PySide.QtUiTools as QtUiTools
+from PySide.QtGui import QApplication, QFrame, QDial, QSlider, QPushButton, QFileDialog, QWidget, QMessageBox, QTextOption, QWidget,QHBoxLayout, QCheckBox, QComboBox, QTextCursor, QGroupBox, QToolButton, QDoubleSpinBox, 	QStatusBar, QPlainTextEdit 
+
+
 
 from glViewport import GLWidget, mesh
 
 import reprap
 from log import log
+import prefs
 #import glSVG
 
 
@@ -27,16 +35,33 @@ stdoutLog = None
 stderrLog = None 
 
 
-class win(QWidget):
+class struct():
+    pass
+
+class win(QFrame):
     def __init__(self, app=None):
-        QWidget.__init__(self, None)
+        QFrame.__init__(self, None)
         
         self.svgGLViewer = None 
         
         # load the draft.ui, a UI defination created on QT Creator.
-        QUiLoader = QtUiTools.QUiLoader()
         self.currentCom = ""
-        self.ui = QUiLoader.load('draft.ui')
+        
+        USE_QTUITOOLS=False
+        if USE_QTUITOOLS:
+            import PySide.QtUiTools as QtUiTools
+            QUiLoader = QtUiTools.QUiLoader()
+            self.ui = QUiLoader.load('draft.ui')
+        else:
+            import draft_ui 
+            self.ui = draft_ui.Ui_Frame()
+            self.ui.setupUi( self )
+            def __findChild( *args):
+                global _self
+                _self = self
+                ret =  eval("_self.ui.%s" % args[1])
+                return ret
+            self.ui.findChild = __findChild
         
         # main reprap object to comunicate with arduino
         self.reprap = reprap.device() #.cartesianClass()
@@ -47,13 +72,16 @@ class win(QWidget):
             self.coms.addItem ( each, userData=self.reprap.comList[each] )
         
         # connect buttons to methods on this class
-        self.ui.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )
-#        self.ui.connect(self.ui.findChild(QPushButton, 'sliceButton') , SIGNAL('clicked()'), lambda: self.sliceButton() )
-        self.ui.connect(self.ui.findChild(QPushButton, 'printButton') , SIGNAL('clicked()'), lambda: self.printButton() )
-        self.ui.connect(self.ui.findChild(QPushButton, 'connect') , SIGNAL('clicked()'), lambda: self.connectButton() )
-        self.ui.connect(self.ui.findChild(QToolButton, 'refil') , SIGNAL('clicked()'), lambda: self.refilButton() )
-        self.ui.connect(self.ui.findChild(QSlider, 'layer') , SIGNAL('sliderMoved(int)'), self.layerSlider )
-        self.ui.connect(self.ui.findChild(QSlider, 'layer') , SIGNAL('valueChanged(int)'), self.layerSlider )
+        print self.ui.findChild(QPushButton, 'loadGeo') 
+        self.connect(self.ui.findChild(QPushButton, 'loadGeo') , SIGNAL('clicked()'), lambda: self.loadGeo() )
+#        self.connect(self.ui.findChild(QPushButton, 'sliceButton') , SIGNAL('clicked()'), lambda: self.sliceButton() )
+        self.connect(self.ui.findChild(QPushButton, 'printButton') , SIGNAL('clicked()'), lambda: self.printButton() )
+        self.connect(self.ui.findChild(QPushButton, 'connect') , SIGNAL('clicked()'), lambda: self.connectButton() )
+        self.connect(self.ui.findChild(QToolButton, 'refil') , SIGNAL('clicked()'), lambda: self.refilButton() )
+        
+        self.connect(self.ui.findChild(QDial, 'sliceDial') , SIGNAL('sliderMoved(int)'), self.layerSlider )
+#        self.connect(self.ui.findChild(QSlider, 'layer') , SIGNAL('sliderMoved(int)'), self.layerSlider )
+#        self.connect(self.ui.findChild(QSlider, 'layer') , SIGNAL('valueChanged(int)'), self.layerSlider )
         
 
         # store those as direct children for easy access and save in config file.
@@ -62,20 +90,53 @@ class win(QWidget):
         self.sliceThickness         = self.ui.findChild(QDoubleSpinBox, 'sliceThickness') 
         self.axisSpeedSpinBox       = self.ui.findChild(QDoubleSpinBox, 'axisSpeed') 
         
-        self.ui.connect(self.sliceThickness, SIGNAL('valueChanged(double)'), self.refreshGPU )
-        self.ui.connect(self.invertNormals, SIGNAL('clicked()'), self.refreshGPU )
+        self.connect(self.sliceThickness, SIGNAL('valueChanged(double)'), self.refreshGPU )
+        self.connect(self.invertNormals, SIGNAL('clicked()'), self.refreshGPU )
         
-        self.ui.connect(self.axisSpeedSpinBox , SIGNAL('valueChanged()'), lambda: self.axisSpeed() )
+        self.connect(self.axisSpeedSpinBox , SIGNAL('valueChanged(double)'), lambda: self.axisSpeed() )
         #self.axisSpeedSpinBox.valueChanged[float].connect(lambda: self.axisSpeed())
         self.axisSpeed()
 
-        self.ui.connect(self.ui.findChild(QToolButton, 'm10') , SIGNAL('clicked()'), lambda: self.moveZ(-10, True) )
-        self.ui.connect(self.ui.findChild(QToolButton, 'm1')  , SIGNAL('clicked()'), lambda: self.moveZ(-1, True) )
-        self.ui.connect(self.ui.findChild(QToolButton, 'm01') , SIGNAL('clicked()'), lambda: self.moveZ(-0.1, True) )
+        self.connect(self.ui.findChild(QToolButton, 'm10') , SIGNAL('clicked()'), lambda: self.moveZ(-10, True) )
+        self.connect(self.ui.findChild(QToolButton, 'm1')  , SIGNAL('clicked()'), lambda: self.moveZ(-1, True) )
+        self.connect(self.ui.findChild(QToolButton, 'm01') , SIGNAL('clicked()'), lambda: self.moveZ(-0.1, True) )
         
-        self.ui.connect(self.ui.findChild(QToolButton, 'p10') , SIGNAL('clicked()'), lambda: self.moveZ(10, True) )
-        self.ui.connect(self.ui.findChild(QToolButton, 'p1')  , SIGNAL('clicked()'), lambda: self.moveZ(1, True) )
-        self.ui.connect(self.ui.findChild(QToolButton, 'p01') , SIGNAL('clicked()'), lambda: self.moveZ(0.1, True) )
+        self.connect(self.ui.findChild(QToolButton, 'p10') , SIGNAL('clicked()'), lambda: self.moveZ(10, True) )
+        self.connect(self.ui.findChild(QToolButton, 'p1')  , SIGNAL('clicked()'), lambda: self.moveZ(1, True) )
+        self.connect(self.ui.findChild(QToolButton, 'p01') , SIGNAL('clicked()'), lambda: self.moveZ(0.1, True) )
+    
+        #translate model
+        self.modelTransform = struct()
+        self.modelTransform.tx = self.ui.findChild(QDoubleSpinBox, 'modelMoveX')
+        self.modelTransform.ty = self.ui.findChild(QDoubleSpinBox, 'modelMoveY')
+        self.modelTransform.tz = self.ui.findChild(QDoubleSpinBox, 'modelMoveZ')
+        self.modelTransform.rx = self.ui.findChild(QDoubleSpinBox, 'modelRotateX')
+        self.modelTransform.ry = self.ui.findChild(QDoubleSpinBox, 'modelRotateY')
+        self.modelTransform.rz = self.ui.findChild(QDoubleSpinBox, 'modelRotateZ')
+        self.modelTransform.s = self.ui.findChild(QDoubleSpinBox, 'modelScale')
+        
+        def resetFunction( method, value, *sliders ):
+            method( value,value,value, set=True)
+            for each in sliders:
+                each.setValue( value )
+
+        moveFunction = lambda: self.moveModel(self.modelTransform.tx.value(), self.modelTransform.tz.value(), self.modelTransform.ty.value())
+        self.connect(self.modelTransform.tx , SIGNAL('valueChanged(double)'), moveFunction )
+        self.connect(self.modelTransform.ty , SIGNAL('valueChanged(double)'), moveFunction )
+        self.connect(self.modelTransform.tz , SIGNAL('valueChanged(double)'), moveFunction )
+        self.connect(self.ui.findChild(QPushButton, 'modelMoveReset') , SIGNAL('clicked()'), lambda: resetFunction( self.moveModel, 0.0, self.modelTransform.tx, self.modelTransform.ty, self.modelTransform.tz ) )
+
+        rotateFunction = lambda: self.rotateModel(self.modelTransform.rx.value(), self.modelTransform.rz.value(), self.modelTransform.ry.value())
+        self.connect(self.modelTransform.rx , SIGNAL('valueChanged(double)'), rotateFunction )
+        self.connect(self.modelTransform.ry , SIGNAL('valueChanged(double)'), rotateFunction )
+        self.connect(self.modelTransform.rz , SIGNAL('valueChanged(double)'), rotateFunction )
+        self.connect(self.ui.findChild(QPushButton, 'modelRotateReset') , SIGNAL('clicked()'), lambda: resetFunction( self.rotateModel, 0.0, self.modelTransform.rx, self.modelTransform.ry, self.modelTransform.rz ) )
+
+        scaleFunction = lambda: self.scaleModel(self.modelTransform.s.value(), self.modelTransform.s.value(), self.modelTransform.s.value())
+        self.connect(self.modelTransform.s , SIGNAL('valueChanged(double)'), scaleFunction )
+        self.connect(self.ui.findChild(QPushButton, 'modelScaleReset') , SIGNAL('clicked()'), lambda: resetFunction( self.scaleModel, 1.0, self.modelTransform.s ) )
+
+        
 
         # VERY IMPORTANT!!! we MUST schedule glFrame to be deleted or else we get a thread fatal error in python!
         # this fix "Fatal Python error: PyEval_SaveThread: NULL tstate" error when using QtOpenGl Widgets!!
@@ -91,6 +152,21 @@ class win(QWidget):
         
         # create a new GLWidget, parented to the ui main frame
         self.glFrame = GLWidget( self.ui.findChild(QWidget, 'frame') )
+        self.glFrame.app = app
+
+        # unit setup
+        self.modelUnit = self.ui.findChild(QComboBox, 'modelUnit') 
+        unitz = prefs.units()
+        unitzIndez = unitz.keys()
+        unitzIndez.sort()
+        for each in unitzIndez:
+            self.modelUnit.addItem ( each, userData=unitz[each] )
+        self.modelUnit.setCurrentIndex( self.modelUnit.findText( 'mm' ) )
+        def setCurrentUnit():
+            self.glFrame.unit = unitz[self.modelUnit.currentText()]
+            self.refreshGPU()
+        self.connect( self.modelUnit , SIGNAL('currentIndexChanged(QString)'), setCurrentUnit )
+        
         
         # load a default mesh into the opengl viewport
 #        self.glFrame.addMesh( mesh('meshes/teapot.obj') )
@@ -103,7 +179,7 @@ class win(QWidget):
 #        self.status.showMessage("Ready")
 
         self.logWin = self.ui.findChild(QPlainTextEdit, 'log')
-        self.ui.connect(self.logWin , SIGNAL('textChanged()'), lambda: self.logAppended() )
+        self.connect(self.logWin , SIGNAL('textChanged()'), lambda: self.logAppended() )
         self.logWin.setWordWrapMode( QTextOption.NoWrap )
         
         self.fileName = None
@@ -111,10 +187,14 @@ class win(QWidget):
         
         self.loadConfig()
         
-        stdoutLog = log()
-        stderrLog = log(error=True)
+#        stdoutLog = log()
+#        stderrLog = log(error=True)
         
         self.layerSliderValue = 0.5
+        
+        self.moveModel(0,0,0, set=True)
+        self.rotateModel(0,0,0, set=True)
+        self.scaleModel(1,1,1, set=True)
         
     def saveConfig(self):
         checkBoxStates = {
@@ -143,6 +223,33 @@ class win(QWidget):
                 
             self.refreshMesh()
 
+    def moveModel(self, x, y, z, set=True):
+        if set:
+            self.glFrame.moveOBJ = [x,y,z]
+        else:
+            self.glFrame.moveOBJ[0] += x
+            self.glFrame.moveOBJ[1] += y
+            self.glFrame.moveOBJ[2] += z
+        self.refreshGPU()
+        
+    def rotateModel(self, x, y, z, set=True):
+        if set:
+            self.glFrame.rotateOBJ = [x,y,z]
+        else:
+            self.glFrame.rotateOBJ[0] += x
+            self.glFrame.rotateOBJ[1] += y
+            self.glFrame.rotateOBJ[2] += z
+        self.refreshGPU()
+        
+    def scaleModel(self, x, y, z, set=True):
+        if set:
+            self.glFrame.scaleOBJ = [x,y,z]
+        else:
+            self.glFrame.scaleOBJ[0] += x
+            self.glFrame.scaleOBJ[1] += y
+            self.glFrame.scaleOBJ[2] += z
+        self.refreshGPU()
+        
     
     def logAppended(self):
 #        bar = self.logWin.verticalScrollBar()
@@ -152,7 +259,7 @@ class win(QWidget):
 #        self.logWin.moveCursor( QTextCursor.Start )
 #        self.logWin.repaint()
         self.logWin.ensureCursorVisible()# ( QTextCursor.End )
-        self.logWin.repaint()
+#        self.logWin.repaint()
         
     def layerSlider(self, value):
         value = float(value)/100.0
@@ -178,10 +285,10 @@ class win(QWidget):
         if state:
             self.comLightState = state
         self.comLight.setStyleSheet( comIcon[self.comLightState ] )
-        self.comLight.repaint()
+#        self.comLight.repaint()
         
-    def show(self):
-        self.ui.show()
+#    def show(self):
+#        self.show()
         
         
     def disconnect(self):
@@ -223,6 +330,8 @@ class win(QWidget):
             reprap.cartesian.homeReset()
         except: 
             self.arduinoException()
+            
+        self.glFrame.fullScreen()
         
 
     def loadGeo(self, *args):
@@ -256,17 +365,18 @@ class win(QWidget):
             if not os.path.exists( self.fileName ):
                 return
         self.glFrame.addMesh( mesh(self.fileName) )
+        self.modelUnit.setCurrentIndex( self.modelUnit.findText( 'mm' ) )
         self.refreshGPU()
         
         
 
-stdoutLog = log()
-stderrLog = log(error=True)
 try:
     app = QApplication(sys.argv)
     w=win(app)
-    stdoutLog.attachLog(w.logWin)
-    stderrLog.attachLog(w.logWin)
+    stdoutLog = log()
+    stderrLog = log(error=True)
+#    stdoutLog.attachLog(w.logWin)
+#    stderrLog.attachLog(w.logWin)
     sys.stdout = stdoutLog 
     sys.stderr = stderrLog
     w.show()

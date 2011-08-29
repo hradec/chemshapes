@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>918</height>
+    <width>774</width>
+    <height>839</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -93,7 +93,7 @@ font: 75 7.5pt &quot;Arial&quot;;
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>848</height>
+           <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -253,26 +253,36 @@ background-color: rgb(64, 24, 24);
             </widget>
            </item>
            <item>
-            <widget class="Line" name="line_2">
-             <property name="autoFillBackground">
-              <bool>false</bool>
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <property name="topMargin">
+              <number>10</number>
              </property>
-             <property name="frameShadow">
-              <enum>QFrame::Sunken</enum>
-             </property>
-             <property name="lineWidth">
-              <number>4</number>
-             </property>
-             <property name="midLineWidth">
-              <number>0</number>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
+             <item>
+              <widget class="Line" name="line_2">
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="lineWidth">
+                <number>4</number>
+               </property>
+               <property name="midLineWidth">
+                <number>0</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <widget class="QGroupBox" name="groupBox_2">
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
              <property name="styleSheet">
               <string notr="true"/>
              </property>
@@ -284,77 +294,72 @@ background-color: rgb(64, 24, 24);
                <number>0</number>
               </property>
               <property name="leftMargin">
-               <number>10</number>
+               <number>4</number>
               </property>
               <property name="topMargin">
                <number>4</number>
               </property>
               <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
                <number>4</number>
               </property>
+              <property name="bottomMargin">
+               <number>8</number>
+              </property>
               <item>
-               <layout class="QGridLayout" name="gridLayout_3">
+               <layout class="QVBoxLayout" name="verticalLayout_13">
                 <property name="leftMargin">
-                 <number>0</number>
+                 <number>10</number>
                 </property>
-                <property name="spacing">
-                 <number>1</number>
+                <property name="rightMargin">
+                 <number>10</number>
                 </property>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_5">
                 <item>
-                 <widget class="QLabel" name="label_8">
-                  <property name="toolTip">
-                   <string>Change the visible slice in the viewport</string>
+                 <widget class="QCheckBox" name="invertNormals">
+                  <property name="enabled">
+                   <bool>true</bool>
                   </property>
                   <property name="text">
-                   <string>Slice Preview:</string>
+                   <string>invert Normals</string>
                   </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QSlider" name="layer">
-                  <property name="toolTip">
-                   <string>Change the visible slice in the viewport</string>
-                  </property>
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                  <property name="checked">
+                   <bool>false</bool>
                   </property>
                  </widget>
                 </item>
                </layout>
               </item>
               <item>
-               <widget class="Line" name="line_5">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QCheckBox" name="invertNormals">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="text">
-                 <string>invert Normals</string>
-                </property>
-                <property name="checked">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="Line" name="line">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
+               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                <item>
+                 <widget class="QLabel" name="label_9">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>30</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="layoutDirection">
+                   <enum>Qt::RightToLeft</enum>
+                  </property>
+                  <property name="text">
+                   <string>model unit space</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="modelUnit">
+                  <property name="toolTip">
+                   <string>set the model original unit</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item>
                <widget class="Line" name="line_7">
@@ -364,614 +369,357 @@ background-color: rgb(64, 24, 24);
                </widget>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="translate">
-                <property name="spacing">
-                 <number>5</number>
+               <widget class="QGroupBox" name="groupBox_7">
+                <property name="title">
+                 <string>model postioning</string>
                 </property>
-                <item>
-                 <widget class="QLabel" name="label_13">
-                  <property name="minimumSize">
-                   <size>
-                    <width>45</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="layoutDirection">
-                   <enum>Qt::RightToLeft</enum>
-                  </property>
-                  <property name="text">
-                   <string>Translate</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_10">
-                  <property name="spacing">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <layout class="QGridLayout" name="gridLayout_4">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <item row="1" column="2">
-                     <widget class="QToolButton" name="m10_2">
-                      <property name="styleSheet">
-                       <string notr="true"> QToolButton{
-background-color: rgb(65, 8, 9);
-}</string>
-                      </property>
-                      <property name="text">
-                       <string>-10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="3">
-                     <widget class="QToolButton" name="m1_2">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(65, 8, 9);</string>
-                      </property>
-                      <property name="text">
-                       <string>-1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="4">
-                     <widget class="QToolButton" name="p1_2">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="5">
-                     <widget class="QToolButton" name="p10_2">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QLabel" name="label_9">
-                      <property name="text">
-                       <string>X:</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <layout class="QGridLayout" name="gridLayout_5">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <item row="0" column="2">
-                     <widget class="QToolButton" name="m10_3">
-                      <property name="styleSheet">
-                       <string notr="true"> QToolButton{
-background-color: rgb(65, 8, 9);
-}</string>
-                      </property>
-                      <property name="text">
-                       <string>-10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="3">
-                     <widget class="QToolButton" name="m1_3">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(65, 8, 9);</string>
-                      </property>
-                      <property name="text">
-                       <string>-1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="4">
-                     <widget class="QToolButton" name="p1_3">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="5">
-                     <widget class="QToolButton" name="p10_3">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="1">
-                     <widget class="QLabel" name="label_10">
-                      <property name="text">
-                       <string>Y:</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <layout class="QGridLayout" name="gridLayout_6">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <item row="0" column="1">
-                     <widget class="QToolButton" name="m10_4">
-                      <property name="styleSheet">
-                       <string notr="true"> QToolButton{
-background-color: rgb(65, 8, 9);
-}</string>
-                      </property>
-                      <property name="text">
-                       <string>-10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="2">
-                     <widget class="QToolButton" name="m1_4">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(65, 8, 9);</string>
-                      </property>
-                      <property name="text">
-                       <string>-1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="3">
-                     <widget class="QToolButton" name="p1_4">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="4">
-                     <widget class="QToolButton" name="p10_4">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="0">
-                     <widget class="QLabel" name="label_11">
-                      <property name="text">
-                       <string>Z:</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <widget class="Line" name="line_4">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_12">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>4</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>4</number>
+                 </property>
+                 <item>
+                  <layout class="QHBoxLayout" name="translate">
+                   <property name="spacing">
+                    <number>5</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="modelMoveReset">
+                     <property name="minimumSize">
+                      <size>
+                       <width>30</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>30</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>reset values</string>
+                     </property>
+                     <property name="text">
+                      <string>move</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="modelMoveX">
+                     <property name="minimum">
+                      <double>-99.989999999999995</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="modelMoveY">
+                     <property name="minimum">
+                      <double>-99.989999999999995</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="modelMoveZ">
+                     <property name="minimum">
+                      <double>-99.989999999999995</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="translate_2">
+                   <property name="spacing">
+                    <number>5</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="modelRotateReset">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>30</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>reset values</string>
+                     </property>
+                     <property name="text">
+                      <string>rotate</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="modelRotateX">
+                     <property name="minimum">
+                      <double>-360.000000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>360.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>10.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="modelRotateY">
+                     <property name="minimum">
+                      <double>-360.000000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>360.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>10.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="modelRotateZ">
+                     <property name="minimum">
+                      <double>-360.000000000000000</double>
+                     </property>
+                     <property name="maximum">
+                      <double>360.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>10.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="translate_3">
+                   <property name="spacing">
+                    <number>5</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="modelScaleReset">
+                     <property name="minimumSize">
+                      <size>
+                       <width>30</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>30</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>reset values</string>
+                     </property>
+                     <property name="text">
+                      <string>scale</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="modelScale">
+                     <property name="minimum">
+                      <double>-99.900000000000006</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>0.100000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>1.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="modelPutOnPlatform">
+                   <property name="text">
+                    <string>put model on the platform</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="translate_2">
-                <property name="spacing">
-                 <number>5</number>
+               <widget class="QGroupBox" name="groupBox">
+                <property name="styleSheet">
+                 <string notr="true"/>
                 </property>
-                <item>
-                 <widget class="QLabel" name="label_14">
-                  <property name="minimumSize">
-                   <size>
-                    <width>45</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="layoutDirection">
-                   <enum>Qt::RightToLeft</enum>
-                  </property>
-                  <property name="text">
-                   <string>Rotate</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_11">
-                  <property name="spacing">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <layout class="QGridLayout" name="gridLayout_7">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <item row="1" column="2">
-                     <widget class="QToolButton" name="m10_5">
-                      <property name="styleSheet">
-                       <string notr="true"> QToolButton{
-background-color: rgb(65, 8, 9);
-}</string>
-                      </property>
-                      <property name="text">
-                       <string>-10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="3">
-                     <widget class="QToolButton" name="m1_5">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(65, 8, 9);</string>
-                      </property>
-                      <property name="text">
-                       <string>-1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="4">
-                     <widget class="QToolButton" name="p1_5">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="5">
-                     <widget class="QToolButton" name="p10_5">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QLabel" name="label_12">
-                      <property name="text">
-                       <string>X:</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <layout class="QGridLayout" name="gridLayout_8">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <item row="0" column="2">
-                     <widget class="QToolButton" name="m10_6">
-                      <property name="styleSheet">
-                       <string notr="true"> QToolButton{
-background-color: rgb(65, 8, 9);
-}</string>
-                      </property>
-                      <property name="text">
-                       <string>-10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="3">
-                     <widget class="QToolButton" name="m1_6">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(65, 8, 9);</string>
-                      </property>
-                      <property name="text">
-                       <string>-1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="4">
-                     <widget class="QToolButton" name="p1_6">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="5">
-                     <widget class="QToolButton" name="p10_6">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="1">
-                     <widget class="QLabel" name="label_15">
-                      <property name="text">
-                       <string>Y:</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <layout class="QGridLayout" name="gridLayout_9">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <item row="0" column="1">
-                     <widget class="QToolButton" name="m10_7">
-                      <property name="styleSheet">
-                       <string notr="true"> QToolButton{
-background-color: rgb(65, 8, 9);
-}</string>
-                      </property>
-                      <property name="text">
-                       <string>-10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="2">
-                     <widget class="QToolButton" name="m1_7">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(65, 8, 9);</string>
-                      </property>
-                      <property name="text">
-                       <string>-1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="3">
-                     <widget class="QToolButton" name="p1_7">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="4">
-                     <widget class="QToolButton" name="p10_7">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="0">
-                     <widget class="QLabel" name="label_16">
-                      <property name="text">
-                       <string>Z:</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <widget class="Line" name="line_6">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+                <property name="title">
+                 <string>Print</string>
                 </property>
-               </widget>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="translate_3">
-                <property name="spacing">
-                 <number>5</number>
-                </property>
-                <item>
-                 <widget class="QLabel" name="label_17">
-                  <property name="minimumSize">
-                   <size>
-                    <width>45</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="layoutDirection">
-                   <enum>Qt::RightToLeft</enum>
-                  </property>
-                  <property name="text">
-                   <string>Scale</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_12">
-                  <property name="spacing">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <layout class="QGridLayout" name="gridLayout_10">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <item row="1" column="1">
-                     <widget class="QToolButton" name="m10_8">
-                      <property name="styleSheet">
-                       <string notr="true"> QToolButton{
-background-color: rgb(65, 8, 9);
-}</string>
-                      </property>
-                      <property name="text">
-                       <string>-10</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="2">
-                     <widget class="QToolButton" name="m1_8">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(65, 8, 9);</string>
-                      </property>
-                      <property name="text">
-                       <string>-1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="3">
-                     <widget class="QToolButton" name="p1_8">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+1.0</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="4">
-                     <widget class="QToolButton" name="p10_8">
-                      <property name="styleSheet">
-                       <string notr="true">background-color: rgb(5, 42, 0);</string>
-                      </property>
-                      <property name="text">
-                       <string>+10</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QGroupBox" name="groupBox">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="title">
-              <string>Print</string>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_2">
-              <property name="spacing">
-               <number>2</number>
-              </property>
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>4</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>5</number>
-              </property>
-              <item>
-               <layout class="QFormLayout" name="formLayout_2">
-                <property name="fieldGrowthPolicy">
-                 <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-                </property>
-                <property name="verticalSpacing">
-                 <number>0</number>
-                </property>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="label_2">
-                  <property name="text">
-                   <string>slice time in secs</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QDoubleSpinBox" name="expTime">
-                  <property name="singleStep">
-                   <double>0.010000000000000</double>
-                  </property>
-                  <property name="value">
-                   <double>4.000000000000000</double>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label">
-                  <property name="layoutDirection">
-                   <enum>Qt::LeftToRight</enum>
-                  </property>
-                  <property name="text">
-                   <string>thickness in micron</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QDoubleSpinBox" name="sliceThickness">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>10</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="layoutDirection">
-                   <enum>Qt::LeftToRight</enum>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">alternate-background-color: rgb(72, 72, 72);
+                <layout class="QVBoxLayout" name="verticalLayout_2">
+                 <property name="spacing">
+                  <number>2</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>4</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>6</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>4</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>6</number>
+                 </property>
+                 <item>
+                  <layout class="QFormLayout" name="formLayout_2">
+                   <property name="fieldGrowthPolicy">
+                    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                   </property>
+                   <property name="verticalSpacing">
+                    <number>0</number>
+                   </property>
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="label_2">
+                     <property name="text">
+                      <string>slice time in secs</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QDoubleSpinBox" name="expTime">
+                     <property name="singleStep">
+                      <double>0.010000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>4.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label">
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
+                     </property>
+                     <property name="text">
+                      <string>thickness in micron</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QDoubleSpinBox" name="sliceThickness">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>10</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">alternate-background-color: rgb(72, 72, 72);
 gridline-color: rgb(65, 65, 65);
 border-top-color: rgb(26, 26, 26);
 
 border-color: rgb(14, 12, 47);</string>
-                  </property>
-                  <property name="decimals">
-                   <number>0</number>
-                  </property>
-                  <property name="maximum">
-                   <double>1000.000000000000000</double>
-                  </property>
-                  <property name="singleStep">
-                   <double>1.000000000000000</double>
-                  </property>
-                  <property name="value">
-                   <double>400.000000000000000</double>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <widget class="Line" name="line_3">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="printButton">
-                <property name="styleSheet">
-                 <string notr="true"/>
-                </property>
-                <property name="text">
-                 <string>start printing (hit ESC to stop)</string>
-                </property>
+                     </property>
+                     <property name="decimals">
+                      <number>0</number>
+                     </property>
+                     <property name="maximum">
+                      <double>1000.000000000000000</double>
+                     </property>
+                     <property name="singleStep">
+                      <double>1.000000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>400.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="Line" name="line_3">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QGroupBox" name="groupBox_6">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="title">
+                    <string>slice preview</string>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_11">
+                    <item>
+                     <widget class="QDial" name="sliceDial">
+                      <property name="pageStep">
+                       <number>1</number>
+                      </property>
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="wrapping">
+                       <bool>false</bool>
+                      </property>
+                      <property name="notchTarget">
+                       <double>1.000000000000000</double>
+                      </property>
+                      <property name="notchesVisible">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="Line" name="line">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="printButton">
+                   <property name="styleSheet">
+                    <string notr="true"/>
+                   </property>
+                   <property name="text">
+                    <string>start printing (hit ESC to stop)</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>

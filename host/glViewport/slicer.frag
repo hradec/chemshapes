@@ -2,18 +2,23 @@ varying vec3 normal;
 varying vec3 _V;
 varying vec3 _N;
 varying vec4 P;
+varying vec4 Pw;
 varying vec4 eyenormal;
 varying vec4 eye;
 varying vec4 Peye;
+varying vec4 bbsize;
 uniform float layer;
 uniform float front;
 uniform vec4 bboxSize;
 uniform float invertNormals;
+uniform vec4 clearColor;
+
+
 
 void main()
 {
-    float sliceSize = bboxSize[3];
-    float sliceLevel = layer*bboxSize[2]*2.0;
+    float sliceSize = bbsize[3];
+    float sliceLevel = layer*bbsize[1]*2.0;
     float slice = smoothstep(sliceLevel-sliceSize,sliceLevel,P[1]) * (1.0-smoothstep(sliceLevel,sliceLevel+sliceSize,P[1]));
 
 
@@ -44,16 +49,23 @@ void main()
         if ( fr > 0.0 ) {
             discard;
         }
-        color.rgb = vec3(abs(fr),0.0,0.0);//vec3(abs(fr),0,0);
-//        gl_FragDepth = 0.0;
     }else{
         if ( fr <= 0.0 ){
             discard;
         }
-        color.rgb = vec3(1.0);
     }
     float mask = step(0.0,fr);
-    color.rgb = vec3(mask) + vec3(-fr*(1.0-mask),0.0,0.0);
-    gl_FragColor = vec4(color.rgb,slice) ;
+    color.rgb = vec3(mask*2.0) + vec3(-fr*(1.0-mask),0.0,0.0);
+    if( P[1]<0.0 ){
+        if ( mask>0.0 ){
+//            gl_FragDepth = 1.0;
+        }else{
+            color.rgb = clearColor.rgb;
+        }
+//        gl_FragDepth = 1.0;
+    }
+        
+
+    gl_FragColor = vec4(color.rgb,1) ;
     if( slice<1.0 ) discard;
 }

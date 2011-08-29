@@ -3,6 +3,33 @@
 import serial, time
 import RepRapArduinoSerialSender
 
+# M119 - read optos
+# M114 - read positions XYZE
+# M115 - print firmware info
+# G1   - movement
+# G92  - movement
+# G28  - home all axis
+# M201 - adjust accelaration ?!?
+# M202 - adjust travel accelaration ?!?
+# M92  - adjust speed?!
+# M106 - Fan On (we can use to turn the tilt DC on)
+# M107 - Fan On (we can use to turn the tilt DC off)
+# M109 - Wait for extruder heater to reach target.
+# M190 - Wait bed for heater to reach target.
+# M104 - Set Extruder temp
+# M140 - set bed temp
+
+
+# M300 - home Z to bottom opto (evaluate middle - if open, slow mode)
+# M301 - home Z to middle opto ( refill procedure!? )
+# M302 - home Z to middle then to bottom opto (evaluate middle - if open, mode slow)
+# M303 - home Z to middle then to bottom and return distance. 
+# M320 - set steps per mm
+# M321 - get steps per mm
+# M330 - tilt vat
+
+
+
 class axis():
     def __init__(self, axisName, device):
         self.device = device

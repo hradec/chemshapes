@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ "`uname`" == "Darwin" ] ; then
+
+    rm -rf build dist
+    env \
+    PATH=.:`pwd`/__debug_env_osx/2.7/bin:`pwd`/__debug_env_osx/2.7/lib:$PATH \
+    PYTHONPATH=.:`pwd`/__debug_env_osx/2.7/lib/python2.7/site-packages/:`pwd`/gletools \
+    DYLD_LIBRARY_PATH=.:`pwd`/__debug_env_osx/2.7:`pwd`/__debug_env_osx/2.7/lib \
+    __debug_env_osx/2.7/bin/python2.7 setup.py py2app 
+
+    # we need this to fix QT system clashing
+    touch dist/draft.app/Contents/Resources/qt.conf 
+
+else
+    __debug_env_w32/Python27/python.exe setup.py py2exe
+fi
+
+

@@ -165,6 +165,7 @@ typemap = {
 class Vars(object):
     def __init__(self, program):
         self.__dict__['_program'] = program
+        self._program = program
 
     def __setattr__(self, name, value):
         self[name] = value
@@ -173,6 +174,8 @@ class Vars(object):
         if isinstance(value, Variable):
             value.set(self._program, name)
         elif isinstance(value, (tuple, list)):
+#            print type(value[0]), len(value)
+#            print typemap
             setter = typemap[type(value[0])][len(value)]
             with self._program:
                 location = self._program.uniform_location(name)

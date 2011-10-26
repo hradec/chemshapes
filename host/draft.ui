@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>774</width>
-    <height>839</height>
+    <width>786</width>
+    <height>806</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -69,6 +69,12 @@ font: 75 7.5pt &quot;Arial&quot;;
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QFrame" name="frame">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -93,7 +99,7 @@ font: 75 7.5pt &quot;Arial&quot;;
          <property name="minimumSize">
           <size>
            <width>200</width>
-           <height>0</height>
+           <height>736</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -154,6 +160,15 @@ QGroupBox::title {
 	border-radius: 5px;
 	border-bottom-color: rgb(22, 22, 25);*/
 }
+
+
+ QComboBox, QDoubleSpinBox, QCheckBox *{
+     border: 2px solid ;
+     border-color: rgb(70, 70,90);
+     border-radius: 5px;
+     background-color:  rgb(50, 50, 60);;
+ }
+
 
 
 
@@ -389,7 +404,7 @@ background-color: rgb(64, 24, 24);
                     <number>5</number>
                    </property>
                    <item>
-                    <widget class="QPushButton" name="modelMoveReset">
+                    <widget class="QToolButton" name="modelMoveReset">
                      <property name="minimumSize">
                       <size>
                        <width>30</width>
@@ -442,7 +457,7 @@ background-color: rgb(64, 24, 24);
                     <number>5</number>
                    </property>
                    <item>
-                    <widget class="QPushButton" name="modelRotateReset">
+                    <widget class="QToolButton" name="modelRotateReset">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -513,7 +528,7 @@ background-color: rgb(64, 24, 24);
                     <number>2</number>
                    </property>
                    <item>
-                    <widget class="QPushButton" name="modelScaleReset">
+                    <widget class="QToolButton" name="modelScaleReset">
                      <property name="minimumSize">
                       <size>
                        <width>30</width>
@@ -550,7 +565,13 @@ background-color: rgb(64, 24, 24);
                   </layout>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="modelPutOnPlatform">
+                  <widget class="QToolButton" name="modelPutOnPlatform">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="text">
                     <string>put model on the platform</string>
                    </property>
@@ -588,26 +609,12 @@ background-color: rgb(64, 24, 24);
                    <property name="fieldGrowthPolicy">
                     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
                    </property>
+                   <property name="horizontalSpacing">
+                    <number>-1</number>
+                   </property>
                    <property name="verticalSpacing">
                     <number>0</number>
                    </property>
-                   <item row="1" column="0">
-                    <widget class="QLabel" name="label_2">
-                     <property name="text">
-                      <string>slice time in secs</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="1">
-                    <widget class="QDoubleSpinBox" name="expTime">
-                     <property name="singleStep">
-                      <double>0.010000000000000</double>
-                     </property>
-                     <property name="value">
-                      <double>4.000000000000000</double>
-                     </property>
-                    </widget>
-                   </item>
                    <item row="0" column="0">
                     <widget class="QLabel" name="label">
                      <property name="layoutDirection">
@@ -659,7 +666,27 @@ border-color: rgb(14, 12, 47);</string>
                      </property>
                     </widget>
                    </item>
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="label_2">
+                     <property name="text">
+                      <string>slice time in secs</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QDoubleSpinBox" name="expTime">
+                     <property name="singleStep">
+                      <double>0.010000000000000</double>
+                     </property>
+                     <property name="value">
+                      <double>4.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
                   </layout>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="printDisplay"/>
                  </item>
                  <item>
                   <widget class="Line" name="line_3">
@@ -682,6 +709,9 @@ border-color: rgb(14, 12, 47);</string>
                    <layout class="QVBoxLayout" name="verticalLayout_11">
                     <item>
                      <widget class="QDial" name="sliceDial">
+                      <property name="layoutDirection">
+                       <enum>Qt::LeftToRight</enum>
+                      </property>
                       <property name="pageStep">
                        <number>1</number>
                       </property>
@@ -710,7 +740,13 @@ border-color: rgb(14, 12, 47);</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="printButton">
+                  <widget class="QToolButton" name="printButton">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="styleSheet">
                     <string notr="true"/>
                    </property>
@@ -760,7 +796,13 @@ border-color: rgb(14, 12, 47);</string>
                    <number>0</number>
                   </property>
                   <item>
-                   <widget class="QPushButton" name="connect">
+                   <widget class="QToolButton" name="connect">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="text">
                      <string>Connect</string>
                     </property>
@@ -792,7 +834,7 @@ border-color: rgb(14, 12, 47);</string>
 
 background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.45, fx:0.386783, fy:0.358, stop:0 rgba(255, 169, 169, 255), stop:0.118227 rgba(214, 0, 0, 255), stop:0.82266 rgba(69, 0, 0, 255), stop:0.901478 rgba(0, 0, 0, 0), stop:1 rgba(0, 0, 0, 0));
 
-border: 0	px solid ;
+border: 0px solid ;
 border-radius: 7px;
 border-color: rgb(150, 220,140);
 margin-top: 0.0ex; </string>
@@ -996,19 +1038,19 @@ background-color: rgb(65, 8, 9);
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Expanding</enum>
-             </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>0</width>
-               <height>0</height>
+               <width>20</width>
+               <height>40</height>
               </size>
              </property>
             </spacer>
            </item>
            <item>
             <widget class="QGroupBox" name="groupBox_3">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
              <property name="styleSheet">
               <string notr="true"/>
              </property>
@@ -1060,14 +1102,14 @@ background-color: rgb(65, 8, 9);
        <item>
         <widget class="QDockWidget" name="logDock">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>157</width>
+           <width>278</width>
            <height>56</height>
           </size>
          </property>
@@ -1147,11 +1189,20 @@ background-color: rgb(65, 8, 9);
              <property name="lineWidth">
               <number>1</number>
              </property>
+             <property name="tabChangesFocus">
+              <bool>true</bool>
+             </property>
+             <property name="undoRedoEnabled">
+              <bool>false</bool>
+             </property>
              <property name="readOnly">
               <bool>true</bool>
              </property>
              <property name="tabStopWidth">
               <number>30</number>
+             </property>
+             <property name="textInteractionFlags">
+              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
              </property>
             </widget>
            </item>

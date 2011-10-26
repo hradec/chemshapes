@@ -1,0 +1,3 @@
+[submodule "host/firmware/Sprinter"]
+	path = host/firmware/Sprinter
+	url = git@github.com:hradec/Sprinter.git

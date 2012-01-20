@@ -1,12 +1,11 @@
 
 import sys, os
 import math
-
 try:
     from PySide import QtCore, QtGui, QtOpenGL
 except:
     from PyQt4 import QtCore, QtGui, QtOpenGL
-
+    
 sys.path.append( '%s/gletools' % os.path.dirname( os.path.dirname( __file__ )) )
 
 
@@ -28,15 +27,13 @@ except ImportError:
     sys.exit(1)
 
 
-from stl import stl
-from obj import *
+from mesh import *
+import stl, obj
 
-import pyglet_shaders
+import pyglet_shaders 
 import gletools
 import prefs
-
-from printModel import printModel
-
+        
 
 class GLWidget(QtOpenGL.QGLWidget):
     def __init__(self, parent=None):
@@ -51,7 +48,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.zoom = -10.0
 
         self.object = 0
-
+        
         self.lastPos = QtCore.QPoint()
 
         self.trolltechGreen = QtGui.QColor.fromCmykF(0.40, 0.0, 1.0, 0.0)
@@ -61,22 +58,22 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.setFocusPolicy( QtCore.Qt.StrongFocus )
         self.__fullScreen = False
         self.xyPosZoom = 100.0
-
+        
         self.moveOBJ = [0,0,0]
         self.rotateOBJ = [0,0,0]
         self.scaleOBJ = [1,1,1]
-
+        
         self.unit = 1.0
-        self.center = [0,0,0]
+        self.center = [0,0,0] 
         self.vec = [0,0,0]
         self.lenght = 0
-
-
-    def __cacheNonFullScreen(self):
+        
+            
+    def __cacheNonFullScreen(self):    
         if not self.__fullScreen:
             self.nonFullScreenRect  = self.size()
             self.nonFullScreenFlags = self.windowFlags()
-
+                
     def fullScreen(self, putInFull=True):
         self.__cacheNonFullScreen()
         if putInFull:
@@ -85,24 +82,24 @@ class GLWidget(QtOpenGL.QGLWidget):
             self.setWindowFlags( QtCore.Qt.FramelessWindowHint | QtCore.Qt.Tool | QtCore.Qt.WindowStaysOnTopHint )
 
             # Resize refer to desktop
-#            print QtGui.QApplication.desktop().size()
+            print QtGui.QApplication.desktop().size() 
             self.resize( QtGui.QApplication.desktop().size() )
-
+            
             self.setAttribute(QtCore.Qt.WA_QuitOnClose, True)
 
-
+            
 #            self.showFullScreen()
         else:
             self.__fullScreen = False
             self.setWindowFlags( self.nonFullScreenFlags )
             self.resize( self.nonFullScreenRect  )
             self.setAttribute(QtCore.Qt.WA_QuitOnClose, True)
-
+            
         self.app.processEvents()
         self.show()
         self.setFocus()
-
-
+            
+        
     def resetCamera(self):
 #        self.xRot = 0
 #        self.yRot = 0
@@ -151,12 +148,11 @@ class GLWidget(QtOpenGL.QGLWidget):
         while len(self.meshs)>0:
             for each in range(len(self.meshs)):
                 del self.meshs[each]
-
+            
         self.meshs = []
         self.meshs.append(mesh)
-        self.mesh = self.meshs[0]
         #self.zoom = mesh.bboxMin[2] * (mesh.bboxMax[2] - mesh.bboxMin[2]) * 2
-        self.center = [0,0,0]
+        self.center = [0,0,0] 
         self.vec = [0,0,0]
         self.lenght = 0
         for i in range(3):
@@ -166,12 +162,12 @@ class GLWidget(QtOpenGL.QGLWidget):
             self.lenght += self.vec[i]*self.vec[i]
         self.lenght = math.sqrt(self.lenght)
         self.resizeLength = 10/self.lenght
-
+            
         #self.yPos = (mesh.bboxMin[1] - mesh.bboxMax[1])/2.0
 #        self.zCamera = ((self.vec[1]*self.resizeLength)/2.0)+((self.lenght*self.resizeLength)*2)
         self.resetCamera()
         self.updateGL()
-
+        
     def install_shaders(self):
         def read_source(fname):
             f = open(fname)
@@ -181,17 +177,16 @@ class GLWidget(QtOpenGL.QGLWidget):
                 f.close()
             return src
 
-        shaderPath  = __file__
+        f=__file__
         if hasattr(sys,'frozen'):
-            shaderPath  =  './shaders/.'
-
-
+            f = './.'
+    
         self.s = {}
         self.fshader = {}
         self.vshader = {}
         for each in ['slicer', 'normal']:
-            fragment = '%s/%s.frag' % (os.path.dirname( shaderPath ), each)
-            vertex = '%s/%s.vert' % (os.path.dirname( shaderPath ), each)
+            fragment = '%s/%s.frag' % (os.path.dirname( f ), each)
+            vertex = '%s/%s.vert' % (os.path.dirname( f ), each)
 
             fsrc = read_source(fragment)
             self.fshader[each] = pyglet_shaders.FragmentShader([fsrc])
@@ -208,7 +203,7 @@ class GLWidget(QtOpenGL.QGLWidget):
     def initializeGL(self):
 #        self.qglClearColor(self.trolltechPurple.darker())
         #self.object = self.makeObject()
-
+        
         self.clearColor = [0.3,0.3,0.5,1]
         GL.glClearColor(*self.clearColor)
 
@@ -216,16 +211,16 @@ class GLWidget(QtOpenGL.QGLWidget):
 #        GL.glEnable(GL.GL_CULL_FACE)
         GL.glEnable(GL.GL_DEPTH_TEST)
         GL.glDepthFunc(GL.GL_LEQUAL)
-
-        GL.glEnable(GL.GL_BLEND)
-
+        
+        GL.glEnable(GL.GL_BLEND)        
+        
 
         GL.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, (5.0, 15.0, 10.0, 1.0))
         GL.glEnable(GL.GL_LIGHTING)
         GL.glEnable(GL.GL_LIGHT0)
-
+        
         GL.glEnable(GL.GL_NORMALIZE)
-
+        
         self.install_shaders()
         self.makeObject()
         self.resizeGL()
@@ -235,18 +230,15 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glColor4f(0.3,0.3,0.7,1)
         GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
 
-        if self.zCamera <= -30:
-            self.zCamera = -30.0
-
-        startCameraY = prefs.current.printArea_mm.z/20.0
-        zoomCorrection = min(0.0,self.zCamera*0.3)
+        if self.zCamera <= -25:
+            self.zCamera = -25.0
 
         GL.glLoadIdentity()
 #        glu.gluLookAt (0,5, self.zCamera , self.center[0]*self.resizeLength, self.center[1]*self.resizeLength, self.center[2]*self.resizeLength, 0.0, 1.0, 0.0);
-        glu.gluLookAt ( 0, startCameraY+5, 50+self.zCamera, 0, startCameraY+zoomCorrection , 0, 0.0, 1.0, 0.0 );
-
+        glu.gluLookAt ( 0, 5, 30+self.zCamera, 0, 3.0+self.zCamera/20.0, 0, 0.0, 1.0, 0.0 );
+        
         GL.glTranslated(self.xPos, self.yPos, 0 )
-        GL.glRotated(self.xRot / 16.0 + zoomCorrection , 1.0, 0.0, 0.0)
+        GL.glRotated(self.xRot / 16.0, 1.0, 0.0, 0.0)
         GL.glRotated(self.yRot / 16.0, 0.0, 1.0, 0.0)
         GL.glRotated(self.zRot / 16.0, 0.0, 0.0, 1.0)
 
@@ -257,18 +249,15 @@ class GLWidget(QtOpenGL.QGLWidget):
 
         GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA  )
 #        GL.glBlendFunc( GL.GL_ONE, GL.GL_ONE )
-
-
+            
+            
         GL.glPushMatrix()
         self.s['slicer'].bind()
-        try:
-            self.shader.uniformf( 'clearColor', *self.clearColor )
-            self.shader.uniformf( 'transform', self.moveOBJ[0], self.moveOBJ[1], self.moveOBJ[2], 0.0 )
-            self.shader.uniformf( 'rotateAngles', self.rotateOBJ[0], self.rotateOBJ[1], self.rotateOBJ[2], 0.0 )
-            self.shader.uniformf( 'scale', self.scaleOBJ[0]*self.unit, self.scaleOBJ[1]*self.unit, self.scaleOBJ[2]*self.unit, self.mesh.getFixScale() )
-            self.shader.uniformf( 'printArea', prefs.current.printArea_mm.x, prefs.current.printArea_mm.y, prefs.current.printArea_mm.z )
-        except:
-            pass
+        self.shader.uniformf( 'clearColor', *self.clearColor )
+        self.shader.uniformf( 'transform', self.moveOBJ[0], self.moveOBJ[1], self.moveOBJ[2], 0.0 )
+        self.shader.uniformf( 'rotateAngles', self.rotateOBJ[0], self.rotateOBJ[1], self.rotateOBJ[2], 0.0 )
+        self.shader.uniformf( 'scale', self.scaleOBJ[0]*self.unit , self.scaleOBJ[1]*self.unit , self.scaleOBJ[2]*self.unit , 1.0 )
+        
 #        GL.glTranslated( self.moveOBJ[0], self.moveOBJ[1], self.moveOBJ[2] )
 #        GL.glRotated(self.rotateOBJ[0], 1.0, 0.0, 0.0)
 #        GL.glRotated(self.rotateOBJ[1], 0.0, 1.0, 0.0)
@@ -281,12 +270,12 @@ class GLWidget(QtOpenGL.QGLWidget):
             mesh.render()
         self.s['slicer'].unbind()
         GL.glPopMatrix()
-
+        
         GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA )
         self.s['normal'].bind()
         GL.glCallList(1)
         self.s['normal'].unbind()
-
+                    
         self.s['slicer'].bind()
 
     def resizeGL(self, width=0, height=0):
@@ -312,9 +301,10 @@ class GLWidget(QtOpenGL.QGLWidget):
         glu.gluPerspective (50.0, width/height, 2.0, 600.0);
         #GL.glFrustum(-1 , 1 , -1 , 1 , 2, 6000.0)
         GL.glMatrixMode(GL.GL_MODELVIEW)
-
+        
     def keyPressEvent (self, event):
-#        print event.key();; sys.stdout.flush()
+        print event.key()
+        sys.stdout.flush()
         self.fullScreen(False)
 
     def mousePressEvent(self, event):
@@ -332,17 +322,17 @@ class GLWidget(QtOpenGL.QGLWidget):
             self.updateGL()
         elif event.buttons() & QtCore.Qt.MiddleButton:
             self.xyPosZoom  = ((self.zCamera+50.0)/1000.0)
-            self.xPos += dx*self.xyPosZoom
-            self.yPos -= dy*self.xyPosZoom
+            self.xPos += dx*self.xyPosZoom  
+            self.yPos -= dy*self.xyPosZoom  
             self.updateGL()
 
         self.lastPos = QtCore.QPoint(event.pos())
-
+        
     def wheelEvent(self, event):
         self.zCamera += event.delta()*0.05
         event.accept()
         self.updateGL()
-#        print self.zCamera
+        print self.zCamera
 
     def makeObject(self):
         genList = GL.glGenLists(1)
@@ -354,19 +344,19 @@ class GLWidget(QtOpenGL.QGLWidget):
 
         GL.glBegin(GL.GL_QUADS)
         self.quad(
-            -prefs.current.printArea_mm.x/2.0, -0.1, -prefs.current.printArea_mm.y/2.0,
-            -prefs.current.printArea_mm.x/2.0, -0.1,  prefs.current.printArea_mm.y/2.0,
-             prefs.current.printArea_mm.x/2.0, -0.1,  prefs.current.printArea_mm.y/2.0,
+            -prefs.current.printArea_mm.x/2.0, -0.1, -prefs.current.printArea_mm.y/2.0, 
+            -prefs.current.printArea_mm.x/2.0, -0.1,  prefs.current.printArea_mm.y/2.0, 
+             prefs.current.printArea_mm.x/2.0, -0.1,  prefs.current.printArea_mm.y/2.0, 
              prefs.current.printArea_mm.x/2.0, -0.1, -prefs.current.printArea_mm.y/2.0,
              prefs.current.printArea_mm.x/100.0, prefs.current.printArea_mm.y/100.0)
         self.quad(
-            -prefs.current.printArea_mm.x/2.0, prefs.current.printArea_mm.z, -prefs.current.printArea_mm.y/2.0,
-            -prefs.current.printArea_mm.x/2.0, prefs.current.printArea_mm.z,  prefs.current.printArea_mm.y/2.0,
-             prefs.current.printArea_mm.x/2.0, prefs.current.printArea_mm.z,  prefs.current.printArea_mm.y/2.0,
+            -prefs.current.printArea_mm.x/2.0, prefs.current.printArea_mm.z, -prefs.current.printArea_mm.y/2.0, 
+            -prefs.current.printArea_mm.x/2.0, prefs.current.printArea_mm.z,  prefs.current.printArea_mm.y/2.0, 
+             prefs.current.printArea_mm.x/2.0, prefs.current.printArea_mm.z,  prefs.current.printArea_mm.y/2.0, 
              prefs.current.printArea_mm.x/2.0, prefs.current.printArea_mm.z, -prefs.current.printArea_mm.y/2.0,
              prefs.current.printArea_mm.x/100.0, prefs.current.printArea_mm.y/100.0)
         GL.glEnd()
-
+        
         GL.glBegin(GL.GL_LINES)
         GL.glVertex3d(prefs.cm(prefs.mm(-prefs.current.printArea_mm.x/2.0)), -0.001, prefs.cm(prefs.mm(-prefs.current.printArea_mm.y/2.0)))
         GL.glVertex3d(prefs.cm(prefs.mm(-prefs.current.printArea_mm.x/2.0)), prefs.cm(prefs.current.printArea_mm.z), prefs.cm(prefs.mm(-prefs.current.printArea_mm.y/2.0)))
@@ -380,7 +370,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glVertex3d(prefs.cm(prefs.mm(prefs.current.printArea_mm.x/2.0)), -0.001, prefs.cm(prefs.mm(-prefs.current.printArea_mm.y/2.0)))
         GL.glVertex3d(prefs.cm(prefs.mm(prefs.current.printArea_mm.x/2.0)), prefs.cm(prefs.current.printArea_mm.z), prefs.cm(prefs.mm(-prefs.current.printArea_mm.y/2.0)))
         GL.glEnd()
-
+        
 
 
 #        self.extrude(x1, y1, x2, y2)
@@ -442,6 +432,6 @@ class GLWidget(QtOpenGL.QGLWidget):
         while angle > 360 * 16:
             angle -= 360 * 16
         return angle
-
-
-
+    
+    
+    

@@ -23,10 +23,10 @@ uniform vec4 clearColor;
 
 void main()
 {
-    float Y = 1.1-((P.y)/abs(bbsize.z*2.0));
+    float Y = ((P.y)/abs(bbsize.z*2.0));
     float sliceSize = 0.001;//bbsize[3];
     float sliceLevel = layer;
-    float slice = smoothstep(0.0,sliceLevel,Y);// * (1.0-smoothstep(sliceLevel,sliceLevel+sliceSize,Y));
+    float slice = smoothstep(sliceLevel,sliceLevel+sliceSize,Y);
 
 
     vec3 N = normalize(_N); 
@@ -79,5 +79,5 @@ void main()
 
     gl_FragColor = vec4(color.rgb,1.0);// + vec4(0.0,1.0-min(0.0,(slice-0.5)*2.0),0.0,0.0);
 //    gl_FragColor = vec4(Y,Y,Y<0 ? 0 : 1,1);
-    //if( slice<1.0 ) discard;
+    if( slice>1.0 ) discard;
 }

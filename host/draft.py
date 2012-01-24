@@ -87,6 +87,8 @@ class win(QFrame):
 
         self.svgGLViewer = None
 
+        self.layerSliderValue = 0.5
+
         # load the draft.ui, a UI defination created on QT Creator.
         self.currentCom = ""
 
@@ -244,8 +246,6 @@ class win(QFrame):
 #        stdoutLog = log()
 #        stderrLog = log(error=True)
 
-        self.layerSliderValue = 0.5
-
         self.moveModel(0,0,0, set=True)
         self.rotateModel(0,0,0, set=True)
         self.scaleModel(1,1,1, set=True)
@@ -316,15 +316,13 @@ class win(QFrame):
 #        self.logWin.repaint()
 
     def layerSlider(self, value):
-        value = float(value)/100.0
-#        print value, self.glFrame.mesh.bboxMax[2], self.glFrame.mesh.bboxMin[2]
-        self.glFrame.shader.uniformf( 'layer', value)
+        self.layerSliderValue = float(value)/100.0
         self.refreshGPU()
 
 
     def refilButton(self):
         self.glFrame.install_shaders( )
-        self.glFrame.shader.uniformf( 'layer', self.layerSliderValue )
+        self.refreshGPU()
 
     def axisSpeed( self ):
         self.reprap.z.speed( float(self.axisSpeedSpinBox.value()) )
@@ -413,12 +411,13 @@ class win(QFrame):
 
     def refreshGPU(self):
         if hasattr( self.glFrame, "shader" ):
+            print "refreshGPU", self.layerSliderValue
             thickness = float(self.sliceThickness.value())/10000.0
             try:
-                self.glFrame.shader.uniformf( 'bboxSize', self.glFrame.vec[0], self.glFrame.vec[1], self.glFrame.vec[2], thickness)
-                self.glFrame.shader.uniformf( 'bboxMin', self.glFrame.mesh.bboxMin[0], self.glFrame.mesh.bboxMin[1], self.glFrame.mesh.bboxMin[2], 1.0)
-                self.glFrame.shader.uniformf( 'bboxMax', self.glFrame.mesh.bboxMax[0], self.glFrame.mesh.bboxMax[1], self.glFrame.mesh.bboxMax[2], 1.0)
+                self.glFrame.s['slicer'].bind()
+                self.glFrame.shader.uniformf( 'layer', self.layerSliderValue )
                 self.glFrame.shader.uniformf( 'invertNormals', float(self.invertNormals.checkState()) )
+                self.glFrame.s['slicer'].unbind()
             except:
                 pass
 

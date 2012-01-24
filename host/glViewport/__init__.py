@@ -257,6 +257,12 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.shader.uniformf( 'transform', self.moveOBJ[0], self.moveOBJ[1], self.moveOBJ[2], 0.0 )
         self.shader.uniformf( 'rotateAngles', self.rotateOBJ[0], self.rotateOBJ[1], self.rotateOBJ[2], 0.0 )
         self.shader.uniformf( 'scale', self.scaleOBJ[0]*self.unit , self.scaleOBJ[1]*self.unit , self.scaleOBJ[2]*self.unit , 1.0 )
+        try:
+            self.shader.uniformf( 'bboxSize', self.vec[0], self.vec[1], self.vec[2], thickness)
+            self.shader.uniformf( 'bboxMin', self.mesh.bboxMin[0], self.mesh.bboxMin[1], self.mesh.bboxMin[2], 1.0)
+            self.shader.uniformf( 'bboxMax', self.mesh.bboxMax[0], self.mesh.bboxMax[1], self.mesh.bboxMax[2], 1.0)
+        except:
+            pass
         
 #        GL.glTranslated( self.moveOBJ[0], self.moveOBJ[1], self.moveOBJ[2] )
 #        GL.glRotated(self.rotateOBJ[0], 1.0, 0.0, 0.0)

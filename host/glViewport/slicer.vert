@@ -13,7 +13,7 @@ varying vec4 parea;
 
 uniform vec4 bboxMin;
 uniform vec4 bboxMax;
-//uniform vec3 bboxSize;
+uniform vec3 bboxSize;
 uniform vec4 transform;
 uniform vec4 rotateAngles;
 uniform vec4 scale;
@@ -78,7 +78,7 @@ void main()
     gl_Position = gl_ModelViewProjectionMatrix * new_vertex ;
     P = gl_ProjectionMatrix * new_vertex ;
     Pw = new_vertex ;
-    bbsize = gl_ProjectionMatrix * (bbmax-bbmin);
+    bbsize = gl_ProjectionMatrix * vec4(bboxSize.xyz,1.0);// (bbmax-bbmin);
     parea = (gl_ProjectionMatrix * vec4(printArea,1.0));
     
     _N = normalize(gl_NormalMatrix*newNormal.xyz); 

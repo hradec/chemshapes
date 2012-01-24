@@ -5,6 +5,7 @@ try:
     from PySide import QtCore, QtGui, QtOpenGL
 except:
     from PyQt4 import QtCore, QtGui, QtOpenGL
+    QtCore.Qt.MiddleButton = QtCore.Qt.MidButton
     
 sys.path.append( '%s/gletools' % os.path.dirname( os.path.dirname( __file__ )) )
 

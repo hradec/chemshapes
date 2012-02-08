@@ -69,7 +69,7 @@ void main()
 //    color.rgb = abs(P.z) > 10.0 ? clearColor.rgb : color.rgb ;
     if( P[1]<0.0 ){
         if ( mask>0.0 ){
-//            gl_FragDepth = 1.0;
+/*            gl_FragDepth = 1.0;*/
         }else{
             color.rgb = clearColor.rgb;
         }
@@ -78,6 +78,6 @@ void main()
         
 
     gl_FragColor = vec4(color.rgb,1.0);// + vec4(0.0,1.0-min(0.0,(slice-0.5)*2.0),0.0,0.0);
-//    gl_FragColor = vec4(Y,Y,Y<0 ? 0 : 1,1);
-    if( slice>1.0 ) discard;
+    //gl_FragColor = vec4(Y,Y,Y<0 ? 0 : 1,1);
+    if( slice>=1.0 ) discard;
 }

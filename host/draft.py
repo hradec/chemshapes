@@ -388,7 +388,7 @@ class win(QFrame):
             self.arduinoException()
 
         #self.glFrame.fullScreen()
-        render = printModel( prefs.cs1, False, self.fileName, self.glFrame.meshs, self.displays.itemData( self.displays.currentIndex() ) )
+        render = printModel.printModel( prefs.cs1, True, self.fileName, self.glFrame.meshs, self.displays.itemData( self.displays.currentIndex() ) )
         render.run()
 
 

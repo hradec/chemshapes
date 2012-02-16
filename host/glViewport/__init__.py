@@ -2,16 +2,15 @@ from __future__ import with_statement
 
 import sys, os
 import math
+sys.path.append( '%s/gletools' % os.path.dirname( os.path.dirname( __file__ )) )
+
+
 try:
     from PySide import QtCore, QtGui, QtOpenGL
 except:
     from PyQt4 import QtCore, QtGui, QtOpenGL
     QtCore.Qt.MiddleButton = QtCore.Qt.MidButton
-    
-sys.path.append( '%s/gletools' % os.path.dirname( os.path.dirname( __file__ )) )
 
-
-from ctypes import util
 try:
     from OpenGL.platform import win32
 except AttributeError:
@@ -27,10 +26,12 @@ except ImportError:
                             QtGui.QMessageBox.Ok | QtGui.QMessageBox.Default,
                             QtGui.QMessageBox.NoButton)
     sys.exit(1)
+    
+
+
 
 from mesh import *
 import stl, obj
-
 
 import pyglet
 import pyglet_shaders 

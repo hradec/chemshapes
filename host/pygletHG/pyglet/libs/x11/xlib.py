@@ -4689,14 +4689,14 @@ _Xwctomb.restype = c_int
 _Xwctomb.argtypes = [c_char_p, c_wchar]
 
 # /usr/include/X11/Xlib.h:4014
-XGetEventData = _lib.XGetEventData
-XGetEventData.restype = c_int
-XGetEventData.argtypes = [POINTER(Display), POINTER(XGenericEventCookie)]
+#XGetEventData = _lib.XGetEventData
+#XGetEventData.restype = c_int
+#XGetEventData.argtypes = [POINTER(Display), POINTER(XGenericEventCookie)]
 
 # /usr/include/X11/Xlib.h:4019
-XFreeEventData = _lib.XFreeEventData
-XFreeEventData.restype = None
-XFreeEventData.argtypes = [POINTER(Display), POINTER(XGenericEventCookie)]
+#XFreeEventData = _lib.XFreeEventData
+#XFreeEventData.restype = None
+#XFreeEventData.argtypes = [POINTER(Display), POINTER(XGenericEventCookie)]
 
 NoValue = 0 	# /usr/include/X11/Xutil.h:4805
 XValue = 1 	# /usr/include/X11/Xutil.h:4806

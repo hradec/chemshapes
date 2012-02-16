@@ -1,6 +1,5 @@
 
-
-
+from glViewport import *    
 
 class GLWidget(QtOpenGL.QGLWidget):
     def __init__(self, parent=None):

@@ -37,7 +37,7 @@ import pyglet
 import pyglet_shaders 
 import gletools
 import prefs
-import context
 
+from context import context
 from glwidget import *
 

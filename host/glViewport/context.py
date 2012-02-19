@@ -1,6 +1,10 @@
 
 from __future__ import with_statement
+
+from glViewport import *    
+
 import gletools
+from gletools.gl import *
 import prefs
 
 class context:
@@ -52,13 +56,6 @@ class context:
         self.fbo2.textures[0].unit = GL_TEXTURE1
 
     def loadShaders(self):
-        # setup shader variables
-        self.layer = 0.0
-        self.shaderProgram.vars.buffer1 = gletools.Sampler2D(GL_TEXTURE0)
-        self.rotation = 0.0
-        
-        self.timer = None
-
         
         self.shaderProgram = gletools.ShaderProgram(
             gletools.VertexShader('''
@@ -197,6 +194,14 @@ class context:
 #            gletools.FragmentShader( ''.join(open('%s/slicer.frag' % path).readlines()) ),
            
 #        )
+
+        # setup shader variables
+        self.layer = 0.0
+        self.shaderProgram.vars.buffer1 = gletools.Sampler2D(GL_TEXTURE0)
+        self.rotation = 0.0
+        
+        self.timer = None
+
 
 
     def on_mouse_drag(self, x, y, rx, ry, button, modifier):
@@ -495,7 +500,7 @@ class context:
         self.s['slicer'].bind()
 
     def resizeGL(self, width=0, height=0):
-        self.__cacheNonFullScreen()
+        #self.__cacheNonFullScreen()
         width = float(self.parent.width())
         height = float(self.parent.height())
         side = min(width, height)

@@ -1,10 +1,6 @@
 
 from __future__ import with_statement
-
-from glViewport import *    
-
 import gletools
-from gletools.gl import *
 import prefs
 
 class context:
@@ -14,9 +10,10 @@ class context:
         
         # bind Model!
         if filename:
-            self.m = mesh(filename)
-        else:
-            self.m = model
+            model = mesh(filename)
+        self.m = model        
+        self.addMesh(model)
+            
 
         # update width/height methods
         self.parent = parent
@@ -37,6 +34,26 @@ class context:
         # load shaders
         self.loadShaders()
 
+    def addMesh( self, mesh ):
+        for each in range(len(self.meshs)):
+            del self.meshs[each]
+            
+        self.meshs = [mesh]
+        #self.zoom = mesh.bboxMin[2] * (mesh.bboxMax[2] - mesh.bboxMin[2]) * 2
+        self.center = [0,0,0] 
+        self.vec = [0,0,0]
+        self.lenght = 0
+        for i in range(3):
+            x = float(mesh.bboxMax[i] - mesh.bboxMin[i])
+            self.center[i] = mesh.bboxMin[i] + (x/2.0)
+            self.vec[i] = x
+            self.lenght += self.vec[i]*self.vec[i]
+        self.lenght = math.sqrt(self.lenght)
+        self.resizeLength = 10/self.lenght
+            
+        self.resetCamera()
+        self.updateGL()
+
     def aspectRefresh(self):
         '''# setup aspect ratio correction'''
         self.winAspect = float(self.width())/float(self.height())
@@ -56,6 +73,13 @@ class context:
         self.fbo2.textures[0].unit = GL_TEXTURE1
 
     def loadShaders(self):
+        # setup shader variables
+        self.layer = 0.0
+        self.shaderProgram.vars.buffer1 = gletools.Sampler2D(GL_TEXTURE0)
+        self.rotation = 0.0
+        
+        self.timer = None
+
         
         self.shaderProgram = gletools.ShaderProgram(
             gletools.VertexShader('''
@@ -195,14 +219,6 @@ class context:
            
 #        )
 
-        # setup shader variables
-        self.layer = 0.0
-        self.shaderProgram.vars.buffer1 = gletools.Sampler2D(GL_TEXTURE0)
-        self.rotation = 0.0
-        
-        self.timer = None
-
-
 
     def on_mouse_drag(self, x, y, rx, ry, button, modifier):
         pass
@@ -312,8 +328,6 @@ class context:
 
 
 
-
-
         
     def resetCamera(self):
 #        self.xRot = 0
@@ -331,12 +345,6 @@ class context:
 
     def zRotation(self):
         return self.zRot
-
-    def minimumSizeHint(self):
-        return QtCore.QSize(50, 50)
-
-    def sizeHint(self):
-        return QtCore.QSize(400, 400)
 
     def setXRotation(self, angle):
         angle = self.normalizeAngle(angle)
@@ -359,29 +367,6 @@ class context:
         self.emit(QtCore.SIGNAL("zRotationChanged(int)"), angle)
         self.updateGL()
 
-    def addMesh( self, mesh ):
-        while len(self.meshs)>0:
-            for each in range(len(self.meshs)):
-                del self.meshs[each]
-            
-        self.meshs = []
-        self.meshs.append(mesh)
-        #self.zoom = mesh.bboxMin[2] * (mesh.bboxMax[2] - mesh.bboxMin[2]) * 2
-        self.center = [0,0,0] 
-        self.vec = [0,0,0]
-        self.lenght = 0
-        for i in range(3):
-            x = float(mesh.bboxMax[i] - mesh.bboxMin[i])
-            self.center[i] = mesh.bboxMin[i] + (x/2.0)
-            self.vec[i] = x
-            self.lenght += self.vec[i]*self.vec[i]
-        self.lenght = math.sqrt(self.lenght)
-        self.resizeLength = 10/self.lenght
-            
-        #self.yPos = (mesh.bboxMin[1] - mesh.bboxMax[1])/2.0
-#        self.zCamera = ((self.vec[1]*self.resizeLength)/2.0)+((self.lenght*self.resizeLength)*2)
-        self.resetCamera()
-        self.updateGL()
         
     def install_shaders(self):
         def read_source(fname):
@@ -416,20 +401,16 @@ class context:
 
 
     def initializeGL(self):
-#        self.qglClearColor(self.trolltechPurple.darker())
-        #self.object = self.makeObject()
+        ortho = gletools.Ortho( -x*0.5, x*0.5, -y*0.5, y*0.5, -100000,100000)
         
         self.clearColor = [0.3,0.3,0.5,1]
         GL.glClearColor(*self.clearColor)
 
-        GL.glShadeModel(GL.GL_FLAT)
 #        GL.glEnable(GL.GL_CULL_FACE)
+        GL.glShadeModel(GL.GL_FLAT)
         GL.glEnable(GL.GL_DEPTH_TEST)
         GL.glDepthFunc(GL.GL_LEQUAL)
-        
         GL.glEnable(GL.GL_BLEND)        
-        
-
         GL.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, (5.0, 15.0, 10.0, 1.0))
         GL.glEnable(GL.GL_LIGHTING)
         GL.glEnable(GL.GL_LIGHT0)
@@ -448,59 +429,59 @@ class context:
         if self.zCamera <= -25:
             self.zCamera = -25.0
 
-        GL.glLoadIdentity()
-#        glu.gluLookAt (0,5, self.zCamera , self.center[0]*self.resizeLength, self.center[1]*self.resizeLength, self.center[2]*self.resizeLength, 0.0, 1.0, 0.0);
-        glu.gluLookAt ( 0, 5, 30+self.zCamera, 0, 3.0+self.zCamera/20.0, 0, 0.0, 1.0, 0.0 );
-        
-        GL.glTranslated(self.xPos, self.yPos, 0 )
-        GL.glRotated(self.xRot / 16.0, 1.0, 0.0, 0.0)
-        GL.glRotated(self.yRot / 16.0, 0.0, 1.0, 0.0)
-        GL.glRotated(self.zRot / 16.0, 0.0, 0.0, 1.0)
+        with gletools.Group( self.fbo, ortho, self.s['normal'], self.s['slicer'], Matrix ):
+            glLoadIdentity()
+            glu.gluLookAt ( 0, 5, 30+self.zCamera, 0, 3.0+self.zCamera/20.0, 0, 0.0, 1.0, 0.0 );
+            glTranslated(self.xPos, self.yPos, 0 )
+            glRotated(self.xRot / 16.0, 1.0, 0.0, 0.0)
+            glRotated(self.yRot / 16.0, 0.0, 1.0, 0.0)
+            glRotated(self.zRot / 16.0, 0.0, 0.0, 1.0)
 
+            glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+            glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA )
+            glEnable(GL_BLEND)        
 
-
-#        self.qglColor(self.trolltechGreen)
-#        GL.glScale( self.resizeLength, self.resizeLength, self.resizeLength )
-
-        GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA  )
-#        GL.glBlendFunc( GL.GL_ONE, GL.GL_ONE )
+            GL.glPushMatrix()
+            self.s['slicer'].bind()
+            self.shader.uniformf( 'clearColor', *self.clearColor )
+            self.shader.uniformf( 'transform', self.moveOBJ[0], self.moveOBJ[1], self.moveOBJ[2], 0.0 )
+            self.shader.uniformf( 'rotateAngles', self.rotateOBJ[0], self.rotateOBJ[1], self.rotateOBJ[2], 0.0 )
+            self.shader.uniformf( 'scale', self.scaleOBJ[0]*self.unit , self.scaleOBJ[1]*self.unit , self.scaleOBJ[2]*self.unit , 1.0 )
+            try:
+                self.shader.uniformf( 'bboxSize', self.vec[0], self.vec[1], self.vec[2], thickness)
+                self.shader.uniformf( 'bboxMin', self.mesh.bboxMin[0], self.mesh.bboxMin[1], self.mesh.bboxMin[2], 1.0)
+                self.shader.uniformf( 'bboxMax', self.mesh.bboxMax[0], self.mesh.bboxMax[1], self.mesh.bboxMax[2], 1.0)
+            except:
+                pass
             
-            
-        GL.glPushMatrix()
-        self.s['slicer'].bind()
-        self.shader.uniformf( 'clearColor', *self.clearColor )
-        self.shader.uniformf( 'transform', self.moveOBJ[0], self.moveOBJ[1], self.moveOBJ[2], 0.0 )
-        self.shader.uniformf( 'rotateAngles', self.rotateOBJ[0], self.rotateOBJ[1], self.rotateOBJ[2], 0.0 )
-        self.shader.uniformf( 'scale', self.scaleOBJ[0]*self.unit , self.scaleOBJ[1]*self.unit , self.scaleOBJ[2]*self.unit , 1.0 )
-        try:
-            self.shader.uniformf( 'bboxSize', self.vec[0], self.vec[1], self.vec[2], thickness)
-            self.shader.uniformf( 'bboxMin', self.mesh.bboxMin[0], self.mesh.bboxMin[1], self.mesh.bboxMin[2], 1.0)
-            self.shader.uniformf( 'bboxMax', self.mesh.bboxMax[0], self.mesh.bboxMax[1], self.mesh.bboxMax[2], 1.0)
-        except:
-            pass
-        
-#        GL.glTranslated( self.moveOBJ[0], self.moveOBJ[1], self.moveOBJ[2] )
-#        GL.glRotated(self.rotateOBJ[0], 1.0, 0.0, 0.0)
-#        GL.glRotated(self.rotateOBJ[1], 0.0, 1.0, 0.0)
-#        GL.glRotated(self.rotateOBJ[2], 0.0, 0.0, 1.0)
-#        GL.glScale( self.scaleOBJ[0]*self.unit , self.scaleOBJ[1]*self.unit , self.scaleOBJ[2]*self.unit  )
-        for mesh in self.meshs:
             self.shader.uniformf( 'front', 0.0 )
-            mesh.render()
+            self.m.render()
             self.shader.uniformf( 'front', 1.0 )
-            mesh.render()
-        self.s['slicer'].unbind()
-        GL.glPopMatrix()
-        
-        GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA )
-        self.s['normal'].bind()
-        GL.glCallList(1)
-        self.s['normal'].unbind()
+            self.m.render()
+                
+            self.s['slicer'].unbind()
+
+            GL.glPopMatrix()
+            
+            GL.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA )
+            self.s['normal'].bind()
+            GL.glCallList(1)
+            self.s['normal'].unbind()
+
+
+
+        with gletools.Group(self.fbo.textures[0], self.projection, self.shaderProgram, Matrix):
+            glTranslatef(0, 0, -1.92)
+            gletools.quad(-self.winAspect,-1, self.winAspect,1)
+            #quad(0.0, window.width)
+
+            
+            
                     
         self.s['slicer'].bind()
 
     def resizeGL(self, width=0, height=0):
-        #self.__cacheNonFullScreen()
+        self.__cacheNonFullScreen()
         width = float(self.parent.width())
         height = float(self.parent.height())
         side = min(width, height)
